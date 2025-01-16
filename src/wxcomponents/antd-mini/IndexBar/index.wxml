@@ -1,0 +1,40 @@
+<view
+  class="ant-indexbar-side {{className}}"
+  disableScroll="{{true}}"
+  style="{{style}}"
+  hoverStopPropagation
+>
+  <view
+    wx:if="{{showMask}}"
+    class="ant-indexbar-side-mask"
+  ></view>
+  <view class="ant-indexbar-side-content">
+    <view
+      class="ant-indexbar-side-item"
+      catchtouchstart="onTouchStart"
+      catchtouchmove="onTouchMove"
+      catchtouchend="onTouchEnd"
+      data-item="{{({ item, index })}}"
+      id="{{'ant-alphabet-' + index}}"
+      style="width: {{size}}px; height: {{size}}px;"
+      wx:for="{{items}}"
+      wx:for-index="index"
+      wx:for-item="item"
+      wx:key="label"
+    >
+      <view
+        style="width: {{size}}px; height: {{size}}px;"
+        class="ant-indexbar-side-item-default {{activeClassName}} {{touchKey ? touchKey === item.label ? 'ant-indexbar-side-active' : '' : index === currentKey ? 'ant-indexbar-side-active' : ''}}"
+      >{{item.label}}</view>
+      <view
+        wx:if="{{item.label === touchKey && !item.disablePreview && moving}}"
+        class="ant-indexbar-side-item-tip"
+      >{{item.label}}<slot
+          name="labelPreview"
+          value="{{item}}"
+          index="{{index}}"
+        ></slot>
+      </view>
+    </view>
+  </view>
+</view>

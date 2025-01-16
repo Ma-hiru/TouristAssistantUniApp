@@ -1,0 +1,68 @@
+.ant-postscript {
+  background: var(--postscript-background-color, #ffffff);
+  padding: 16rpx;
+}
+.ant-postscript-title {
+  font-size: 30rpx;
+  color: var(--postscript-title-color, #333333);
+  margin-bottom: 16rpx;
+}
+.ant-postscript-input {
+  position: relative;
+  margin-bottom: 16rpx;
+  padding: 16rpx 0;
+}
+.ant-postscript-input::after {
+  content: '';
+  position: absolute;
+  background-color: var(--postscript-quick-border-color, #e5e5e5);
+  display: block;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  transform: scaleY(0.5);
+}
+.ant-postscript-input .ant-input-content {
+  font-size: 30rpx;
+  color: var(--postscript-input-color, #333333);
+  caret-color: var(--postscript-caret-color, #1677ff);
+}
+.ant-postscript-input-placeholder {
+  font-size: 26rpx;
+  color: var(--postscript-placeholder-color, #cccccc);
+}
+.ant-postscript-quick {
+  display: flex;
+}
+.ant-postscript-quick .ant-postscript-quick-item:last-child {
+  margin-right: 0;
+}
+.ant-postscript-quick-item {
+  margin-right: 8rpx;
+  flex-shrink: 0;
+  padding: 12rpx 16rpx;
+  border-radius: 50vh;
+  font-size: 26rpx;
+  color: var(--postscript-quick-text-color, #666666);
+  height: fit-content;
+  position: relative;
+}
+.ant-postscript-quick-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform-origin: 0 0;
+  pointer-events: none;
+  border: 1px solid var(--postscript-quick-border-color, #e5e5e5);
+  border-radius: 50vh;
+  transform: scale(0.5);
+  box-sizing: border-box;
+}
+.ant-postscript-quick-item:active {
+  opacity: 0.7;
+}

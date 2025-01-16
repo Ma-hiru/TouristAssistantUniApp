@@ -1,0 +1,163 @@
+.ant-select-contact-component {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.ant-select-contact-component .search-line {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+.ant-select-contact-component .search-bar {
+  padding: 4px 0 4px 0;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.4s;
+  flex: 1;
+}
+.ant-select-contact-component .search-bar-focus {
+  border-color: var(--select-contact-search-bar-focus-color, #1677ff);
+}
+.ant-select-contact-component .cancel {
+  color: var(--select-contact-search-cancel-color, #333333);
+  margin-left: 8px;
+}
+.ant-select-contact-component .hidden-cancel-button .am-search-cancel {
+  display: none;
+}
+.ant-select-contact-component .am-search {
+  padding: 0;
+}
+.ant-select-contact-component .scc-blank {
+  height: 24rpx;
+  min-height: 24rpx;
+}
+.ant-select-contact-component .scc-contact-wrap {
+  flex: 1;
+  overflow: hidden;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-loading {
+  height: 100%;
+  background: var(--select-contact-wrap-loading-bg, #fff);
+  border-radius: 12rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-scroll {
+  position: relative;
+  height: 100%;
+  background-color: var(--select-contact-scroll-bg, #fff);
+  border-radius: 24rpx;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-scroll::-webkit-scrollbar {
+  display: none;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-recommend {
+  width: 100%;
+  height: 138rpx;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list {
+  padding: 0 24rpx 24rpx;
+  background: var(--select-contact-list-bg, #fff);
+  border-radius: 12rpx;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .title {
+  font-size: 28rpx;
+  line-height: 48rpx;
+  color: var(--select-contact-title-color, #999);
+  background: var(--select-contact-title-bg, #fff);
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .title__ios {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1rpx;
+  z-index: 2;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .title.first-level {
+  font-size: 30rpx;
+  line-height: 80rpx;
+  color: var(--select-contact-title-first-color, #333);
+  border-bottom: 2rpx solid var(--select-contact-title-first-border, #eee);
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .tag {
+  padding: 0 8rpx;
+  margin-left: 8rpx;
+  font-size: 20rpx;
+  color: var(--select-contact-tag-color, #ff6010);
+  border: 0.5px solid var(--select-contact-tag-border, #ffcfb7);
+  border-radius: 6rpx;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .am-list-prefix {
+  padding-left: 0;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .am-list-line {
+  padding-right: 0;
+}
+.ant-select-contact-component .scc-contact-wrap .contact-list .am-auto-sizer-content {
+  border-radius: 8rpx;
+}
+.ant-select-contact-component .scc-contact-wrap .alphabet-container {
+  transform: translate(0, calc(-50% + 48rpx));
+}
+.ant-select-contact-component .scc-search-wrap {
+  overflow: hidden;
+  border-radius: 24rpx;
+  flex: 1;
+}
+.ant-select-contact-component .scc-search-wrap .normal {
+  height: 100%;
+}
+.ant-select-contact-component .scc-search-wrap .normal .tag {
+  padding: 0 8rpx;
+  margin-left: 8rpx;
+  font-size: 20rpx;
+  color: var(--select-contact-tag-color, #ff6010);
+  border: 0.5px solid var(--select-contact-tag-border, #ffcfb7);
+  border-radius: 6rpx;
+}
+.ant-select-contact-component .scc-search-wrap .normal .am-list-item:nth-of-type(1) {
+  border-top-left-radius: 24rpx;
+  border-top-right-radius: 24rpx;
+}
+.ant-select-contact-component .scc-search-wrap .normal .am-list-item:nth-last-of-type(1) {
+  border-bottom-left-radius: 24rpx;
+  border-bottom-right-radius: 24rpx;
+}
+.ant-select-contact-component .scc-search-wrap .empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--select-contact-empty-bg, #fff);
+  border-radius: 24rpx;
+}
+.ant-select-contact-component .scc-search-wrap .empty-img {
+  width: 200rpx;
+  height: 200rpx;
+  margin-top: 80rpx;
+  background: url(https://gw.alipayobjects.com/mdn/rms_a07f19/afts/img/A*ZN9XRokU8BIAAAAAAAAAAAAAARQnAQ) no-repeat;
+}
+.ant-select-contact-component .scc-search-wrap .empty-text {
+  margin: 24rpx 0 90rpx;
+  font-size: 30rpx;
+  color: var(--select-contact-empty-color, #999);
+}
+.ant-select-contact-component .scc-search-wrap .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-select-contact-component .scc-search-wrap .loading-text {
+  font-size: 28rpx;
+  color: var(--select-contact-loading-bg, #999);
+}
+.ant-select-contact-component .scc-search-wrap .display-name {
+  display: inline-block;
+}
+.ant-select-contact-component .scc-search-wrap .display-name__light {
+  color: var(--select-contact-display-light-color, #fa6300);
+}
+.hidden {
+  display: none !important;
+}
