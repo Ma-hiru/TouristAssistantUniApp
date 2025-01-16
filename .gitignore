@@ -19,3 +19,5 @@ dist
 *.njsproj
 *.sln
 *.sw?
+/src/wxcomponents/antd-mini/
+/src/wxcomponents/vant/
