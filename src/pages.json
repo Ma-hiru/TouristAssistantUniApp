@@ -36,6 +36,13 @@
         "navigationBarTitleText": "登录",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/register/register",
+      "style": {
+        "navigationBarTitleText": "注册",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
@@ -55,7 +62,8 @@
       "van-toast": "/wxcomponents/vant/toast/index",
       "van-card": "/wxcomponents/vant/card/index",
       "ant-button": "/wxcomponents/antd-mini/Button/index",
-      "ant-icon": "/wxcomponents/antd-mini/Icon/index"
+      "ant-icon": "/wxcomponents/antd-mini/Icon/index",
+      "ant-avatar": "/wxcomponents/antd-mini/Avatar/index",
     }
   },
   "tabBar": {

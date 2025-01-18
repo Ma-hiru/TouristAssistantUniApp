@@ -1,16 +1,23 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import type { loginInfo, userProfile } from "@/api";
 
 export const useUserStore = defineStore(
   "userStore",
   () => {
-    const token = ref("token_test");
-    const profile = ref({
-      token: token.value,
+    const loginInfo = ref<loginInfo>({
+      nickname: "",
+      avatar: "",
+      code: "",
+    });
+    const profile = ref<userProfile>({
+      token: "",
+      nickname: "",
+      avatar: "",
     });
     return {
+      loginInfo,
       profile,
-      token,
     };
   },
   {

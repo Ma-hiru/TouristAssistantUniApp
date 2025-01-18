@@ -1,8 +1,8 @@
 <template>
   <view class="h-screen w-screen flex justify-center items-center p-12">
     <view class="w-full">
-      <wd-button :block="true" icon="phone" size="large" @tap="login">
-        <text class="font-light">手机号一键登录</text>
+      <wd-button :block="true" size="large" @tap="login">
+        <text class="font-light">微信一键登录</text>
       </wd-button>
       <wd-divider> 其他登录方式</wd-divider>
       <view class="w-full flex flex-col justify-center items-center">
@@ -19,12 +19,15 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from "@/stores";
+
+const userStore = useUserStore();
 const login = () => {
   uni.login({
     provider: "weixin",
     success: (res) => {
-      console.log(res.code);
-      loginSuccess();
+      userStore.loginInfo.code = res.code;
+      uni.navigateTo({ url: "/pages/register/register" });
     },
   });
 };

@@ -1,6 +1,6 @@
-import { useUserStore } from "../../stores";
-import { reqURL } from "./baseURL";
-import type { ResponseData } from "./types";
+import { useUserStore } from "@/stores";
+import { reqURL } from "@/api";
+import type { ResponseData } from "@/api";
 
 const userStore = useUserStore();
 const httpInterceptor = {
@@ -14,7 +14,7 @@ const httpInterceptor = {
       "source-client": "miniapp",
       ...options.header,
     };
-    const token = userStore.profile?.token;
+    const token = userStore.profile.token;
     if (token) {
       options.header["Authorization"] = token;
     }

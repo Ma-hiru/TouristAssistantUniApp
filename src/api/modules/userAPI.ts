@@ -1,5 +1,5 @@
 import pinia, { useUserStore } from "../../stores";
-import { http } from "./http";
+import { http } from "@/api";
 
 const userStore = useUserStore(pinia);
 
@@ -8,12 +8,12 @@ enum API {
 }
 
 export const reqTest = (): Promise<any> => {
-  console.log(userStore.token);
+  console.log(userStore.profile.token);
   return http({
     method: "POST",
     url: API.Test,
     data: {
-      token: userStore.token,
+      token: userStore.profile.token,
     },
   });
 };

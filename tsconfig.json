@@ -1,14 +1,18 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
+  "references": [
+    { "path": "./tsconfig.vue.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
   "compilerOptions": {
     "sourceMap": true,
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types","wot-design-uni/global","@uni-helper/uni-app-types"]
+    "types": ["@dcloudio/types","wot-design-uni/global","@uni-helper/uni-app-types"],
+    "verbatimModuleSyntax": false
   },
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-  ],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*"],
 }

@@ -1,5 +1,5 @@
 import UploadFileOption = UniNamespace.UploadFileOption;
-import { reqURL } from "./baseURL";
+import { reqURL } from "@/api";
 
 export const upload = (options: UploadFileOption) => {
   options.url = reqURL + options.url;

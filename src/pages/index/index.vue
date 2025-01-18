@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <view> This is home page.</view>
+    <view class="underline"> This is home page.</view>
     <view>
       {{ data }}
       <wd-button @tap="test">Test</wd-button>

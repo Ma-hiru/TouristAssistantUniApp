@@ -4,7 +4,7 @@ import OnSocketOpenCallbackResult = UniNamespace.OnSocketOpenCallbackResult;
 import GeneralCallbackResult = UniNamespace.GeneralCallbackResult;
 import OnSocketMessageCallbackResult = UniNamespace.OnSocketMessageCallbackResult;
 import SendSocketMessageOptions = UniNamespace.SendSocketMessageOptions;
-import { reqURL } from "./baseURL";
+import { reqURL } from "@/api";
 
 /** @example `核心API`
  *  const SocketTask = uni.connectSocket({
