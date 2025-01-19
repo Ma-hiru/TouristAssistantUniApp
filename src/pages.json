@@ -12,7 +12,8 @@
       "style": {
         "navigationBarTitleText": "首页",
         "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
       }
     },
     {
@@ -43,6 +44,13 @@
         "navigationBarTitleText": "注册",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/map/map",
+      "style": {
+        "navigationBarTitleText": "路线规划",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
@@ -63,7 +71,7 @@
       "van-card": "/wxcomponents/vant/card/index",
       "ant-button": "/wxcomponents/antd-mini/Button/index",
       "ant-icon": "/wxcomponents/antd-mini/Icon/index",
-      "ant-avatar": "/wxcomponents/antd-mini/Avatar/index",
+      "ant-avatar": "/wxcomponents/antd-mini/Avatar/index"
     }
   },
   "tabBar": {

@@ -23,11 +23,23 @@ import { useUserStore } from "@/stores";
 
 const userStore = useUserStore();
 const login = () => {
+  uni.showToast({
+    title: "登录中",
+    icon: "loading",
+    mask: true,
+  });
   uni.login({
     provider: "weixin",
     success: (res) => {
       userStore.loginInfo.code = res.code;
+      //TODO 判断是否需要昵称头像
       uni.navigateTo({ url: "/pages/register/register" });
+    },
+    fail: () => {
+      uni.showToast({
+        title: "获取微信信息失败",
+        icon: "none",
+      });
     },
   });
 };

@@ -38,7 +38,7 @@ export const http = <T>(
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data as ResponseData<T>);
           //TODO 身份认证失败的处理
-        } else if (res.statusCode == 401) {
+        } else if (res.statusCode === 401) {
           uni.navigateTo({ url: "/pages/login/login" }).then();
           reject(res);
         } else {

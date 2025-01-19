@@ -1,18 +1,41 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
-  "references": [
-    { "path": "./tsconfig.vue.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "allowJs": true,
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types","wot-design-uni/global","@uni-helper/uni-app-types"],
-    "verbatimModuleSyntax": false
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "@dcloudio/types",
+      "miniprogram-api-typings",
+      "@uni-helper/uni-app-types/dist/index.d.ts",
+      "vite/client"
+    ]
   },
-  "include": ["src/**/*"],
+  "vueCompilerOptions": {
+    // experimentalRuntimeMode 已废弃，现调整为 nativeTags，请升级 Volar 插件至最新版本
+    "nativeTags": [
+      "block",
+      "component",
+      "template",
+      "slot"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
 }

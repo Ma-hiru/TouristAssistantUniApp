@@ -33,8 +33,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
-import { ButtonOnChooseavatar } from "@uni-helper/uni-app-types";
-import { loginInfo } from "@/api";
+import type { ButtonOnChooseavatar } from "@uni-helper/uni-app-types";
+import type { loginInfo } from "@/api";
 import { useUserStore } from "@/stores";
 import { upload } from "@/api/modules/upload";
 
@@ -68,7 +68,7 @@ const handleSubmit = () => {
       icon: "none",
     });
     return;
-  } else if (loginForm.value.nickname.length > 10) {
+  } else if (loginForm.value.nickname!.length > 10) {
     uni.showToast({
       title: "昵称太长了，换个吧~",
       icon: "none",
@@ -83,7 +83,6 @@ const handleSubmit = () => {
   }
   upload({
     url: "/api/upload",
-    method: "POST",
     filePath: loginForm.value.avatar,
     name: "avatar",
     formData: {
