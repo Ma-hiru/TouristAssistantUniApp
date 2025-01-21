@@ -44,13 +44,6 @@
         "navigationBarTitleText": "注册",
         "enablePullDownRefresh": false
       }
-    },
-    {
-      "path": "pages/map/map",
-      "style": {
-        "navigationBarTitleText": "路线规划",
-        "enablePullDownRefresh": false
-      }
     }
   ],
   "globalStyle": {
@@ -59,16 +52,6 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "usingComponents": {
-      "van-button": "/wxcomponents/vant/button/index",
-      "van-cell": "/wxcomponents/vant/cell/index",
-      "van-cell-group": "/wxcomponents/vant/cell-group/index",
-      "van-icon": "/wxcomponents/vant/icon/index",
-      "van-image": "/wxcomponents/vant/image/index",
-      "van-row": "/wxcomponents/vant/row/index",
-      "van-col": "/wxcomponents/vant/col/index",
-      "van-popup": "/wxcomponents/vant/popup/index",
-      "van-toast": "/wxcomponents/vant/toast/index",
-      "van-card": "/wxcomponents/vant/card/index",
       "ant-button": "/wxcomponents/antd-mini/Button/index",
       "ant-icon": "/wxcomponents/antd-mini/Icon/index",
       "ant-avatar": "/wxcomponents/antd-mini/Avatar/index"
@@ -81,7 +64,7 @@
     "borderStyle": "white",
     "list": [
       {
-        "text": "首页",
+        "text": "地图",
         "pagePath": "pages/index/index",
         "iconPath": "static/tabs/home_unselect.png",
         "selectedIconPath": "static/tabs/home_select.png"

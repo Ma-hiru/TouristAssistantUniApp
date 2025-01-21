@@ -15,27 +15,34 @@
     />
     <view class="z-20 mb-10 ml-4">
       <button
-        class="floatBtn w-16 h-16 bg-blue-600 flex justify-center items-center rounded-full hover:bg-blue-900 hover:text-sm mb-4"
+        class="floatBtn w-16 h-16 bg-blue-600 flex justify-center items-center rounded-full mb-4"
+        hover-class="bg-blue-900"
         @tap="getLocation"
       >
         <ant-icon type="RedoOutline" style="font-size: 60rpx; color: white" />
       </button>
       <button
-        class="floatBtn w-16 h-16 bg-blue-600 flex justify-center items-center rounded-full hover:bg-blue-900 hover:text-sm"
+        class="floatBtn w-16 h-16 bg-blue-600 flex justify-center items-center rounded-full"
+        hover-class="bg-blue-900"
         @tap="popupShow = true"
       >
         <ant-icon type="FlagOutline" style="font-size: 60rpx; color: white" />
       </button>
     </view>
-
     <view class="z-30">
       <wd-popup
         v-model="popupShow"
-        custom-style="height: 65vh"
+        custom-style="height: 80vh"
         @close="handleClose"
         position="bottom"
       >
-        <text class="custom-txt">弹弹弹</text>
+        <view class="relative w-full h-full">
+          <view class="text-center text-base font-bold p-4">
+            <text>欢迎使用路线规划助手</text>
+          </view>
+          <view class="bg-gray-600 chatContent">Content</view>
+          <ChatInput />
+        </view>
       </wd-popup>
     </view>
   </view>
@@ -45,6 +52,7 @@ import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { Position } from "@/types/map";
 import { MapMarker, MapPolyline } from "@uni-helper/uni-app-types";
+import ChatInput from "@/components/ChatInput/index.vue";
 //地图数据
 const position = ref<Position>({
   longitude: 116.4,
@@ -120,5 +128,9 @@ const handleClose = () => {};
   width: 100vw;
   height: 100vh;
   z-index: 10;
+}
+
+.chatContent {
+  height: calc(80% - 1.5rem);
 }
 </style>
