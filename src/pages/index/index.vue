@@ -40,8 +40,16 @@
           <view class="text-center text-base font-bold p-4">
             <text>欢迎使用路线规划助手</text>
           </view>
-          <view class="bg-gray-600 chatContent">Content</view>
-          <ChatInput />
+          <view class="chatContent">
+            <scroll-view class="h-full" :scroll-y="true">
+              <Message
+                type="user"
+                :time="'2025-01-22 22:20:50'"
+                :text="'介绍一下岳阳楼。'"
+              />
+            </scroll-view>
+          </view>
+          <ChatInput placeholder="你想要怎样的路线呢~" />
         </view>
       </wd-popup>
     </view>
@@ -53,6 +61,7 @@ import { onLoad } from "@dcloudio/uni-app";
 import { Position } from "@/types/map";
 import { MapMarker, MapPolyline } from "@uni-helper/uni-app-types";
 import ChatInput from "@/components/ChatInput/index.vue";
+import Message from "@/components/Message/index.vue";
 //地图数据
 const position = ref<Position>({
   longitude: 116.4,
@@ -131,6 +140,6 @@ const handleClose = () => {};
 }
 
 .chatContent {
-  height: calc(80% - 1.5rem);
+  height: calc(73vh);
 }
 </style>

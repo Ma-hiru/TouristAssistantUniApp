@@ -1,12 +1,12 @@
 <template>
-  <view class="pl-4 pr-4 absolute w-full bottom-6 z-30">
+  <view class="pl-4 pr-4 absolute w-full bottom-4 z-50">
     <view
-      class="border border-solid border-s border-gray-100 shadow-lg flex justify-center items-center rounded-2xl w-full p-2"
+      class="z-50 border border-solid border-s bg-gray-100 border-gray-100 shadow-lg flex justify-center items-center rounded-2xl w-full p-2"
     >
-      <view>
+      <view class="z-50">
         <textarea
-          class="text-base"
-          placeholder="你想要怎样的路线呢~"
+          class="text-base z-50"
+          :placeholder="props.placeholder"
           :auto-height="true"
           confirm-type="send"
           :maxlength="-1"
@@ -26,7 +26,7 @@
         <image
           v-show="!loading"
           class="w-1/2 h-1/2 fill-black"
-          src="/static/chat/send.svg"
+          src="/static/chat/send_button.svg"
           mode="aspectFit"
         />
         <wd-loading v-if="loading" color="#000000" />
@@ -40,6 +40,9 @@
 import { ref } from "vue";
 import { TextareaOnKeyboardheightchange } from "@uni-helper/uni-app-types";
 
+const props = defineProps<{
+  placeholder: string;
+}>();
 /** 文字输入 */
 const inputText = ref<string>("");
 const keyboardHeight = ref<number>(0);
