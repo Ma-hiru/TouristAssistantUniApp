@@ -1,21 +1,30 @@
 <template>
   <view
-    class="bg-gray-200 p-4 rounded-xl select-auto -top-2 relative font-bold w-auto inline-block"
+    class="bg-gray-200 rounded-xl select-text -top-2 relative font-bold w-auto inline-block overflow-hidden"
+    :class="{
+      'rounded-tr-none': cornerPosition === 'right',
+      'rounded-tl-none': cornerPosition === 'left',
+    }"
   >
-    <text>{{ curText }}</text>
+    <view class="max-w-[calc(100vw-10rem)] break-words pl-2 pr-2">
+      <!--      {{ curText }}-->
+      <towxml :nodes="content" />
+    </view>
   </view>
 </template>
 
 <script setup lang="ts" name="ChatText">
-import { computed, ref } from "vue";
-import { onLoad } from "@dcloudio/uni-app";
+import { computed, onMounted, ref, watch } from "vue";
+import { useTowxml } from "@/wxcomponents/towxml";
 
 const props = defineProps<{
   text: string;
   isTypeText: boolean;
+  cornerPosition: "left" | "right";
+  scrollToBottom: () => void;
 }>();
 const curIndex = ref<number>(0);
-const speed = ref<number>(50);
+const speed = ref<number>(20);
 const timer = ref<number>();
 const startIndex = ref<number>(0);
 const isPause = ref<boolean>(false);
@@ -43,12 +52,17 @@ const writeText = () => {
   curIndex.value++;
   if (curIndex.value > props.text.length) isPause.value = true;
   if (!isPause.value) timer.value = setTimeout(writeText, speed.value);
+  props.scrollToBottom();
 };
-onLoad(() => {
+onMounted(() => {
   if (props.isTypeText) start();
-  else curIndex.value = props.text.length - 1;
+  else curIndex.value = props.text.length;
 });
 defineExpose({ start, pause, conti, reset });
+const content = ref();
+watch(curText, () => {
+  content.value = useTowxml(curText.value, "markdown");
+});
 </script>
 
 <style scoped lang="scss"></style>

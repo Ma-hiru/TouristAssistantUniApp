@@ -5,7 +5,7 @@
     >
       <view class="z-50">
         <textarea
-          class="text-base z-50"
+          class="text-base z-50 resize-none"
           :placeholder="props.placeholder"
           :auto-height="true"
           confirm-type="send"
@@ -42,6 +42,7 @@ import { TextareaOnKeyboardheightchange } from "@uni-helper/uni-app-types";
 
 const props = defineProps<{
   placeholder: string;
+  onSend: (text: string) => Promise<boolean>;
 }>();
 /** 文字输入 */
 const inputText = ref<string>("");
@@ -51,27 +52,33 @@ const onKeyboardHeightChange: TextareaOnKeyboardheightchange = (e) => {
 };
 /** 发送数据 */
 const loading = ref<boolean>(false);
-const sendMessage = () => {
+const sendMessage = async () => {
   if (inputText.value.trim() === "") {
-    uni.showToast({
+    await uni.showToast({
       title: "内容不能为空~",
       icon: "none",
     });
     return;
   }
   loading.value = true;
-  uni.showLoading({
+  await uni.showLoading({
     title: "正在发送...",
   });
-  setTimeout(() => {
+  if (await props.onSend(inputText.value)) {
     uni.hideLoading();
-    uni.showToast({
+    await uni.showToast({
       title: "发送成功",
       icon: "success",
     });
     inputText.value = "";
-    loading.value = false;
-  }, 1000);
+  } else {
+    uni.hideLoading();
+    await uni.showToast({
+      title: "发送失败，请检查网络~",
+      icon: "error",
+    });
+  }
+  loading.value = false;
 };
 </script>
 

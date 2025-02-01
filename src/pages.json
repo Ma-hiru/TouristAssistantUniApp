@@ -54,7 +54,8 @@
     "usingComponents": {
       "ant-button": "/wxcomponents/antd-mini/Button/index",
       "ant-icon": "/wxcomponents/antd-mini/Icon/index",
-      "ant-avatar": "/wxcomponents/antd-mini/Avatar/index"
+      "ant-avatar": "/wxcomponents/antd-mini/Avatar/index",
+      "towxml": "/wxcomponents/towxml/towxml"
     }
   },
   "tabBar": {

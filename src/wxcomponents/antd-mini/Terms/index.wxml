@@ -1,0 +1,154 @@
+<view class="ant-terms {{buttonsFixed ? 'ant-terms-fixed' : ''}} {{className}}">
+  <slot name="button-top"></slot>
+  <view>
+    <view
+      wx:if="{{terms.length && type !== 'read'}}"
+      class="ant-terms-protocol"
+    >
+      <block wx:if="{{type === 'check'}}">
+        <ant-popover
+          className="ant-terms-checkbox-tips"
+          placement="top-left"
+          autoAdjustOverflow="{{false}}"
+          visible="{{checkboxTipsVisible}}"
+          content="{{checkboxTipsText}}"
+          showMask="{{false}}"
+          style="display: inline-block"
+        >
+          <ant-checkbox
+            checked="{{checked}}"
+            bindchange="onCheckChange"
+          ></ant-checkbox>
+        </ant-popover>
+        <text
+          wx:if="{{termPrefix}}"
+          bindtap="onTermPrefixTap"
+          class="ant-terms-protocol-text"
+        >{{termPrefix}}</text>
+      </block>
+      <text
+        wx:if="{{type !== 'check' && termPrefix}}"
+        class="ant-terms-protocol-text"
+      >{{termPrefix}}</text>
+      <text
+        class="ant-terms-protocol-item"
+        bindtap="onTermTap"
+        data-item="{{item}}"
+        data-index="{{index}}"
+        wx:for="{{terms}}"
+        wx:for-index="index"
+        wx:for-item="item"
+        wx:key="key"
+      >{{item.name}}</text>
+      <text
+        wx:if="{{termSuffix}}"
+        class="ant-terms-protocol-text"
+      >{{termSuffix}}</text>
+    </view>
+    <block wx:if="{{terms.length && type === 'read'}}">
+      <slot name="read-content"></slot>
+      <view class="ant-terms-read-shadow">
+        <view class="ant-terms-read-shadow-total">共{{terms.length}}份</view>
+      </view>
+      <swiper
+        className="ant-terms-read-protocol-swiper"
+        current="{{mixin.value}}"
+        autoplay="{{false}}"
+        vertical="{{false}}"
+        circular="{{false}}"
+        previousMargin="35px"
+        nextMargin="35px"
+        bindchange="onReadChange"
+      >
+        <block
+          wx:for="{{terms}}"
+          wx:for-index="index"
+          wx:for-item="item"
+          wx:key="key"
+        >
+          <swiper-item className="ant-terms-read-protocol-swiper-item">
+            <view
+              class="ant-terms-read-protocol"
+              bindtap="onReadSwiperTap"
+              data-item="{{item}}"
+              data-index="{{index}}"
+            >
+              <text
+                wx:if="{{termPrefix}}"
+                class="ant-terms-read-protocol-text"
+              >{{termPrefix}}</text>
+              <text
+                class="ant-terms-read-protocol-item"
+                bindtap="onTermTap"
+                data-item="{{item}}"
+                data-index="{{index}}"
+              >{{item.name}}</text>
+              <text
+                wx:if="{{termSuffix}}"
+                class="ant-terms-read-protocol-text"
+              >{{termSuffix}}</text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </block>
+    <view
+      wx:if="{{buttons.length}}"
+      class="ant-terms-btn {{buttonsDirection === 'horizontal' ? 'ant-terms-btn-flex' : ''}}"
+    >
+      <slot name="prefix"></slot>
+      <view
+        class="ant-terms-btn-item {{buttonsDirection === 'horizontal' ? 'ant-terms-btn-item-flex' : ''}}"
+        data-item="{{item}}"
+        data-index="{{index}}"
+        wx:for="{{buttons}}"
+        wx:for-index="index"
+        wx:for-item="item"
+        wx:key="key"
+      >
+        <slot
+          name="button-left"
+          index="{{index}}"
+          item="{{item}}"
+        ></slot>
+        <ant-button
+          data-index="{{index}}"
+          data-item="{{item}}"
+          bindtap="onButtonTap"
+          type="{{item.type || 'primary'}}"
+          style="{{item.style || ''}}"
+          inline="{{item.inline}}"
+          size="{{item.size}}"
+          aide="{{item.aide}}"
+          loading="{{item.loading}}"
+          disabled="{{item.disabled}}"
+          icon="{{item.icon}}"
+          activeClassName="{{item.activeClassName}}"
+          className="{{buttons.length === 1 ? 'ant-terms-btn-single' : ''}} {{item.className}}"
+        >
+          <slot
+            name="button-prefix"
+            slot="prefix"
+            index="{{index}}"
+            item="{{item}}"
+          ></slot>{{item.text}}{{countdownArr[index] ? '（' + countdownArr[index] + 's）' : ''}}<slot
+            name="button-suffix"
+            slot="suffix"
+            index="{{index}}"
+            item="{{item}}"
+          ></slot>
+        </ant-button>
+        <slot
+          name="button-right"
+          index="{{index}}"
+          item="{{item}}"
+        ></slot>
+      </view>
+      <slot name="suffix"></slot>
+    </view>
+    <slot name="button-group-bottom"></slot>
+    <!--默认插槽，内容区域-->
+    <slot></slot>
+    <ant-safe-area position="bottom"></ant-safe-area>
+  </view>
+</view>

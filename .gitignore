@@ -19,4 +19,3 @@ dist
 *.njsproj
 *.sln
 *.sw?
-/src/wxcomponents/

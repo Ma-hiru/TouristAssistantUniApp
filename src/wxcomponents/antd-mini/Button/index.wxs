@@ -1,0 +1,28 @@
+function getClass(size) {
+  var list = ['small', 'medium', 'large'];
+  if (list.indexOf(size) >= 0) {
+    return "ant-button-".concat(size);
+  }
+  return 'ant-button-medium';
+}
+function getHoverClass(loading, type, activeClassName) {
+  if (loading) {
+    return '';
+  }
+  var className = 'ant-button-active';
+  if (type === 'text') {
+    className += ' ant-button-text-active';
+  }
+  if (activeClassName) {
+    className += ' ' + activeClassName;
+  }
+  return className;
+}
+function isAide(aide, type) {
+  return aide && ['default', 'primary'].indexOf(type) > -1;
+}
+module.exports = {
+  getClass: getClass,
+  getHoverClass: getHoverClass,
+  isAide: isAide
+};

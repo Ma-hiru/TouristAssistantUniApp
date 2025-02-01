@@ -1,0 +1,116 @@
+.ant-terms {
+  box-sizing: border-box;
+  padding-top: 20rpx;
+}
+.ant-terms .ant-terms-btn-single {
+  height: 98rpx;
+  padding: 0;
+  justify-content: center;
+}
+.ant-terms-fixed {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--terms-fixed-background-color, #ffffff);
+  position: fixed;
+  border-top: 1rpx solid var(--terms-fixed-border-color, #eeeeee);
+  z-index: 999;
+}
+.ant-terms .ant-terms-protocol {
+  margin: 0 24rpx;
+  text-align: left;
+  padding-bottom: 24rpx;
+  line-height: 37rpx;
+}
+.ant-terms .ant-terms-protocol-item {
+  vertical-align: middle;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  color: var(--terms-protocol-item-color, #1677ff);
+}
+.ant-terms .ant-terms-protocol-text {
+  vertical-align: middle;
+  color: var(--terms-protocol-text-color, #999999);
+  font-size: 26rpx;
+  line-height: 37rpx;
+}
+.ant-terms .ant-terms-protocol .ant-terms-checkbox-tips .ant-popover-content {
+  left: -20rpx !important;
+}
+.ant-terms .ant-terms-protocol .ant-checkbox-item {
+  margin-left: 4rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+  height: unset;
+}
+.ant-terms .ant-terms-protocol .ant-checkbox-item .ant-checkbox-item-content {
+  padding-left: 0;
+  font-size: 0;
+}
+.ant-terms .ant-terms-protocol .ant-checkbox-item-wrap {
+  width: 32rpx;
+  height: 32rpx;
+  flex: 0 0 32rpx;
+}
+.ant-terms swiper {
+  height: 106rpx;
+}
+.ant-terms .ant-terms-read-shadow {
+  width: 100%;
+  height: 115rpx;
+  margin-top: -115rpx;
+  background-image: var(--terms-read-shadow-background, linear-gradient(180deg, rgba(255, 255, 255, 0) 12%, #ffffff 86%));
+  position: relative;
+}
+.ant-terms .ant-terms-read-shadow-total {
+  position: absolute;
+  right: 48rpx;
+  bottom: 0;
+  font-size: 22rpx;
+  line-height: 30rpx;
+  font-weight: 500;
+  color: var(--terms-read-protocol-item-color, #333333);
+}
+.ant-terms .ant-terms-read-protocol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58rpx;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  margin: 24rpx 8rpx 24rpx 8rpx;
+  border: 1rpx solid var(--terms-read-protocol-border, #eeeeee);
+  box-shadow: 0 0 10rpx 0 var(--terms-read-protocol-box-shadow-color, rgba(0, 0, 0, 0.1));
+}
+.ant-terms .ant-terms-read-protocol-item {
+  color: var(--terms-read-protocol-item-color, #333333);
+  font-size: 22rpx;
+  line-height: 30rpx;
+  font-weight: 500;
+}
+.ant-terms .ant-terms-read-protocol-text {
+  color: var(--terms-read-protocol-text-color, #999999);
+  font-size: 22rpx;
+  line-height: 30rpx;
+}
+.ant-terms-btn {
+  margin: 0 24rpx;
+}
+.ant-terms-btn-item {
+  margin-bottom: 24rpx;
+}
+.ant-terms-btn-item:last-of-type {
+  margin-bottom: 0;
+}
+.ant-terms-btn-flex {
+  display: flex;
+}
+.ant-terms-btn-flex .ant-terms-btn-item {
+  margin-bottom: 0;
+  flex: 1;
+  margin-right: 24rpx;
+}
+.ant-terms-btn-flex .ant-terms-btn-item:last-of-type {
+  margin-right: 0;
+}

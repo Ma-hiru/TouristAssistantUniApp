@@ -1,0 +1,87 @@
+在 Node.js 环境中，`html-parse` 并不是一个常见的 npm 包名称。
+您可能指的是以下其中之一：
+
+1. **`node-html-parser`**：
+   - **简介**：这是一个非常快速的 HTML 解析器，生成简化的 DOM 树，并支持基本的元素查询。
+   - **安装**：
+     ```bash
+     npm install node-html-parser
+     ```
+   - **用法**：
+     ```javascript
+     const { parse } = require('node-html-parser');
+
+     const root = parse('<ul id="list"><li>Hello World</li></ul>');
+
+     console.log(root.firstChild.structure);
+     // 输出：ul#list
+     //         li
+     //           #text
+
+     console.log(root.querySelector('#list'));
+     // 输出：{ tagName: 'ul', rawAttrs: 'id="list"', childNodes: [ { tagName: 'li', rawAttrs: '', childNodes: [Object], classNames: [] } ], id: 'list', classNames: [] }
+     ```
+   - **更多信息**：
+     [node-html-parser npm 页面](https://www.npmjs.com/package/node-html-parser)
+
+2. **`htmlparser2`**：
+   - **简介**：一个快速且宽容的 HTML 解析器，支持流式解析和事件驱动的 API。
+   - **安装**：
+     ```bash
+     npm install htmlparser2
+     ```
+   - **用法**：
+     ```javascript
+     const htmlparser2 = require('htmlparser2');
+
+     const html = '<ul><li>Hello World</li></ul>';
+
+     const handler = new htmlparser2.DefaultHandler(function (error, dom) {
+       if (error) {
+         console.error(error);
+       } else {
+         console.log(dom);
+       }
+     });
+
+     const parser = new htmlparser2.Parser(handler);
+     parser.parseComplete(html);
+     ```
+   - **更多信息**：
+     [htmlparser2 npm 页面](https://www.npmjs.com/package/htmlparser2)
+
+3. **`parse5`**：
+   - **简介**：一个符合 WHATWG HTML Living Standard 的 HTML 解析和序列化工具集。
+   - **安装**：
+     ```bash
+     npm install parse5
+     ```
+   - **用法**：
+     ```javascript
+     const parse5 = require('parse5');
+
+     const html = '<ul><li>Hello World</li></ul>';
+
+     const document = parse5.parse(html);
+     console.log(document);
+     ```
+   - **更多信息**：
+     [parse5 GitHub 仓库](https://github.com/inikulin/parse5)
+
+4. **`html-react-parser`**：
+   - **简介**：将 HTML 字符串转换为一个或多个 React 元素的解析器。
+   - **安装**：
+     ```bash
+     npm install html-react-parser
+     ```
+   - **用法**：
+     ```javascript
+     import parse from 'html-react-parser';
+
+     const htmlString = '<p>Hello, World!</p>';
+     const reactElement = parse(htmlString);
+     ```
+   - **更多信息**：
+     [html-react-parser npm 页面](https://www.npmjs.com/package/html-react-parser)
+
+请根据您的具体需求选择合适的库。 

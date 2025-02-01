@@ -5,8 +5,12 @@
         <ChatTime :time="props.time" />
         <ChatAvatar :type="props.type" />
       </view>
-      <view class="w-full pl-16 pr-16 text-right">
-        <ChatText :text="props.text" :is-type-text="false" />
+      <view class="w-full max-w-full pl-16 pr-16 flex justify-end">
+        <ChatText
+          :text="props.text"
+          :is-type-text="false"
+          corner-position="right"
+        />
       </view>
     </view>
   </view>
@@ -16,8 +20,13 @@
         <ChatAvatar :type="props.type" />
         <ChatTime :time="props.time" />
       </view>
-      <view class="w-full pl-16 pr-16 text-left">
-        <ChatText :text="props.text" :is-type-text="true" />
+      <view class="w-full pl-16 pr-16 flex justify-start items-center">
+        <ChatText
+          :text="props.text"
+          :is-type-text="props.isTypeText"
+          corner-position="left"
+          :scroll-to-bottom="props.scrollToBottom"
+        />
       </view>
     </view>
   </view>
@@ -37,6 +46,8 @@ const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string;
   text: string;
+  isTypeText: boolean;
+  scrollToBottom: () => void;
 }>();
 </script>
 

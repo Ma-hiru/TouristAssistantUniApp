@@ -1,0 +1,96 @@
+.ant-number-input {
+  background: var(--number-input-background-color, #ffffff);
+  padding: 16rpx;
+  border-radius: 16rpx;
+}
+.ant-number-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.ant-number-input-title {
+  font-size: 30rpx;
+  color: var(--number-input-title-color, #333333);
+}
+.ant-number-input-link {
+  font-size: 30rpx;
+  color: var(--number-input-link-color, #4b6b99);
+}
+.ant-number-input-unit {
+  height: 28rpx;
+  margin-top: 30rpx;
+  margin-left: 50rpx;
+}
+.ant-number-input-unit-text {
+  position: relative;
+  font-size: 30rpx;
+  color: var(--number-input-unit-color, #999999);
+  text-align: left;
+  line-height: 28rpx;
+  text-indent: 0.5em;
+}
+.ant-number-input-unit-text::after {
+  content: '';
+  position: absolute;
+  background-color: var(--number-input-border-color, #e5e5e5);
+  display: block;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  transform: scaleX(0.5);
+}
+.ant-number-input-content {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+.ant-number-input-content::after {
+  content: '';
+  position: absolute;
+  background-color: var(--number-input-border-color, #e5e5e5);
+  display: block;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  transform: scaleY(0.5);
+}
+.ant-number-input-prefix {
+  font-size: 64rpx;
+  color: var(--number-input-prefix-color, #333333);
+  margin-right: 16rpx;
+}
+.ant-number-input-field {
+  flex: 1;
+}
+.ant-number-input-field .ant-input-content {
+  height: 125rpx;
+  font-size: 88rpx;
+  line-height: 74rpx;
+  caret-color: var(--number-input-caret-color, #1677ff);
+}
+.ant-number-input-placeholder {
+  font-size: 30rpx;
+}
+.ant-number-input-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.ant-number-input-quick-item {
+  font-size: 30rpx;
+  line-height: 1.4;
+  color: var(--number-input-quick-text-color, #1677ff);
+  padding: 8rpx 24rpx;
+  border: 1rpx solid var(--number-input-quick-border-color, #1677ff);
+  border-radius: 50vh;
+}
+.ant-number-input-quick-item:active {
+  opacity: 0.7;
+}
