@@ -57,6 +57,7 @@ Component(IndexBarDefaultProps, {
         return this;
     },
     init: function (nextProps) {
+        var _this = this;
         var defaultCurrent = nextProps.defaultCurrent, current = nextProps.current, items = nextProps.items;
         this.initItemHeight();
         var initCurrent = this.isControlled(nextProps)
@@ -67,6 +68,11 @@ Component(IndexBarDefaultProps, {
             currentKey: _index,
             touchKeyIndex: _index,
             touchKey: initCurrent,
+        }, function () {
+            _this.setData({
+                touchKeyIndex: -1,
+                touchKey: '',
+            });
         });
     },
     isControlled: function (nextProps, valueKey) {
@@ -184,8 +190,6 @@ Component(IndexBarDefaultProps, {
         if (currentKey !== newIndex - 1 && newIndex - 1 >= 0 && !moving) {
             this.setData({
                 currentKey: newIndex - 1,
-                touchKeyIndex: newIndex - 1,
-                touchKey: items[newIndex - 1].label,
             });
             this.onAlphabetClick(items[newIndex - 1], newIndex - 1);
         }

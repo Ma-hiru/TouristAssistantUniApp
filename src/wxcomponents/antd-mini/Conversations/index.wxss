@@ -1,0 +1,55 @@
+.ant-copilot-conversations-hover {
+  opacity: 0.6;
+}
+.ant-copilot-conversations-swipe-item {
+  height: var(--conversations-swipe-item-height, 140rpx);
+}
+.ant-copilot-conversations-swipe-item-view {
+  height: 100%;
+  width: var(--conversations-swipe-item-view-width, calc(100% - 300rpx));
+  padding: 24rpx 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.ant-copilot-conversations-swipe-item-view-main {
+  flex-grow: 1;
+  overflow: hidden;
+}
+.ant-copilot-conversations-swipe-item-view-main-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ant-copilot-conversations-swipe-item-view-icon {
+  flex-shrink: 0;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+}
+.ant-copilot-conversations-swipe-item-view-label {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  height: 40rpx;
+  color: var(--conversations-swipe-item-view-label-color, rgba(0, 0, 0, 0.88));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ant-copilot-conversations-swipe-item-view-timestamp {
+  flex-shrink: 0;
+  margin-left: 28rpx;
+  font-size: 28rpx;
+  line-height: 44rpx;
+  color: var(--conversations-swipe-item-view-timestamp-color, #848484);
+}
+.ant-copilot-conversations-swipe-item-view-desc {
+  font-size: 24rpx;
+  line-height: 48rpx;
+  height: 48rpx;
+  color: var(--conversations-swipe-item-view-desc-color, rgba(0, 0, 0, 0.45));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

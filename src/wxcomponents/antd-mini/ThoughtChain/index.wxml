@@ -1,0 +1,50 @@
+<wxs
+  src="./index.wxs"
+  module="utils"
+></wxs>
+<view class="ant-copilot-thoughtchain {{className}}">
+  <view
+    class="ant-copilot-thoughtchain-node"
+    wx:for="{{items}}"
+    wx:for-index="index"
+    wx:for-item="item"
+  >
+    <view
+      bindtap="onTitleTap"
+      data-index="{{index}}"
+      data-key="{{item.key || index}}"
+    >
+      <view class="ant-copilot-thoughtchain-node-title">
+        <image
+          wx:if="{{item.icon && item.icon.includes('https://')}}"
+          class="ant-copilot-thoughtchain-node-title-icon"
+          mode="widthFix"
+          src="{{item.icon}}"
+        ></image>
+        <ant-icon
+          wx:else
+          type="{{item.icon || 'CheckCircleOutline'}}"
+          class="ant-copilot-thoughtchain-node-title-icon"
+        ></ant-icon>{{item.title}}<view
+          wx:if="{{collapsible}}"
+          class="ant-copilot-thoughtchain-node-title-collapse"
+        >
+          <ant-icon type="{{utils.isExpand(collapsible, item.key || index, foldStatusMap) ? 'UpOutline' : 'DownOutline'}}"></ant-icon>
+        </view>
+      </view>
+    </view>
+    <view
+      wx:if="{{utils.isExpand(collapsible, item.key || index, foldStatusMap)}}"
+      class="ant-copilot-thoughtchain-node-content"
+    >
+      <view
+        class="ant-copilot-thoughtchain-node-content-text"
+        bindtap="onContentTap"
+        data-key="{{item.key || index}}"
+        data-content="{{item.content}}"
+      >
+        <view>{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -44,6 +44,13 @@
         "navigationBarTitleText": "注册",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/route/route",
+      "style": {
+        "navigationBarTitleText": "路线规划",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
@@ -55,6 +62,9 @@
       "ant-button": "/wxcomponents/antd-mini/Button/index",
       "ant-icon": "/wxcomponents/antd-mini/Icon/index",
       "ant-avatar": "/wxcomponents/antd-mini/Avatar/index",
+      "ant-loading": "/wxcomponents/antd-mini/Loading/index",
+      "ant-welcome": "/wxcomponents/antd-mini/Welcome/index",
+      "ant-prompts": "/wxcomponents/antd-mini/Prompts/index",
       "towxml": "/wxcomponents/towxml/towxml"
     }
   },

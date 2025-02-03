@@ -1,0 +1,24 @@
+.ant-copilot-actions {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 24rpx;
+  background: var(--actions-background-color, #F7F7F7);
+  padding: 16rpx 24rpx;
+  border-radius: 24rpx;
+}
+.ant-copilot-actions-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 12rpx;
+}
+.ant-copilot-actions-item:active {
+  background: var(--actions-item-hover-background-color, #EEEEEE);
+}
+.ant-copilot-actions-item-icon {
+  font-size: 40rpx;
+  width: 40rpx;
+  height: 40rpx;
+}

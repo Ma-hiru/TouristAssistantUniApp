@@ -10,6 +10,8 @@
           :text="props.text"
           :is-type-text="false"
           corner-position="right"
+          :scroll-to-bottom="props.scrollToBottom"
+          ref="textRef"
         />
       </view>
     </view>
@@ -20,7 +22,7 @@
         <ChatAvatar :type="props.type" />
         <ChatTime :time="props.time" />
       </view>
-      <view class="w-full pl-16 pr-16 flex justify-start items-center">
+      <view class="w-full pl-16 pr-16 flex justify-start items-end">
         <ChatText
           :text="props.text"
           :is-type-text="props.isTypeText"
@@ -41,14 +43,22 @@
 import ChatAvatar from "@/components/Message/ChatAvatar.vue";
 import ChatTime from "@/components/Message/ChatTime.vue";
 import ChatText from "@/components/Message/ChatText.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
   type: "user" | "system" | "assistant";
-  time: string;
+  time: string | undefined;
   text: string;
-  isTypeText: boolean;
+  isTypeText: boolean | undefined;
   scrollToBottom: () => void;
 }>();
+const textRef = ref<InstanceType<typeof ChatText>>();
+defineExpose({
+  start: () => textRef.value?.start(),
+  pause: () => textRef.value?.pause(),
+  conti: () => textRef.value?.conti(),
+  reset: () => textRef.value?.reset(),
+});
 </script>
 
 <style scoped lang="scss"></style>

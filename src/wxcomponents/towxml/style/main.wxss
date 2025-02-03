@@ -369,7 +369,7 @@ video {
 }
 
 .h2w__latex--line {margin:4rpx 8rpx; vertical-align:middle;}
-.h2w__latex--block {display:block; margin:1em auto;} 
+.h2w__latex--block {display:block; margin:1em auto;}
 
 .h2w__yuml {display:block;}
 

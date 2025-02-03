@@ -1,0 +1,55 @@
+<view
+  class="ant-copilot-conversations {{className}}"
+  style="{{style}}"
+>
+  <block
+    wx:for="{{items}}"
+    wx:for-index="index"
+    wx:for-item="item"
+    wx:key="key"
+  >
+    <view class="ant-copilot-conversations-swipe-item">
+      <ant-swipe-action
+        data-item="{{item}}"
+        data-index="{{index}}"
+        rightButtons="{{menus}}"
+        elasticity="{{true}}"
+        disabled="{{item.disabledMenu}}"
+        bindbuttontap="onButtonTap"
+      >
+        <view
+          class="ant-copilot-conversations-swipe-item-view"
+          hoverStartTime="{{20}}"
+          hoverStayTime="{{40}}"
+          hoverClass="{{item.disabled ? '' : 'ant-copilot-conversations-hover'}}"
+          bindtouchstart="{{item.disabled ? '' : 'onTouchStart'}}"
+          bindtouchend="{{item.disabled ? '' : 'onItemTap'}}"
+          data-item="{{item}}"
+          data-index="{{index}}"
+        >
+          <image
+            wx:if="{{item.icon}}"
+            class="ant-copilot-conversations-swipe-item-view-icon"
+            src="{{item.icon}}"
+          ></image>
+          <view class="ant-copilot-conversations-swipe-item-view-main">
+            <view class="ant-copilot-conversations-swipe-item-view-main-top">
+              <view
+                wx:if="{{item.label}}"
+                class="ant-copilot-conversations-swipe-item-view-label"
+              >{{item.label}}</view>
+              <view
+                wx:if="{{item.timestamp}}"
+                class="ant-copilot-conversations-swipe-item-view-timestamp"
+              >{{item.timestamp}}</view>
+            </view>
+            <view
+              wx:if="{{item.description}}"
+              class="ant-copilot-conversations-swipe-item-view-desc"
+            >{{item.description}}</view>
+          </view>
+        </view>
+      </ant-swipe-action>
+    </view>
+  </block>
+</view>

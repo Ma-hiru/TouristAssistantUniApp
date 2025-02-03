@@ -1,6 +1,6 @@
 <template>
   <view
-    class="bg-gray-200 rounded-xl select-text -top-2 relative font-bold w-auto inline-block overflow-hidden"
+    class="bg-[#e5e7eb] rounded-xl select-text -top-2 relative font-bold w-auto inline-block overflow-hidden"
     :class="{
       'rounded-tr-none': cornerPosition === 'right',
       'rounded-tl-none': cornerPosition === 'left',
@@ -59,9 +59,11 @@ onMounted(() => {
   else curIndex.value = props.text.length;
 });
 defineExpose({ start, pause, conti, reset });
-const content = ref();
+const content = ref(null);
 watch(curText, () => {
-  content.value = useTowxml(curText.value, "markdown");
+  content.value = useTowxml(curText.value, "markdown", {
+    theme: "light",
+  });
 });
 </script>
 

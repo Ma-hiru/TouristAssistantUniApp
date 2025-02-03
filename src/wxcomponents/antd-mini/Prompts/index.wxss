@@ -1,0 +1,89 @@
+.ant-copilot-prompts-title {
+  font-weight: 400;
+  font-size: var(--prompts-title-size, 32rpx);
+  color: var(--prompts-title-color, rgba(0, 0, 0, 0.25));
+  line-height: var(--prompts-title-line-height, 48rpx);
+  padding-bottom: var(--prompts-title-padding-bottom, 16rpx);
+}
+.ant-copilot-prompts-vertical-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--prompts-list-gap, 24rpx);
+}
+.ant-copilot-prompts-vertical-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2rpx solid var(--prompts-item-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 50vh;
+  padding: 20rpx 32rpx;
+  gap: var(--prompts-item-gap, 16rpx);
+}
+.ant-copilot-prompts-vertical-list-item-icon {
+  font-size: 32rpx;
+}
+.ant-copilot-prompts-vertical-list-item-image {
+  width: 40rpx;
+  height: 40rpx;
+  flex-shrink: 0;
+}
+.ant-copilot-prompts-vertical-list-item-label {
+  font-weight: 500;
+  font-size: 28rpx;
+  color: var(--prompts-item-label-color, rgba(0, 0, 0, 0.88));
+  line-height: var(--prompts-item-description-line-height, 44rpx);
+  text-wrap: nowrap;
+}
+.ant-copilot-prompts-vertical-list-item-description {
+  font-weight: 400;
+  font-size: 28rpx;
+  color: var(--prompts-item-description-color, rgba(0, 0, 0, 0.88));
+  line-height: var(--prompts-item-description-line-height, 44rpx);
+}
+.ant-copilot-prompts-vertical-list-item-arrow {
+  font-size: 32rpx;
+  color: var(--prompts-item-arrow-color, rgba(0, 0, 0, 0.45));
+}
+.ant-copilot-prompts-horizontal-list {
+  box-sizing: border-box;
+  padding: 24rpx 24rpx 0 24rpx;
+  display: flex;
+  height: 106rpx;
+}
+.ant-copilot-prompts-horizontal-list::-webkit-scrollbar {
+  display: none;
+}
+.ant-copilot-prompts-horizontal-list.wrap {
+  flex-wrap: wrap;
+  height: unset;
+}
+.ant-copilot-prompts-horizontal-list-item {
+  height: 58rpx;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 8rpx 24rpx;
+  border: 2rpx solid var(--prompts-item-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 30rpx;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.ant-copilot-prompts-horizontal-list-item:last-of-type {
+  margin-right: 0;
+}
+.ant-copilot-prompts-horizontal-list-item-typography .ant-typography-icon-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.ant-copilot-prompts-horizontal-list-item-typography .ant-typography-icon {
+  font-size: 32rpx;
+}
+.ant-copilot-prompts-horizontal-list-item-typography .ant-typography-text {
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: var(--prompts-item-label-color, rgba(0, 0, 0, 0.88));
+}

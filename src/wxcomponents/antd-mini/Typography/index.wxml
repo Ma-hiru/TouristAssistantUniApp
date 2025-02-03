@@ -23,7 +23,7 @@
     <image
       wx:else
       class="ant-typography-icon-image"
-      style="width: {{fontSize}};height: {{fontSize}};"
+      style="{{fontSize ? 'width: ' + fontSize + ';height: ' + fontSize + ';' : ''}}"
       src="{{icon}}"
     ></image>
   </view>
@@ -49,7 +49,7 @@
     <image
       wx:else
       class="ant-typography-icon-image"
-      style="width: {{fontSize}};height: {{fontSize}};"
+      style="{{fontSize ? 'width: ' + fontSize + ';height: ' + fontSize + ';' : ''}}"
       src="{{icon}}"
     ></image>
   </view>

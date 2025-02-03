@@ -24,35 +24,12 @@
       <button
         class="floatBtn w-16 h-16 bg-blue-600 flex justify-center items-center rounded-full"
         hover-class="bg-blue-900"
-        @tap="popupShow = true"
+        @tap="gotoRoute"
       >
         <ant-icon type="FlagOutline" style="font-size: 60rpx; color: white" />
       </button>
     </view>
-    <view class="z-30">
-      <wd-popup
-        v-model="popupShow"
-        custom-style="height: 80vh"
-        @close="handleClose"
-        position="bottom"
-      >
-        <view class="relative w-full h-full">
-          <view class="text-center text-base font-bold p-4">
-            <text>欢迎使用路线规划助手</text>
-          </view>
-          <view class="chatContent">
-            <scroll-view class="h-full" :scroll-y="true">
-              <Message
-                type="user"
-                :time="'2025-01-22 22:20:50'"
-                :text="'介绍一下岳阳楼。'"
-              />
-            </scroll-view>
-          </view>
-          <ChatInput placeholder="你想要怎样的路线呢~" />
-        </view>
-      </wd-popup>
-    </view>
+    <view class="z-30"> </view>
   </view>
 </template>
 <script setup lang="ts">
@@ -60,8 +37,6 @@ import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { Position } from "@/types/map";
 import { MapMarker, MapPolyline } from "@uni-helper/uni-app-types";
-import ChatInput from "@/components/ChatInput/index.vue";
-import Message from "@/components/Message/index.vue";
 //地图数据
 const position = ref<Position>({
   longitude: 116.4,
@@ -124,10 +99,9 @@ async function getLocation() {
 onLoad(async () => {
   await getLocation();
 });
-//悬浮按钮
-//弹出层
-const popupShow = ref(false);
-const handleClose = () => {};
+function gotoRoute() {
+  uni.navigateTo({ url: "/pages/route/route" });
+}
 </script>
 <style lang="scss" scoped>
 .map {

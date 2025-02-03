@@ -1,0 +1,51 @@
+.ant-copilot-bubble {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx;
+}
+.ant-copilot-bubble-avatar {
+  margin-top: 8rpx;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50vh;
+  flex-shrink: 0;
+}
+.ant-copilot-bubble-container {
+  margin: 0 24rpx;
+}
+.ant-copilot-bubble-content {
+  padding: 24rpx 32rpx;
+  margin: 8rpx 0;
+  border-radius: 24rpx;
+  background: var(--bubble-background-color, #F7F7F7);
+  font-size: var(--size-font6);
+  color: var(--bubble-text-color, rgba(0, 0, 0, 0.88));
+  line-height: 1.5;
+  word-break: break-all;
+}
+.ant-copilot-bubble-content.round {
+  border-radius: 46rpx;
+}
+.ant-copilot-bubble-content.corner {
+  border-radius: 4rpx 24rpx 24rpx 24rpx;
+}
+.ant-copilot-bubble-content.borderless {
+  background: transparent;
+}
+.ant-copilot-bubble-content.outlined {
+  background: transparent;
+  border: 1rpx solid var(--bubble-outlined-color, #EBEBEB);
+}
+.ant-copilot-bubble-content.shadow {
+  box-shadow: 0 0 4rpx 0 rgba(0, 0, 0, 0.05), 0 0 12rpx -8rpx rgba(0, 0, 0, 0.04), 0 4rpx 8rpx 0 rgba(0, 0, 0, 0.04);
+}
+.ant-copilot-bubble-end {
+  flex-direction: row-reverse;
+}
+.ant-copilot-bubble-end .ant-copilot-bubble-content {
+  background: var(--bubble-user-background-color, #1677FF);
+  color: var(--bubble-text-color-user, #ffffff);
+}
+.ant-copilot-bubble-end .ant-copilot-bubble-content.corner {
+  border-radius: 24rpx 4rpx 24rpx 24rpx;
+}

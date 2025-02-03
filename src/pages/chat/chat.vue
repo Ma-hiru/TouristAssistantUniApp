@@ -5,7 +5,6 @@
       :scroll-y="true"
       :scroll-with-animation="true"
       :show-scrollbar="false"
-      :scroll-into-view="scrollIntoViewId"
       :scroll-top="scrollTop"
     >
       <Message
@@ -17,33 +16,39 @@
         :id="'item-' + index"
         :is-type-text="msg.isAdd"
         :scroll-to-bottom="scrollToBottom"
+        ref="messageRef"
       />
+      <ChatWelcome v-if="chatStore.chatList.length === 0" />
       <view class="h-20" />
     </scroll-view>
     <ChatInput
       class="z-50"
       placeholder="快来询问热门的景点信息吧~"
       :on-send="onSend"
+      :loading="sendLoading"
     />
   </view>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { GetTime } from "@/utils";
+import { throttle } from "lodash";
 import Message from "@/components/Message/index.vue";
 import ChatInput from "@/components/ChatInput/index.vue";
-import { GetTime } from "@/utils";
+import ChatWelcome from "@/components/ChatWelcome/ChatWelcome.vue";
 import { useChatStore } from "@/stores/modules/useChatStore";
-import { ref } from "vue";
-import { throttle } from "lodash";
 
 const chatStore = useChatStore();
-const scrollIntoViewId = ref("");
 const scrollTop = ref(0);
+const sendLoading = ref(false);
+const messageRef = ref<InstanceType<typeof Message>>();
 
 function onSend(text: string): Promise<boolean> {
+  sendLoading.value = true;
   return new Promise((resolve) => {
     chatStore.sendText({
-      id: undefined,
+      id: 114,
       userId: 1,
       content: text,
       type: "user",
@@ -51,6 +56,7 @@ function onSend(text: string): Promise<boolean> {
       isAdd: true,
     });
     scrollToBottom();
+    setTimeout(() => (sendLoading.value = false), 1500);
     resolve(true);
   });
 }

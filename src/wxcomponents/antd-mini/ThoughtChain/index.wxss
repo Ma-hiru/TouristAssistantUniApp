@@ -1,0 +1,41 @@
+.ant-copilot-thoughtchain-node {
+  margin-bottom: 36rpx;
+}
+.ant-copilot-thoughtchain-node:last-child {
+  margin-bottom: 0;
+}
+.ant-copilot-thoughtchain-node-title {
+  display: flex;
+  align-items: center;
+  line-height: 44rpx;
+  color: var(--thought-chain-title-color, rgba(0, 0, 0, 0.45));
+}
+.ant-copilot-thoughtchain-node-title-icon {
+  width: 32rpx;
+  margin-right: 16rpx;
+}
+.ant-copilot-thoughtchain-node-title-collapse {
+  margin-left: 16rpx;
+  font-size: 36rpx;
+}
+.ant-copilot-thoughtchain-node-content {
+  padding-left: 58rpx;
+  margin-top: 18rpx;
+}
+.ant-copilot-thoughtchain-node-content-text,
+.ant-copilot-thoughtchain-node-content-link {
+  color: var(--thought-chain-content-color, rgba(0, 0, 0, 0.55));
+  font-size: 28rpx;
+}
+.ant-copilot-thoughtchain-node-content-text-item,
+.ant-copilot-thoughtchain-node-content-link-item {
+  line-height: 40rpx;
+  margin-bottom: 16rpx;
+}
+.ant-copilot-thoughtchain-node-content-text-item:last-child,
+.ant-copilot-thoughtchain-node-content-link-item:last-child {
+  margin-bottom: 0;
+}
+.ant-copilot-thoughtchain-node-content-link {
+  color: var(--button-color, #1677ff);
+}

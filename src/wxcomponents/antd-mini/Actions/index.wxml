@@ -1,0 +1,29 @@
+<wxs
+  src="./check.wxs"
+  module="sjs"
+></wxs>
+<view
+  class="ant-copilot-actions {{className}}"
+  style="{{style}}"
+>
+  <view
+    class="ant-copilot-actions-item"
+    hoverClass="ant-copilot-actions-item-hover"
+    bindtap="handleTapAction"
+    data-action="{{item}}"
+    wx:for="{{items}}"
+    wx:for-index="index"
+    wx:for-item="item"
+  >
+    <ant-icon
+      wx:if="{{sjs.checkIcon(item.icon)}}"
+      className="ant-copilot-actions-item-icon"
+      type="{{item.icon}}"
+    ></ant-icon>
+    <image
+      wx:else
+      class="ant-copilot-actions-item-icon"
+      src="{{item.icon}}"
+    ></image>
+  </view>
+</view>

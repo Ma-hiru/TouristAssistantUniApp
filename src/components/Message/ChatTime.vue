@@ -6,7 +6,7 @@
 
 <script setup lang="ts" name="ChatTime">
 const props = defineProps<{
-  time: string;
+  time: string | undefined;
 }>();
 </script>
 

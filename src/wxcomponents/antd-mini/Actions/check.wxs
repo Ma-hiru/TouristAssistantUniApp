@@ -1,0 +1,7 @@
+function checkIcon() {
+  var icon = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  return getRegExp('^[a-zA-Z]+$').test(icon);
+}
+module.exports = {
+  checkIcon: checkIcon
+};

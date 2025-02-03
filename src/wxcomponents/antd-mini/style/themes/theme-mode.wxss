@@ -406,6 +406,10 @@
     --footer-chip-color: #1677ff;
     --footer-chip-disabled-background-color: #f5f5f5;
     --footer-chip-disabled-color: #999999;
+    --thought-chain-title-color: rgba(0, 0, 0, 0.45);
+    --thought-chain-content-color: rgba(0, 0, 0, 0.55);
+    --welcome-background-color: linear-gradient(106deg, #F2F9FE 0%, #F7F3FF 100%);
+    --welcome-text-color: rgba(0, 0, 0, 0.88);
     --terms-fixed-background-color: #ffffff;
     --terms-fixed-border-color: #eeeeee;
     --terms-protocol-item-color: #1677ff;
@@ -415,6 +419,30 @@
     --terms-read-protocol-box-shadow-color: rgba(0, 0, 0, 0.1);
     --terms-read-protocol-item-color: #333333;
     --terms-read-protocol-text-color: #999999;
+    --prompts-title-color: rgba(0, 0, 0, 0.25);
+    --prompts-item-border-color: rgba(0, 0, 0, 0.1);
+    --prompts-item-label-color: rgba(0, 0, 0, 0.88);
+    --prompts-item-description-color: rgba(0, 0, 0, 0.88);
+    --prompts-item-arrow-color: rgba(0, 0, 0, 0.45);
+    --suggestion-item-border-color: rgba(0, 0, 0, 0.1);
+    --suggestion-item-text-color: rgba(0, 0, 0, 0.88);
+    --actions-background-color: #F7F7F7;
+    --actions-item-hover-background-color: #EEEEEE;
+    --bubble-background-color: #F7F7F7;
+    --bubble-user-background-color: #1677FF;
+    --bubble-text-color: rgba(0, 0, 0, 0.88);
+    --bubble-text-color-user: #ffffff;
+    --sender-background-color: #ffffff;
+    --sender-text-color: #333333;
+    --sender-placeholder-color: rgba(0, 0, 0, 0.25);
+    --sender-send-color: #1677ff;
+    --sender-input-text-color: #000000;
+    --sender-input-caret-color: #1677ff;
+    --sender-focus-border-color: #1677ff;
+    --sender-max-height: 192rpx;
+    --conversations-swipe-item-view-label-color: rgba(0, 0, 0, 0.88);
+    --conversations-swipe-item-view-timestamp-color: #848484;
+    --conversations-swipe-item-view-desc-color: rgba(0, 0, 0, 0.45);
   }
 }
 /* 深色模式的css变量 */
@@ -800,6 +828,10 @@
     --footer-chip-color: #3086ff;
     --footer-chip-disabled-background-color: #2b2b2b;
     --footer-chip-disabled-color: #616161;
+    --thought-chain-title-color: rgba(255, 255, 255, 0.45);
+    --thought-chain-content-color: rgba(255, 255, 255, 0.55);
+    --welcome-background-color: linear-gradient(106deg, #0D0601 0%, #080C00 100%);
+    --welcome-text-color: rgba(255, 255, 255, 0.88);
     --terms-fixed-background-color: #1a1a1a;
     --terms-fixed-border-color: #2b2b2b;
     --terms-protocol-item-color: #3086ff;
@@ -809,5 +841,29 @@
     --terms-read-protocol-box-shadow-color: rgba(0, 0, 0, 0.1);
     --terms-read-protocol-item-color: #c5cad1;
     --terms-read-protocol-text-color: #616161;
+    --prompts-title-color: rgba(255, 255, 255, 0.25);
+    --prompts-item-border-color: rgba(255, 255, 255, 0.1);
+    --prompts-item-label-color: rgba(255, 255, 255, 0.88);
+    --prompts-item-description-color: rgba(255, 255, 255, 0.88);
+    --prompts-item-arrow-color: rgba(255, 255, 255, 0.45);
+    --conversations-swipe-item-view-label-color: rgba(255, 255, 255, 0.88);
+    --conversations-swipe-item-view-timestamp-color: #b0b0b0;
+    --conversations-swipe-item-view-desc-color: rgba(255, 255, 255, 0.45);
+    --suggestion-item-border-color: rgba(255, 255, 255, 0.15);
+    --suggestion-item-text-color: rgba(255, 255, 255, 0.85);
+    --actions-background-color: #1f1f1f;
+    --actions-item-hover-background-color: #2f2f2f;
+    --bubble-background-color: #1f1f1f;
+    --bubble-user-background-color: #1668dc;
+    --bubble-text-color: rgba(255, 255, 255, 0.85);
+    --bubble-text-color-user: #ffffff;
+    --sender-background-color: #141414;
+    --sender-text-color: rgba(255, 255, 255, 0.85);
+    --sender-placeholder-color: rgba(255, 255, 255, 0.3);
+    --sender-send-color: #1668dc;
+    --sender-input-text-color: rgba(255, 255, 255, 0.85);
+    --sender-input-caret-color: #1668dc;
+    --sender-focus-border-color: #1668dc;
+    --sender-max-height: 192rpx;
   }
 }

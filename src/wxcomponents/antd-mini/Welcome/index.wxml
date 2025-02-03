@@ -1,0 +1,7 @@
+<view class="ant-copilot-welcome {{className}}">
+  <view class="ant-copilot-welcome-title">{{title}}</view>
+  <view
+    class="ant-copilot-welcome-content"
+    bindtap="onContentTap"
+  >{{description}}</view>
+</view>

@@ -1,10 +1,29 @@
-export type chat<T extends "user" | "assistant" | "system"> = {
-  id: T extends "assistant" | "system" ? number : undefined;
+interface ChatBase {
+  id: number;
   userId: number;
   content: string;
-  type: T;
-  time: string;
-  isAdd: boolean;
-};
+}
 
-export type chatList = chat<"user" | "assistant" | "system">[];
+/** 可辨识联合类型（Discriminated Unions） */
+export type Chat = ChatBase &
+  (
+    | { type: "user" | "assistant"; time: string; isAdd: boolean }
+    | { type: "system"; time: undefined; isAdd: undefined }
+  );
+
+export type ChatList = Chat[];
+
+export type AntdMiniPromptsItem = {
+  key: string;
+  icon: string;
+  label: string;
+  description: string;
+  showArrow: boolean;
+};
+export type AntdMiniPromptsCustomEventType = {
+  detail: [item: AntdMiniPromptsItem, index: number];
+};
+/** 类型体操偷懒 */
+// type customEventType = {
+//   detail: [item: (typeof baseList.value)[number], index: number];
+// };
