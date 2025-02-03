@@ -12,7 +12,7 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@import "../src/wxcomponents/vant/common/index.wxss";
+//@import "../src/wxcomponents/vant/common/index.wxss";
 @import "../src/assets/tailwind.css";
 
 html {
