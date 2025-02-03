@@ -20,4 +20,4 @@ dist
 *.sln
 *.sw?
 /wxcomponent/
-/src/wxcomponents/towxml/
+/src/wxcomponents/
