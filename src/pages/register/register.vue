@@ -1,32 +1,45 @@
 <template>
-  <view class="w-screen h-screen p-12">
-    <view class="w-full p-10 flex justify-center flex-col items-center">
-      <view class="relative">
-        <button
-          class="rounded-full"
-          open-type="chooseAvatar"
-          @chooseavatar="onChooseAvatar"
-        >
-          <ant-avatar :src="loginForm.avatar" size="large" class="avatar" />
-        </button>
-        <view class="mask rounded-full" v-if="!isChooseAvatar">设置头像</view>
+  <view>
+    <view class="w-screen h-screen p-12">
+      <view class="w-full flex justify-center flex-col items-center">
+        <view class="relative">
+          <button
+            class="rounded-full"
+            open-type="chooseAvatar"
+            @chooseavatar="onChooseAvatar"
+          >
+            <image
+              :src="loginForm.avatar"
+              :style="{ height: '6rem', width: '6rem' }"
+            />
+          </button>
+          <view class="mask rounded-full" v-if="!isChooseAvatar">设置头像</view>
+        </view>
       </view>
-    </view>
-    <wd-form ref="form">
-      <wd-cell-group border>
+      <view class="mt-8 flex justify-center">
         <input
           placeholder="请输入昵称"
           type="nickname"
           class="text-center"
           v-model="loginForm.nickname"
         />
-      </wd-cell-group>
-      <view class="mt-4 w-full">
-        <wd-button type="primary" size="large" @click="handleSubmit" block>
-          提交
-        </wd-button>
       </view>
-    </wd-form>
+    </view>
+    <view
+      class="fixed text-[--diy-color-primary] text-center w-screen p-12 pb-4"
+      :style="{ bottom: safeAreaInsets.bottom + 'px' }"
+    >
+      <button
+        class="w-full h-12 leading-4 bg-[var(--diy-color-primary)] flex justify-center items-center rounded-lg text-white"
+        hover-class="btn-hover"
+        @tap="handleSubmit"
+      >
+        <text class="font-medium text-base"> 注册</text>
+      </button>
+      <button class="bg-none inline-block button-clear mt-8">
+        《用户协议》
+      </button>
+    </view>
   </view>
 </template>
 
@@ -34,10 +47,12 @@
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import type { ButtonOnChooseavatar } from "@uni-helper/uni-app-types";
-import type { loginInfo } from "@/api";
+import type { loginInfo } from "@/types/api";
 import { useUserStore } from "@/stores";
 import { upload } from "@/api/modules/upload";
+import { useChatStore } from "@/stores/modules/useChatStore";
 
+const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const userStore = useUserStore();
 const loginForm = ref<loginInfo>({
   code: userStore.loginInfo.code,
@@ -81,6 +96,10 @@ const handleSubmit = () => {
     });
     return;
   }
+  const chatStore = useChatStore();
+  chatStore.loginInfo.avatar = loginForm.value.avatar!;
+  chatStore.loginInfo.nickname = loginForm.value.nickname!;
+  //TODO 压缩图像 大小限制
   upload({
     url: "/api/upload",
     filePath: loginForm.value.avatar,
@@ -93,6 +112,8 @@ const handleSubmit = () => {
       console.log(res.data);
     },
   });
+  uni.showToast({ icon: "success", title: "登录成功" });
+  setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 1000);
 };
 </script>
 
@@ -110,5 +131,10 @@ const handleSubmit = () => {
   justify-content: center;
   align-items: center;
   pointer-events: none;
+}
+.button-clear {
+  &::after {
+    border: none;
+  }
 }
 </style>

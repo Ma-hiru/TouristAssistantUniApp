@@ -1,11 +1,19 @@
 <template>
-  <view class="pl-4 pr-4 absolute w-full bottom-4 z-50">
+  <view class="pl-4 pr-4 fixed bottom-4 z-50 flex flex-col items-end w-full">
+    <view class="absolute hidden -top-16 bg-white" v-show="props.isShowTopBtn">
+      <button
+        @tap="props.scrollToBottom"
+        class="w-12 h-12 flex justify-center items-center shadow-lg"
+      >
+        <ant-icon type="DownOutline" />
+      </button>
+    </view>
     <view
-      class="z-50 border border-solid border-s bg-white border-gray-100 shadow-lg flex justify-center items-end rounded-2xl w-full p-2"
+      class="z-50 border border-solid border-s bg-white border-gray-100 shadow-lg flex justify-center items-end rounded-2xl w-full p-2 relative"
     >
-      <view class="z-50 flex min-h-12 justify-center items-center">
+      <view class="z-50 flex flex-auto min-h-12 justify-center items-center">
         <textarea
-          class="text-base z-50 resize-none leading-4 max-h-32"
+          class="text-base z-50 resize-none leading-4 max-h-32 w-5/6"
           :placeholder="props.placeholder"
           :auto-height="true"
           confirm-type="send"
@@ -19,18 +27,17 @@
       </view>
       <view class="h-12 flex justify-center items-center">
         <button
-          class="w-10 h-10 flex justify-center items-center rounded-full bg-[#1677FF] relative"
+          class="w-10 h-10 flex justify-center items-center rounded-full bg-[var(--diy-color-primary)] relative"
           :hover-class="'btn-hover'"
-          @tap="sendMessage"
-          :disabled="loading"
+          @tap="handleSendOrStop"
         >
           <image
-            v-show="!loading"
+            v-show="!chatStore.isTyping"
             class="w-5 h-5"
             src="/static/chat/send_button.svg"
             mode="aspectFit"
           />
-          <wd-loading v-if="loading" color="#1677FF" />
+          <wd-loading v-if="chatStore.isTyping" color="#1677FF" />
         </button>
       </view>
     </view>
@@ -41,12 +48,22 @@
 <script setup lang="ts" name="index">
 import { ref } from "vue";
 import { TextareaOnKeyboardheightchange } from "@uni-helper/uni-app-types";
+import { useChatStore } from "@/stores/modules/useChatStore";
 
+const chatStore = useChatStore();
 const props = defineProps<{
   placeholder: string;
   onSend: (text: string) => Promise<boolean>;
-  loading: boolean;
+  isShowTopBtn: boolean;
+  scrollToBottom: () => void;
 }>();
+const handleSendOrStop = () => {
+  if (chatStore.isTyping) {
+    chatStore.isStop = true;
+  } else {
+    sendMessage();
+  }
+};
 /** 文字输入 */
 const inputText = ref<string>("");
 const keyboardHeight = ref<number>(0);
@@ -55,6 +72,13 @@ const onKeyboardHeightChange: TextareaOnKeyboardheightchange = (e) => {
 };
 /** 发送数据 */
 const sendMessage = async () => {
+  if (chatStore.isTyping) {
+    await uni.showToast({
+      title: "正在输入中，请稍后...",
+      icon: "none",
+    });
+    return;
+  }
   if (inputText.value.trim() === "") {
     await uni.showToast({
       title: "内容不能为空~",
@@ -82,8 +106,4 @@ const sendMessage = async () => {
 };
 </script>
 
-<style scoped lang="scss">
-.btn-hover {
-  background: #3086ff;
-}
-</style>
+<style scoped lang="scss"></style>

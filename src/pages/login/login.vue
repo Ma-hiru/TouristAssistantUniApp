@@ -1,9 +1,15 @@
 <template>
-  <view class="h-screen w-screen flex justify-center items-center p-12">
+  <view
+    class="h-screen w-screen flex justify-end items-center p-12 wallpaper flex-col pb-48"
+  >
     <view class="w-full">
-      <wd-button :block="true" size="large" @tap="login">
-        <text class="font-light">微信一键登录</text>
-      </wd-button>
+      <button
+        class="w-full h-12 leading-4 bg-[var(--diy-color-primary)] flex justify-center items-center rounded-lg text-white"
+        hover-class="btn-hover"
+        @tap="login"
+      >
+        <text class="font-medium text-base">微信一键登录</text>
+      </button>
       <wd-divider> 其他登录方式</wd-divider>
       <view class="w-full flex flex-col justify-center items-center">
         <button
@@ -12,7 +18,7 @@
         >
           <wd-icon name="phone" size="22px"></wd-icon>
         </button>
-        <text class="text-sm mt-1">模拟登录</text>
+        <text class="text-sm mt-1">手机号登录</text>
       </view>
     </view>
   </view>
@@ -47,8 +53,15 @@ const login = () => {
 async function loginSuccess() {
   await uni.showToast({ icon: "success", title: "登录成功" });
   //TODO save userInfo
-  setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 800);
+  // setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 800);
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.wallpaper {
+  background-image: url("https://shiina-mahiru.cn/download/login_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+</style>

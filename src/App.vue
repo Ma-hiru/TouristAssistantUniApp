@@ -17,5 +17,11 @@ onHide(() => {
 
 html {
   font-size: 16px;
+  --diy-color-primary: #1677ff;
+  --div-color-primary-dark: #3086ff;
+}
+
+.btn-hover {
+  background: var(--div-color-primary-dark);
 }
 </style>

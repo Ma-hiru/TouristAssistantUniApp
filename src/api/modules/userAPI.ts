@@ -1,5 +1,5 @@
 import pinia, { useUserStore } from "../../stores";
-import { http } from "@/api";
+import { http } from "@/utils";
 
 const userStore = useUserStore(pinia);
 

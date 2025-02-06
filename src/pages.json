@@ -20,22 +20,25 @@
       "path": "pages/my/my",
       "style": {
         "navigationBarTitleText": "个人中心",
-        "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": false
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/chat/chat",
       "style": {
         "navigationBarTitleText": "会话",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "登录",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
       }
     },
     {
@@ -51,6 +54,27 @@
         "navigationBarTitleText": "路线规划",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/share/share",
+      "style": {
+        "navigationBarTitleText": "路线分享",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/point/point",
+      "style": {
+        "navigationBarTitleText": "地点",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/pointDetail/pointDetail",
+      "style": {
+        "navigationBarTitleText": "详情",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {
@@ -59,12 +83,13 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "usingComponents": {
-      "ant-button": "/wxcomponents/antd-mini/Button/index",
       "ant-icon": "/wxcomponents/antd-mini/Icon/index",
       "ant-avatar": "/wxcomponents/antd-mini/Avatar/index",
-      "ant-loading": "/wxcomponents/antd-mini/Loading/index",
       "ant-welcome": "/wxcomponents/antd-mini/Welcome/index",
       "ant-prompts": "/wxcomponents/antd-mini/Prompts/index",
+      "ant-input": "/wxcomponents/antd-mini/Input/index",
+      "ant-steps": "/wxcomponents/antd-mini/Steps/index",
+      "ant-loading": "/wxcomponents/antd-mini/Loading/index",
       "towxml": "/wxcomponents/towxml/towxml"
     }
   },
@@ -77,8 +102,8 @@
       {
         "text": "地图",
         "pagePath": "pages/index/index",
-        "iconPath": "static/tabs/home_unselect.png",
-        "selectedIconPath": "static/tabs/home_select.png"
+        "iconPath": "static/tabs/map_unselect.png",
+        "selectedIconPath": "static/tabs/map_select.png"
       },
       {
         "text": "会话",

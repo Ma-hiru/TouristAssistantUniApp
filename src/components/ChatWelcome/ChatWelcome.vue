@@ -1,9 +1,12 @@
 <template>
   <view>
+    <view class="flex justify-center items-center h-56 w-64 m-auto">
+      形象待定......
+    </view>
     <view class="p-4">
       <ant-welcome
-        title="👋🏻 你好，我是 Ant Design X"
-        description="基于 Ant Design 的 AGI 产品界面解决方案，创造更美好的智能视界～"
+        title="👋🏻 你好，我是 小D"
+        description="基于 生成式人工智能 的AI旅游向导，正在为您服务～"
       />
       <ant-prompts
         :items="baseList"
@@ -21,34 +24,38 @@ import {
   AntdMiniPromptsItem,
 } from "@/types/chat";
 
+const props = defineProps<{
+  onSend: (text: string) => void;
+}>();
 const baseList = ref<AntdMiniPromptsItem[]>([
   {
     showArrow: true,
-    label: "热门话题:",
-    description: "",
+    label: "热门提问：",
+    description: "介绍一下xxx吧！",
     icon: "",
     key: "1",
   },
   {
     showArrow: true,
-    label: "组件查询:",
+    label: "路线规划：",
     icon: "",
-    description: "欢迎组件",
+    description: "一小时的速览路线~",
     key: "2",
   },
   {
     showArrow: true,
-    label: "新手帮助:",
+    label: "讲解一下：",
     icon: "",
-    description: "如何实现快速安装和引入",
+    description: "我在什么景点处？",
     key: "3",
   },
 ]);
-const promptsTitle = ref("我可以帮您：");
+const promptsTitle = ref("为你推荐：");
 
 function onItemTap(e: AntdMiniPromptsCustomEventType) {
   const [item, index] = e.detail;
   console.log("e=>", item.label, index);
+  props.onSend(item.description);
 }
 </script>
 

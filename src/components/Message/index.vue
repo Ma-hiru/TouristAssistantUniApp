@@ -11,7 +11,6 @@
           :is-type-text="false"
           corner-position="right"
           :scroll-to-bottom="props.scrollToBottom"
-          ref="textRef"
         />
       </view>
     </view>
@@ -28,6 +27,7 @@
           :is-type-text="props.isTypeText"
           corner-position="left"
           :scroll-to-bottom="props.scrollToBottom"
+          ref="textRef"
         />
       </view>
     </view>
@@ -44,7 +44,8 @@ import ChatAvatar from "@/components/Message/ChatAvatar.vue";
 import ChatTime from "@/components/Message/ChatTime.vue";
 import ChatText from "@/components/Message/ChatText.vue";
 import { ref } from "vue";
-
+//TODO 适配大屏的消息
+//TODO 路线采纳按钮
 const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string | undefined;
@@ -52,13 +53,6 @@ const props = defineProps<{
   isTypeText: boolean | undefined;
   scrollToBottom: () => void;
 }>();
-const textRef = ref<InstanceType<typeof ChatText>>();
-defineExpose({
-  start: () => textRef.value?.start(),
-  pause: () => textRef.value?.pause(),
-  conti: () => textRef.value?.conti(),
-  reset: () => textRef.value?.reset(),
-});
 </script>
 
 <style scoped lang="scss"></style>

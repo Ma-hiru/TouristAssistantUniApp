@@ -16,7 +16,9 @@
 <script setup lang="ts" name="ChatText">
 import { computed, onMounted, ref, watch } from "vue";
 import { useTowxml } from "@/wxcomponents/towxml";
+import { useChatStore } from "@/stores/modules/useChatStore";
 
+const chatStore = useChatStore();
 const props = defineProps<{
   text: string;
   isTypeText: boolean;
@@ -26,18 +28,34 @@ const props = defineProps<{
 const curIndex = ref<number>(0);
 const speed = ref<number>(20);
 const timer = ref<number>();
-const startIndex = ref<number>(0);
 const isPause = ref<boolean>(false);
 const curText = computed(() => {
   return props.text.slice(0, curIndex.value);
 });
+chatStore.isTyping = props.isTypeText;
+watch(isPause, () => {
+  chatStore.isTyping = !isPause.value;
+});
+watch(
+  () => chatStore.isStop,
+  () => {
+    if (chatStore.isStop) {
+      console.log("watch");
+      pause();
+    }
+  }
+);
 const start = () => {
-  curIndex.value = startIndex.value - 1;
+  curIndex.value = chatStore.typingWhere - 1;
+  console.log(chatStore.typingWhere);
   writeText();
 };
 const pause = () => {
   isPause.value = true;
+  chatStore.isStop = false;
   clearTimeout(timer.value);
+  console.log("pause");
+  chatStore.typeComplete();
 };
 const conti = () => {
   isPause.value = false;
@@ -50,7 +68,12 @@ const reset = () => {
 };
 const writeText = () => {
   curIndex.value++;
-  if (curIndex.value > props.text.length) isPause.value = true;
+  chatStore.typingWhere = curIndex.value;
+  if (curIndex.value > props.text.length) {
+    isPause.value = true;
+    chatStore.typeComplete();
+    return;
+  }
   if (!isPause.value) timer.value = setTimeout(writeText, speed.value);
   props.scrollToBottom();
 };
@@ -58,7 +81,6 @@ onMounted(() => {
   if (props.isTypeText) start();
   else curIndex.value = props.text.length;
 });
-defineExpose({ start, pause, conti, reset });
 const content = ref(null);
 watch(curText, () => {
   content.value = useTowxml(curText.value, "markdown", {
