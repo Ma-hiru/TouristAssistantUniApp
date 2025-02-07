@@ -20,7 +20,14 @@ export class ws {
   instance: SocketTask;
   name: string;
 
-  constructor(options: ConnectSocketOption, name: string) {
+  constructor(
+    options: ConnectSocketOption,
+    name: string,
+    onOpen: (res: OnSocketOpenCallbackResult) => void,
+    onClose?: (res: any) => void,
+    onError?: (err: GeneralCallbackResult) => void,
+    onMessage?: <T>(result: OnSocketMessageCallbackResult<T>) => void
+  ) {
     options.url = reqURL + options.url;
     this.name = name;
     this.instance = uni.connectSocket({
@@ -32,6 +39,10 @@ export class ws {
         console.error("WebSocket 连接初始化失败:", err);
       },
     });
+    this.onOpen(onOpen);
+    onClose && this.onClose(onClose);
+    onError && this.onError(onError);
+    onMessage && this.onMessage(onMessage);
   }
 
   onOpen(callback: (result: OnSocketOpenCallbackResult) => void) {

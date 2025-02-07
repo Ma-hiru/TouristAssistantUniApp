@@ -5,9 +5,23 @@ interface ChatBase {
 }
 
 /** 可辨识联合类型（Discriminated Unions） */
-export type Chat = ChatBase &
+export type Chat<T extends boolean> = ChatBase &
   (
-    | { type: "user" | "assistant"; time: string; isAdd: boolean }
+    | {
+        type: "assistant";
+        time: string;
+        isAdd: boolean;
+        isPolyline: {
+          id: T extends true ? number : undefined;
+          isPolyline: T;
+          polyline: T extends true ? MapPolyline[] : undefined;
+        };
+      }
+    | {
+        type: "user";
+        time: string;
+        isAdd: boolean;
+      }
     | { type: "system"; time: undefined; isAdd: undefined }
   );
 

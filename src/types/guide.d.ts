@@ -1,0 +1,3 @@
+type AntdMiniTapsCustomEventType = {
+  detail: number;
+};

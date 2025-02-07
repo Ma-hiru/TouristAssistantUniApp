@@ -75,6 +75,15 @@
         "navigationBarTitleText": "详情",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/guide/guide",
+      "style": {
+        "navigationBarTitleText": "攻略",
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
@@ -90,6 +99,7 @@
       "ant-input": "/wxcomponents/antd-mini/Input/index",
       "ant-steps": "/wxcomponents/antd-mini/Steps/index",
       "ant-loading": "/wxcomponents/antd-mini/Loading/index",
+      "ant-tabs": "/wxcomponents/antd-mini/Tabs/index",
       "towxml": "/wxcomponents/towxml/towxml"
     }
   },
@@ -104,6 +114,12 @@
         "pagePath": "pages/index/index",
         "iconPath": "static/tabs/map_unselect.png",
         "selectedIconPath": "static/tabs/map_select.png"
+      },
+      {
+        "text": "攻略",
+        "pagePath": "pages/guide/guide",
+        "iconPath": "static/tabs/guide_unselect.png",
+        "selectedIconPath": "static/tabs/guide_select.png"
       },
       {
         "text": "会话",
