@@ -1,5 +1,6 @@
 export interface ResponseData<T> {
   code: string;
+  ok: boolean;
   msg: string;
   result: T;
 }

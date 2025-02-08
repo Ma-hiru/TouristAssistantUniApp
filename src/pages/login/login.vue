@@ -39,7 +39,7 @@ const login = () => {
     success: (res) => {
       userStore.loginInfo.code = res.code;
       //TODO 判断是否需要昵称头像
-      uni.navigateTo({ url: "/pages/register/register" });
+      uni.navigateTo({ url: "/pages_sub/default/pages/register/register" });
     },
     fail: () => {
       uni.showToast({

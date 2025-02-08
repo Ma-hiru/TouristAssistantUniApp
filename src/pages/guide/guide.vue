@@ -28,14 +28,23 @@
     >
       <GuideSkeleton v-show="isLoading" />
       <view class="w-screen grid grid-cols-[1fr_1fr]" v-show="!isLoading">
-        <GuideCard v-for="i in 20" :no-left-margin="i % 2 === 0" :key="i" />
+        <GuideCard
+          v-for="i in 20"
+          :no-left-margin="i % 2 === 0"
+          :key="i"
+          :like="i + 'k'"
+          :username="'八奈见'"
+          :content="'test'"
+          :cover="'https://shiina-mahiru.cn/download/user_bg.png'"
+          :avatar="'https://i1.hdslb.com/bfs/face/3a59c98c91d0e14d0a965e45577e6f5f7e73c6ce.jpg@96w_96h_1c_1s.avif'"
+        />
       </view>
     </scroll-view>
   </view>
   <view
     class="bg-white fixed bottom-8 left-1/2 -translate-x-1/2 shadow-lg rounded-full"
   >
-    <button class="p-2 btn-clear rounded-full">
+    <button class="p-2 btn-clear rounded-full" @tap="createPost">
       <image
         src="/static/guide/plus.svg"
         :style="{ height: '2.5rem', width: '2.5rem' }"
@@ -50,7 +59,7 @@ import GuideSkeleton from "@/components/GuideSkeleton/GuideSkeleton.vue";
 import { ref } from "vue";
 
 const { top: menuButtonTop } = uni.getMenuButtonBoundingClientRect();
-const isLoading = ref(true);
+const isLoading = ref(false);
 const typeItems = ref([
   {
     title: "推荐",
@@ -80,7 +89,13 @@ const typeItems = ref([
   },
 ]);
 const tapsChange = (e: AntdMiniTapsCustomEventType) => {
-  console.log(e.detail);
+  isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 500);
+};
+const createPost = () => {
+  uni.navigateTo({ url: "/pages_sub/default/pages/createPost/createPost" });
 };
 </script>
 

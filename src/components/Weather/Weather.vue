@@ -1,10 +1,8 @@
 <template>
   <view class="flex justify-center items-center">
-    <view
-      class="-mr-6 bg-[var(--diy-color-primary)] rounded-full inline-block p-2 z-30"
-    >
+    <view class="-mr-6 icon-bg rounded-full inline-block p-2 z-30">
       <image
-        :src="icon ? `/static/weather/${icon}.svg` : ''"
+        :src="`https://shiina-mahiru.cn:3003/assets/weather/${icon}.svg`"
         style="width: 1.5rem; height: 1.5rem"
       />
     </view>
@@ -43,4 +41,9 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.icon-bg {
+  backdrop-filter: blur(10px) !important;
+  background-color: rgb(255 255 255 / 0.5) !important;
+}
+</style>

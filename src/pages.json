@@ -42,41 +42,6 @@
       }
     },
     {
-      "path": "pages/register/register",
-      "style": {
-        "navigationBarTitleText": "注册",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/route/route",
-      "style": {
-        "navigationBarTitleText": "路线规划",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/share/share",
-      "style": {
-        "navigationBarTitleText": "路线分享",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/point/point",
-      "style": {
-        "navigationBarTitleText": "地点",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/pointDetail/pointDetail",
-      "style": {
-        "navigationBarTitleText": "详情",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
       "path": "pages/guide/guide",
       "style": {
         "navigationBarTitleText": "攻略",
@@ -84,6 +49,56 @@
         "navigationBarBackgroundColor": "#ffffff",
         "navigationStyle": "custom"
       }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages_sub/default",
+      "pages": [
+        {
+          "path": "pages/register/register",
+          "style": {
+            "navigationBarTitleText": "注册",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/route/route",
+          "style": {
+            "navigationBarTitleText": "路线规划",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/share/share",
+          "style": {
+            "navigationBarTitleText": "路线分享",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/point/point",
+          "style": {
+            "navigationBarTitleText": "地点",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/pointDetail/pointDetail",
+          "style": {
+            "navigationBarTitleText": "详情",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/createPost/createPost",
+          "style": {
+            "navigationBarTitleText": "发帖",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom"
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {
@@ -100,6 +115,7 @@
       "ant-steps": "/wxcomponents/antd-mini/Steps/index",
       "ant-loading": "/wxcomponents/antd-mini/Loading/index",
       "ant-tabs": "/wxcomponents/antd-mini/Tabs/index",
+      "ant-divider": "/wxcomponents/antd-mini/Divider/index",
       "towxml": "/wxcomponents/towxml/towxml"
     }
   },

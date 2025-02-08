@@ -73,7 +73,7 @@ const goToRoute = async (path: "chat" | "point" | "share") => {
     });
   else
     await uni.navigateTo({
-      url: `/pages/${path}/${path}`,
+      url: `/pages_sub/default/pages/${path}/${path}`,
     });
 };
 /** 动画部分 */

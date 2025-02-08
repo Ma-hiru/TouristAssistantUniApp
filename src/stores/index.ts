@@ -11,3 +11,5 @@ export default pinia;
 
 // 模块统一导出
 export * from "./modules/useUserStore";
+export * from "./modules/useGuideStore";
+export * from "./modules/useChatStore";
