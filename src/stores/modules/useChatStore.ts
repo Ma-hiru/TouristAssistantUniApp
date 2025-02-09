@@ -8,11 +8,6 @@ export const useChatStore = defineStore("chatStore", () => {
   const isTyping = ref(false);
   const typingWhere = ref(0);
   const isStop = ref(false);
-  const loginInfo = ref({
-    nickname: "",
-    avatar: "",
-    code: "",
-  });
   //TODO createWs
   //TODO 持久化
   (function init() {})();
@@ -36,7 +31,7 @@ export const useChatStore = defineStore("chatStore", () => {
 
   function getChatList() {}
 
-  function sendText(chat: Chat, callback?: () => void) {
+  function sendText(chat: Chat<false>, callback?: () => void) {
     chatList.value.push(chat);
     chatList.value.push({
       id: Math.floor(100 * Math.random()),
@@ -52,7 +47,6 @@ export const useChatStore = defineStore("chatStore", () => {
   function sendImage() {}
 
   return {
-    loginInfo,
     sendText,
     sendImage,
     getChatList,

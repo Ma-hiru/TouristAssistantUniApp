@@ -6,7 +6,7 @@
       class="absolute z-20 left-4"
       :style="{ top: safeAreaInsetsTop + 'px' }"
     >
-      <!--      <Weather />-->
+      <Weather />
     </view>
     <map
       id="map"
@@ -15,10 +15,15 @@
       :markers="markers"
       :show-location="true"
       :show-compass="false"
+      :controls="controls"
       :enable-poi="true"
       :scale="scale"
+      :enable-building="true"
+      :enable-indoorMap="true"
       :longitude="position.longitude"
       :latitude="position.latitude"
+      @callouttap="tapMarkerPop"
+      @markertap="tapMarker"
     />
     <view class="z-20 mb-44 mr-4">
       <button
@@ -43,7 +48,13 @@ import Weather from "@/components/Weather/Weather.vue";
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { Position } from "@/types/map";
-import { MapMarker, MapPolyline } from "@uni-helper/uni-app-types";
+import {
+  MapMarker,
+  MapPolyline,
+  MapControl,
+  MapOnCallouttap,
+  MapOnMarkertap,
+} from "@uni-helper/uni-app-types";
 
 /** 底部栏 */
 const safeAreaInsetsTop = uni.getWindowInfo().safeAreaInsets?.top;
@@ -57,11 +68,17 @@ const bottomBarPositions = {
 };
 const bottomBarHeight = "36rem";
 /** 地图数据 */
+const controls = ref<MapControl[]>([
+  {
+    position: { left: 0, top: 0 },
+    iconPath: "/static/map/location.svg",
+  },
+]);
 const position = ref<Position>({
   longitude: 116.4,
   latitude: 39.9,
 });
-const scale = ref<number>(17);
+const scale = ref<number>(18.5);
 const markers = ref<MapMarker[]>([
   {
     id: 1,
@@ -70,7 +87,7 @@ const markers = ref<MapMarker[]>([
     iconPath: "",
     width: 20,
     height: 20,
-    title: "Test",
+    title: "地点一",
   },
 ]);
 const polyline = ref<MapPolyline[]>([
@@ -91,6 +108,15 @@ const polyline = ref<MapPolyline[]>([
     borderWidth: 2,
   },
 ]);
+const tapMarker: MapOnMarkertap = (event) => {
+  console.log(event.detail.markerId);
+};
+const tapMarkerPop: MapOnCallouttap = (event) => {
+  console.log(event.detail.markerId);
+  uni.navigateTo({
+    url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${event.detail.markerId}`,
+  });
+};
 
 async function getLocation() {
   try {
@@ -105,7 +131,7 @@ async function getLocation() {
     polyline.value[0].points[0].longitude = res.longitude;
     polyline.value[0].points[1].latitude = res.latitude + 0.001;
     polyline.value[0].points[1].longitude = res.longitude + 0.001;
-    markers.value[0].latitude = res.latitude + 0.002;
+    markers.value[0].latitude = res.latitude + 0.001;
     markers.value[0].longitude = res.longitude + 0.001;
   } catch (e) {
     await uni.showToast({

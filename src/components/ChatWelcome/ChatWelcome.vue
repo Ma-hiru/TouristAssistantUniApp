@@ -8,11 +8,13 @@
         title="👋🏻 你好，我是 小D"
         description="基于 生成式人工智能 的AI旅游向导，正在为您服务～"
       />
-      <ant-prompts
-        :items="baseList"
-        :title="promptsTitle"
-        @itemtap="onItemTap"
-      />
+      <view class="mt-4">
+        <ant-prompts
+          :items="baseList"
+          :title="promptsTitle"
+          @itemtap="onItemTap"
+        />
+      </view>
     </view>
   </view>
 </template>
@@ -32,25 +34,25 @@ const baseList = ref<AntdMiniPromptsItem[]>([
     showArrow: true,
     label: "热门提问：",
     description: "介绍一下xxx吧！",
-    icon: "",
+    icon: "LikeOutline",
     key: "1",
   },
   {
     showArrow: true,
     label: "路线规划：",
-    icon: "",
+    icon: "StarOutline",
     description: "一小时的速览路线~",
     key: "2",
   },
   {
     showArrow: true,
     label: "讲解一下：",
-    icon: "",
+    icon: "PlayOutline",
     description: "我在什么景点处？",
     key: "3",
   },
 ]);
-const promptsTitle = ref("为你推荐：");
+const promptsTitle = ref("你可以这样问我：");
 
 function onItemTap(e: AntdMiniPromptsCustomEventType) {
   const [item, index] = e.detail;

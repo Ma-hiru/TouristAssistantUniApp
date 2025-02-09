@@ -15,7 +15,7 @@
       <view class="relative top-[0.5rem-1px] h-10">
         <ant-tabs
           :style="{ width: '100%' }"
-          :items="typeItems"
+          :items="guideStore.postCategoryList"
           @change="tapsChange"
         />
       </view>
@@ -29,14 +29,20 @@
       <GuideSkeleton v-show="isLoading" />
       <view class="w-screen grid grid-cols-[1fr_1fr]" v-show="!isLoading">
         <GuideCard
-          v-for="i in 20"
-          :no-left-margin="i % 2 === 0"
-          :key="i"
-          :like="i + 'k'"
-          :username="'八奈见'"
-          :content="'test'"
-          :cover="'https://shiina-mahiru.cn/download/user_bg.png'"
-          :avatar="'https://i1.hdslb.com/bfs/face/3a59c98c91d0e14d0a965e45577e6f5f7e73c6ce.jpg@96w_96h_1c_1s.avif'"
+          v-for="(post, index) in guideStore.postList"
+          v-show="
+            post.category.find(
+              (i) => i.id === guideStore.postCategoryList[currentTags].id
+            )
+          "
+          :id="post.id"
+          :no-left-margin="index % 2 !== 0"
+          :key="post.id"
+          :like="post.likes"
+          :username="post.nickname"
+          :content="post.title"
+          :cover="post.cover"
+          :avatar="post.avatar"
         />
       </view>
     </scroll-view>
@@ -56,40 +62,37 @@
 <script setup lang="ts">
 import GuideCard from "@/components/GuideCard/GuideCard.vue";
 import GuideSkeleton from "@/components/GuideSkeleton/GuideSkeleton.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { AntdMiniTapsCustomEventType } from "@/types/guide";
+import { useGuideStore } from "@/stores";
 
+const guideStore = useGuideStore();
 const { top: menuButtonTop } = uni.getMenuButtonBoundingClientRect();
-const isLoading = ref(false);
+const isLoading = ref(true);
+onMounted(() => {
+  setTimeout(() => (isLoading.value = false), 200);
+});
 const typeItems = ref([
   {
     title: "推荐",
-    subTitle: "desc",
-    content: "watermelon",
   },
   {
     title: "攻略",
-    subTitle: "desc",
-    badge: true,
-    content: "tomato",
   },
   {
     title: "自拍",
-    subTitle: "desc",
-    content: "monkey",
   },
   {
     title: "交友",
-    subTitle: "desc",
-    content: "monkey",
   },
   {
     title: "美食",
-    subTitle: "desc",
-    content: "monkey",
   },
 ]);
+const currentTags = ref(0);
 const tapsChange = (e: AntdMiniTapsCustomEventType) => {
   isLoading.value = true;
+  currentTags.value = e.detail;
   setTimeout(() => {
     isLoading.value = false;
   }, 500);

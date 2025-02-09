@@ -41,7 +41,7 @@
         </button>
       </view>
     </view>
-    <view :style="{ height: keyboardHeight + 'px' }" />
+    <view :style="{ height: keyboardHeight + 'px', transition: 'all 0.5s' }" />
   </view>
 </template>
 

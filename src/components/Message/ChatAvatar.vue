@@ -7,10 +7,13 @@
 <script setup lang="ts" name="ChatAvatar">
 import { Ref, ref } from "vue";
 import { useChatStore } from "@/stores/modules/useChatStore";
+import { useUserStore } from "@/stores";
 
 const chatStore = useChatStore();
+const userStore = useUserStore();
 const src = ref({
-  user: chatStore.loginInfo.avatar || "../../../static/user/avatar_default.jpg",
+  user:
+    userStore.userProfile.avatar || "../../../static/user/avatar_default.jpg",
   assistant: "../../../static/chat/assistant_avatar.png",
   system: "",
 });

@@ -47,19 +47,18 @@
   </view>
 </template>
 <script setup lang="ts" name="my">
-import { useChatStore } from "@/stores/modules/useChatStore";
+import { computed, ref } from "vue";
+import { useUserStore } from "@/stores";
 
 const { safeAreaInsets } = uni.getSystemInfoSync();
-import { computed, ref } from "vue";
-
-const chatStore = useChatStore();
+const userStore = useUserStore();
 const inputDialog = ref();
 const feedbackText = ref("");
 const avatarSrc = computed(() => {
-  return chatStore.loginInfo.avatar || "/static/user/avatar_default.jpg";
+  return userStore.userProfile.avatar || "/static/user/avatar_default.jpg";
 });
 const username = computed(() => {
-  return chatStore.loginInfo.nickname || "请登录";
+  return userStore.userProfile.nickname || "点击登录";
 });
 const feedback = () => {
   inputDialog.value.open("center");
@@ -79,15 +78,15 @@ const dialogInputConfirm = () => {
   }
 };
 const isLogin = () => {
-  if (username.value === "请登录") {
+  if (username.value !== userStore.userProfile.nickname) {
     uni.navigateTo({ url: "/pages/login/login" });
   }
 };
 const logout = () => {
-  chatStore.loginInfo = {
+  userStore.userProfile = {
     nickname: "",
     avatar: "",
-    code: "",
+    token: "",
   };
   uni.navigateTo({ url: "/pages/login/login" });
 };

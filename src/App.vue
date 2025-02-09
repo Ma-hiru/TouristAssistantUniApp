@@ -27,4 +27,9 @@ html {
 .btn-hover {
   background: var(--div-color-primary-dark);
 }
+.clear-btn {
+  &::after {
+    border: none;
+  }
+}
 </style>

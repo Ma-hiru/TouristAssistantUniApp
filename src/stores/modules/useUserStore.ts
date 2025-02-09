@@ -1,35 +1,33 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { loginInfo, userProfile } from "@/types/api";
+import type { LoginInfo, UserProfile } from "@/types/api";
 
 export const useUserStore = defineStore(
   "userStore",
   () => {
-    const loginInfo = ref<loginInfo>({
-      nickname: "",
-      avatar: "",
+    const loginInfo = ref<LoginInfo>({
       code: "",
     });
-    const profile = ref<userProfile>({
+    const userProfile = ref<UserProfile>({
       token: "",
       nickname: "",
       avatar: "",
     });
     return {
       loginInfo,
-      profile,
+      userProfile,
     };
   },
   {
-    persist: {
-      storage: {
-        getItem(key) {
-          return uni.getStorageSync(key);
-        },
-        setItem(key, value) {
-          uni.setStorageSync(key, value);
-        },
-      },
-    },
+    // persist: {
+    //   storage: {
+    //     getItem(key) {
+    //       return uni.getStorageSync(key);
+    //     },
+    //     setItem(key, value) {
+    //       uni.setStorageSync(key, value);
+    //     },
+    //   },
+    // },
   }
 );

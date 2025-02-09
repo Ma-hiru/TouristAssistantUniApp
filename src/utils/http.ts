@@ -14,7 +14,7 @@ const httpInterceptor = {
       "source-client": "miniapp",
       ...options.header,
     };
-    const token = userStore.profile.token;
+    const token = userStore.userProfile.token;
     if (token) {
       options.header["Authorization"] = token;
     }

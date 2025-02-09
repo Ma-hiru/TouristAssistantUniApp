@@ -4,6 +4,7 @@
     :style="{
       marginLeft: `${props.noLeftMargin ? 0 : 0.25}rem`,
     }"
+    @tap="selectPost"
   >
     <view class="w-full">
       <image
@@ -27,9 +28,15 @@
           {{ props.username }}
         </text>
       </view>
-      <view class="flex justify-center items-center w-10">
+      <view class="flex justify-center items-center">
         <ant-icon type="HeartOutline" />
-        <text>{{ props.like }}</text>
+        <text class="text-sm">
+          {{
+            props.like > 1000
+              ? `${(props.like / 1000).toFixed(1)}k`
+              : props.like
+          }}
+        </text>
       </view>
     </view>
   </view>
@@ -38,12 +45,16 @@
 <script setup lang="ts" name="GuideCard">
 const props = defineProps<{
   noLeftMargin: boolean;
-  like: string;
+  like: number;
   username: string;
   avatar: string;
   content: string;
   cover: string;
+  id: number;
 }>();
+const selectPost = () => {
+  uni.navigateTo({ url: `/pages_sub/default/pages/post/post?id=${props.id}` });
+};
 </script>
 
 <style scoped lang="scss"></style>

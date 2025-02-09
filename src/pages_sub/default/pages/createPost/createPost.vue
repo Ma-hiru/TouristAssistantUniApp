@@ -104,31 +104,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useGuideStore } from "@/stores";
+import { PostCategoryList } from "@/types/guide";
+import dayjs from "dayjs";
+
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const guideStore = useGuideStore();
 const { top: menuButtonTop } = uni.getMenuButtonBoundingClientRect();
-const tags = ref([
-  {
-    id: 1,
-    title: "#攻略",
-    type: "primary",
-  },
-  {
-    id: 2,
-    title: "#自拍",
-    type: "default",
-  },
-  {
-    id: 3,
-    title: "#交友",
-    type: "default",
-  },
-  {
-    id: 4,
-    title: "#美食",
-    type: "default",
-  },
-]);
+const tags = ref<PostCategoryList>(
+  guideStore.postCategoryList.map((item, index) => {
+    if (index === 0) {
+      item.type = "primary";
+      return item;
+    } else {
+      item.type = "default";
+      return item;
+    }
+  })
+);
 const title = ref("");
 const content = ref("");
 const selectTags = (index: number) => {
@@ -156,13 +148,53 @@ const uploadImg = () => {
   });
 };
 const submit = () => {
-  console.log(
-    title.value,
-    content.value,
-    coverSrc.value,
-    tags.value.filter((i) => {
+  if (!title.value) {
+    return uni.showToast({
+      title: "标题不能为空",
+      icon: "none",
+    });
+  } else if (!content.value) {
+    return uni.showToast({
+      title: "正文不能为空",
+      icon: "none",
+    });
+  } else if (!coverSrc.value) {
+    return uni.showToast({
+      title: "封面不能为空",
+      icon: "none",
+    });
+  } else if (!guideStore.createPostPoint) {
+    return uni.showToast({
+      title: "请选择地点",
+      icon: "none",
+    });
+  }
+  guideStore.postList.push({
+    id: Date.now(),
+    time: dayjs(new Date()).format("YYYY-MM-DD"),
+    title: title.value,
+    content: content.value,
+    avatar:
+      "https://i1.hdslb.com/bfs/face/3a59c98c91d0e14d0a965e45577e6f5f7e73c6ce.jpg@96w_96h_1c_1s.avif",
+    nickname: "户山香橙",
+    cover: coverSrc.value,
+    likes: 0,
+    position: guideStore.createPostPoint,
+    category: tags.value.filter((i) => {
       return i.type === "primary";
-    })
+    }),
+    comments: [],
+  });
+  uni.showToast({
+    title: "发布成功",
+    icon: "success",
+  });
+  setTimeout(
+    () =>
+      uni.navigateBack({
+        animationType: "pop-out",
+      }),
+    1000
   );
 };
 </script>

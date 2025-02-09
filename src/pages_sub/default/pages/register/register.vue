@@ -9,7 +9,7 @@
             @chooseavatar="onChooseAvatar"
           >
             <image
-              :src="loginForm.avatar"
+              :src="registerForm.avatar"
               :style="{ height: '6rem', width: '6rem' }"
             />
           </button>
@@ -21,7 +21,7 @@
           placeholder="请输入昵称"
           type="nickname"
           class="text-center"
-          v-model="loginForm.nickname"
+          v-model="registerForm.nickname"
         />
       </view>
     </view>
@@ -47,14 +47,13 @@
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import type { ButtonOnChooseavatar } from "@uni-helper/uni-app-types";
-import type { loginInfo } from "@/types/api";
+import type { RegisterInfo } from "@/types/api";
 import { useUserStore } from "@/stores";
-import { upload } from "@/api/modules/upload";
-import { useChatStore } from "@/stores/modules/useChatStore";
+import { uploadAPI } from "@/api/modules/uploadAPI";
 
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const userStore = useUserStore();
-const loginForm = ref<loginInfo>({
+const registerForm = ref<RegisterInfo>({
   code: userStore.loginInfo.code,
   nickname: "",
   avatar: "",
@@ -64,49 +63,49 @@ const isChooseAvatar = ref<boolean>(false);
 const onChooseAvatar: ButtonOnChooseavatar = (e) => {
   console.log(e);
   const { avatarUrl: Url } = e.detail;
-  loginForm.value.avatar = Url;
+  registerForm.value.avatar = Url;
   isChooseAvatar.value = true;
 };
 onLoad(() => {
   uni.getUserInfo({
     provider: "weixin",
     success: function (infoRes) {
-      loginForm.value.avatar = infoRes.userInfo.avatarUrl;
+      registerForm.value.avatar = infoRes.userInfo.avatarUrl;
       defaultAvatarUrl.value = infoRes.userInfo.avatarUrl;
     },
   });
 });
 const handleSubmit = () => {
-  if (loginForm.value.nickname === "") {
+  if (registerForm.value.nickname === "") {
     uni.showToast({
       title: "昵称不能为空！",
       icon: "none",
     });
     return;
-  } else if (loginForm.value.nickname!.length > 10) {
+  } else if (registerForm.value.nickname!.length > 10) {
     uni.showToast({
       title: "昵称太长了，换个吧~",
       icon: "none",
     });
     return;
-  } else if (loginForm.value.avatar === defaultAvatarUrl.value) {
+  } else if (registerForm.value.avatar === defaultAvatarUrl.value) {
     uni.showToast({
       title: "请设置头像！",
       icon: "none",
     });
     return;
   }
-  const chatStore = useChatStore();
-  chatStore.loginInfo.avatar = loginForm.value.avatar!;
-  chatStore.loginInfo.nickname = loginForm.value.nickname!;
+  userStore.userProfile.avatar = registerForm.value.avatar!;
+  userStore.userProfile.nickname = registerForm.value.nickname!;
+  userStore.userProfile.token = registerForm.value.code!;
   //TODO 压缩图像 大小限制
-  upload({
+  uploadAPI({
     url: "/api/upload",
-    filePath: loginForm.value.avatar,
+    filePath: registerForm.value.avatar,
     name: "avatar",
     formData: {
-      nickname: loginForm.value.nickname,
-      code: loginForm.value.code,
+      nickname: registerForm.value.nickname,
+      code: registerForm.value.code,
     },
     success: (res) => {
       console.log(res.data);
@@ -132,6 +131,7 @@ const handleSubmit = () => {
   align-items: center;
   pointer-events: none;
 }
+
 .button-clear {
   &::after {
     border: none;
