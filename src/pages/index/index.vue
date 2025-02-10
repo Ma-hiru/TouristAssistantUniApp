@@ -6,29 +6,29 @@
       class="absolute z-20 left-4"
       :style="{ top: safeAreaInsetsTop + 'px' }"
     >
-      <Weather />
+      <!--      <Weather />-->
     </view>
     <map
       id="map"
       class="map"
-      :polyline="polyline"
-      :markers="markers"
+      :polyline="mapStore.polyline"
+      :markers="mapStore.markers"
       :show-location="true"
       :show-compass="false"
       :controls="controls"
       :enable-poi="true"
-      :scale="scale"
+      :scale="mapStore.scale"
       :enable-building="true"
       :enable-indoorMap="true"
-      :longitude="position.longitude"
-      :latitude="position.latitude"
+      :longitude="mapStore.position.longitude"
+      :latitude="mapStore.position.latitude"
       @callouttap="tapMarkerPop"
       @markertap="tapMarker"
     />
     <view class="z-20 mb-44 mr-4">
       <button
         class="w-12 h-12 bg-white flex justify-center items-center rounded-sm mb-4"
-        @tap="getLocation"
+        @tap="mapStore.getLocation"
       >
         <image
           src="/static/map/location.svg"
@@ -47,19 +47,16 @@ import Weather from "@/components/Weather/Weather.vue";
 
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
-import { Position } from "@/types/map";
 import {
-  MapMarker,
-  MapPolyline,
   MapControl,
   MapOnCallouttap,
   MapOnMarkertap,
 } from "@uni-helper/uni-app-types";
 
 /** 底部栏 */
-const safeAreaInsetsTop = uni.getWindowInfo().safeAreaInsets?.top;
 import { rem } from "@/settings";
-
+import { useMapStore } from "@/stores/modules/useMapStore";
+const safeAreaInsetsTop = uni.getWindowInfo().safeAreaInsets?.top;
 const bottomBarPositions = {
   closed: -28 * rem,
   opened: -2 * rem,
@@ -68,46 +65,14 @@ const bottomBarPositions = {
 };
 const bottomBarHeight = "36rem";
 /** 地图数据 */
+const mapStore = useMapStore();
 const controls = ref<MapControl[]>([
   {
     position: { left: 0, top: 0 },
     iconPath: "/static/map/location.svg",
   },
 ]);
-const position = ref<Position>({
-  longitude: 116.4,
-  latitude: 39.9,
-});
-const scale = ref<number>(18.5);
-const markers = ref<MapMarker[]>([
-  {
-    id: 1,
-    latitude: 28.336447,
-    longitude: 113.00219,
-    iconPath: "",
-    width: 20,
-    height: 20,
-    title: "地点一",
-  },
-]);
-const polyline = ref<MapPolyline[]>([
-  {
-    points: [
-      {
-        latitude: 30.506244,
-        longitude: 114.448641,
-      },
-      {
-        latitude: 30.503899,
-        longitude: 114.443437,
-      },
-    ],
-    color: "#FA6400",
-    width: 10,
-    arrowLine: true,
-    borderWidth: 2,
-  },
-]);
+
 const tapMarker: MapOnMarkertap = (event) => {
   console.log(event.detail.markerId);
 };
@@ -117,32 +82,8 @@ const tapMarkerPop: MapOnCallouttap = (event) => {
     url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${event.detail.markerId}`,
   });
 };
-
-async function getLocation() {
-  try {
-    const res = await uni.getLocation({
-      type: "gcj02",
-      isHighAccuracy: true,
-    });
-    position.value.latitude = res.latitude;
-    position.value.longitude = res.longitude;
-    uni.createMapContext("map").moveToLocation(position.value);
-    polyline.value[0].points[0].latitude = res.latitude;
-    polyline.value[0].points[0].longitude = res.longitude;
-    polyline.value[0].points[1].latitude = res.latitude + 0.001;
-    polyline.value[0].points[1].longitude = res.longitude + 0.001;
-    markers.value[0].latitude = res.latitude + 0.001;
-    markers.value[0].longitude = res.longitude + 0.001;
-  } catch (e) {
-    await uni.showToast({
-      title: "获取位置失败，请检查定位权限",
-      icon: "none",
-    });
-  }
-}
-
 onLoad(async () => {
-  await getLocation();
+  await mapStore.getLocation();
 });
 </script>
 <style lang="scss" scoped>

@@ -87,7 +87,8 @@
           "path": "pages/pointDetail/pointDetail",
           "style": {
             "navigationBarTitleText": "详情",
-            "enablePullDownRefresh": false
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom"
           }
         },
         {

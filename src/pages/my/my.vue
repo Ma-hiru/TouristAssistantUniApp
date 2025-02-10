@@ -1,54 +1,63 @@
 <template>
-  <view class="w-screen h-screen p-4 pt-0 relative">
+  <view class="w-screen h-screen">
     <view
-      class="relative w-[calc(100%+2rem)] -left-4 user-card p-4 pb-0 rounded-b-md"
+      class="relative w-[calc(100%+2rem)] -left-4 user-card p-4 pb-8 rounded-b-md"
       :style="{ paddingTop: `${safeAreaInsets!.top}px` }"
     >
-      <view class="mt-16 relative top-8">
-        <uni-card margin="0" padding="0" spacing="0">
-          <view
-            class="w-full h-full flex justify-center items-center flex-col pt-4 pb-4"
-            @tap="isLogin"
-          >
-            <ant-avatar class="z-10" size="medium" :src="avatarSrc" />
-            <text class="text-black mt-4 font-bold">
-              {{ username }}
-            </text>
-          </view>
-        </uni-card>
-      </view>
-    </view>
-    <view class="w-[calc(100%-2rem)] left-4 absolute bottom-4">
-      <view class="text-center mb-2 text-[--diy-color-primary]" @tap="feedback">
-        <text>遇到问题？点我反馈</text>
-      </view>
-      <button
-        class="w-full h-12 logout-btn flex justify-center items-center bg-none text-red-600"
-        @tap="logout"
+      <view
+        class="w-full h-full flex justify-center items-center flex-col pt-4 pb-4"
+        @tap="isLogin"
       >
-        退出登录
-      </button>
+        <ant-avatar class="z-10" size="medium" :src="avatarSrc" />
+        <text class="text-white mt-4 font-bold">
+          {{ username }}
+        </text>
+      </view>
     </view>
-    <uni-popup
-      ref="inputDialog"
-      type="dialog"
-      mask-background-color="rgba(0,0,0,0.4)"
-    >
-      <uni-popup-dialog
-        ref="inputClose"
-        mode="input"
-        title="反馈"
-        v-model="feedbackText"
-        placeholder="描述你遇到的问题"
-        @confirm="dialogInputConfirm"
-        @close="feedbackText = ''"
-      />
-    </uni-popup>
+    <view class="pl-2 pr-2 -mt-8">
+      <uni-card margin="0" padding="0.5rem">
+        <view class="flex">
+          <button
+            class="flex flex-col clear-btn items-center justify-center p-2"
+          >
+            <image :src="Star" :style="{ height: '2rem', width: '2rem' }" />
+            <text>收藏记录</text>
+          </button>
+        </view>
+      </uni-card>
+    </view>
   </view>
+  <view class="w-[calc(100%-2rem)] left-4 fixed bottom-4">
+    <view class="text-center mb-2 text-[--diy-color-primary]" @tap="feedback">
+      <text>遇到问题？点我反馈</text>
+    </view>
+    <button
+      class="w-full h-12 logout-btn flex justify-center items-center bg-none text-red-600"
+      @tap="logout"
+    >
+      退出登录
+    </button>
+  </view>
+  <uni-popup
+    ref="inputDialog"
+    type="dialog"
+    mask-background-color="rgba(0,0,0,0.4)"
+  >
+    <uni-popup-dialog
+      ref="inputClose"
+      mode="input"
+      title="反馈"
+      v-model="feedbackText"
+      placeholder="描述你遇到的问题"
+      @confirm="dialogInputConfirm"
+      @close="feedbackText = ''"
+    />
+  </uni-popup>
 </template>
 <script setup lang="ts" name="my">
 import { computed, ref } from "vue";
 import { useUserStore } from "@/stores";
+import Star from "@/pages_sub/default/static/pointDetail/star.svg";
 
 const { safeAreaInsets } = uni.getSystemInfoSync();
 const userStore = useUserStore();

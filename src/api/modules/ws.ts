@@ -5,6 +5,7 @@ import GeneralCallbackResult = UniNamespace.GeneralCallbackResult;
 import OnSocketMessageCallbackResult = UniNamespace.OnSocketMessageCallbackResult;
 import SendSocketMessageOptions = UniNamespace.SendSocketMessageOptions;
 import { reqURL } from "@/api";
+import CloseSocketOptions = UniNamespace.CloseSocketOptions;
 
 /** @example `核心API`
  *  const SocketTask = uni.connectSocket({
@@ -28,7 +29,7 @@ export class ws {
     onError?: (err: GeneralCallbackResult) => void,
     onMessage?: <T>(result: OnSocketMessageCallbackResult<T>) => void
   ) {
-    options.url = reqURL + options.url;
+    // options.url = reqURL + options.url;
     this.name = name;
     this.instance = uni.connectSocket({
       ...options,
@@ -72,7 +73,9 @@ export class ws {
       return callback(res);
     });
   }
-
+  close(options: CloseSocketOptions) {
+    this.instance.close(options);
+  }
   sendMessage(options: SendSocketMessageOptions) {
     this.instance.send(options);
   }

@@ -3,18 +3,17 @@ interface ChatBase {
   userId: number;
   content: string;
 }
-
 /** 可辨识联合类型（Discriminated Unions） */
-export type Chat<T extends boolean> = ChatBase &
+export type Chat = ChatBase &
   (
     | {
         type: "assistant";
         time: string;
         isAdd: boolean;
         isPolyline: {
-          id: T extends true ? number : undefined;
-          isPolyline: T;
-          polyline: T extends true ? MapPolyline[] : undefined;
+          id?: number;
+          isPolyline: boolean;
+          polyline?: MapPolyline[];
         };
       }
     | {
@@ -22,7 +21,7 @@ export type Chat<T extends boolean> = ChatBase &
         time: string;
         isAdd: boolean;
       }
-    | { type: "system"; time: undefined; isAdd: undefined }
+    | { type: "system" }
   );
 
 export type ChatList = Chat[];

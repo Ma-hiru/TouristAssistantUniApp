@@ -4,50 +4,20 @@
       <uni-list :border="true">
         <!-- 自定义右侧内容 -->
         <uni-list-chat
+          v-for="(point, index) in mapStore.pointList"
+          :key="point.id"
           :clickable="true"
-          title="地点1"
+          :title="point.title"
           link
-          @click="handleTapList(1)"
-          avatar="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png"
-          note="简介"
-          time="2020-02-02 20:20"
+          @click="handleTapList(point.id, index)"
+          :avatar="point.detail.cover"
+          :note="point.detail.content"
           badge-positon="left"
         >
           <view class="chat-custom-right">
             <text class="chat-custom-text">推荐</text>
-            <!-- 需要使用 uni-icons 请自行引入 -->
-            <uni-icons type="star-filled" color="#999" size="18"></uni-icons>
+            <uni-icons type="star-filled" color="#999" size="18" />
           </view>
-        </uni-list-chat>
-        <uni-list-chat
-          :clickable="true"
-          title="地点2"
-          link
-          @click="handleTapList(2)"
-          avatar="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png"
-          note="简介"
-          time="2020-02-02 20:20"
-          badge-positon="left"
-        >
-          <view class="chat-custom-right">
-            <text class="chat-custom-text">最近</text>
-            <!-- 需要使用 uni-icons 请自行引入 -->
-            <uni-icons type="star-filled" color="#999" size="18"></uni-icons>
-          </view>
-        </uni-list-chat>
-        <uni-list-chat
-          v-for="i in 20"
-          :title="`地点${i + 2}`"
-          :key="i"
-          :clickable="true"
-          link
-          @click="handleTapList(i + 2)"
-          avatar="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png"
-          note="简介"
-          time="2020-02-02 20:20"
-          badge-positon="left"
-        >
-          <view class="chat-custom-right"></view>
         </uni-list-chat>
       </uni-list>
     </uni-list>
@@ -58,23 +28,14 @@
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import { useGuideStore } from "@/stores";
+import { useMapStore } from "@/stores/modules/useMapStore";
 const guideStore = useGuideStore();
-const avatarList = ref([
-  {
-    url: "https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-  },
-  {
-    url: "https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-  },
-  {
-    url: "https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png",
-  },
-]);
+const mapStore = useMapStore();
 const isGuid = ref(false);
-const handleTapList = (id: number) => {
+const handleTapList = (id: number, index: number) => {
   if (!isGuid.value)
     uni.navigateTo({
-      url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${id}`,
+      url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${id}&index=${index}`,
     });
   else {
     guideStore.createPostPoint = { id, name: `地点${id}` };
