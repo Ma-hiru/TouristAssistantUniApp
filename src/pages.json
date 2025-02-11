@@ -107,6 +107,13 @@
             "navigationStyle": "custom",
             "navigationBarTextStyle": "white"
           }
+        },
+        {
+          "path": "userInfo/userInfo",
+          "style": {
+            "navigationBarTitleText": "个人信息",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     }

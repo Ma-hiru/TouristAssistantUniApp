@@ -13,3 +13,5 @@ export default pinia;
 export * from "./modules/useUserStore";
 export * from "./modules/useGuideStore";
 export * from "./modules/useChatStore";
+export * from "./modules/useMapStore";
+export * from "./modules/useShareStore";

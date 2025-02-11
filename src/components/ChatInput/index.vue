@@ -43,11 +43,11 @@
         v-show="isVoiceInput && isTapping"
       >
         <view class="dots-container">
-          <view class="dot"></view>
-          <view class="dot"></view>
-          <view class="dot"></view>
-          <view class="dot"></view>
-          <view class="dot"></view>
+          <view class="dot" />
+          <view class="dot" />
+          <view class="dot" />
+          <view class="dot" />
+          <view class="dot" />
         </view>
       </view>
       <view

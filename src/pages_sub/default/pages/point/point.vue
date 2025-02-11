@@ -1,25 +1,41 @@
 <template>
   <view>
-    <uni-list>
-      <uni-list :border="true">
-        <!-- 自定义右侧内容 -->
-        <uni-list-chat
-          v-for="(point, index) in mapStore.pointList"
-          :key="point.id"
-          :clickable="true"
-          :title="point.title"
-          link
-          @click="handleTapList(point.id, index)"
-          :avatar="point.detail.cover"
-          :note="point.detail.content"
-          badge-positon="left"
-        >
-          <view class="chat-custom-right">
-            <text class="chat-custom-text">推荐</text>
-            <uni-icons type="star-filled" color="#999" size="18" />
-          </view>
-        </uni-list-chat>
-      </uni-list>
+    <uni-list v-if="!isStar" :border="true">
+      <!-- 自定义右侧内容 -->
+      <uni-list-chat
+        v-for="(point, index) in mapStore.pointList"
+        :key="point.id"
+        :clickable="true"
+        :title="point.title"
+        link
+        @click="handleTapList(point.id, index)"
+        :avatar="point.detail.cover"
+        :note="point.detail.content"
+        badge-positon="left"
+      >
+        <view class="chat-custom-right">
+          <text class="chat-custom-text">打卡点</text>
+          <uni-icons type="star-filled" color="#999" size="18" />
+        </view>
+      </uni-list-chat>
+    </uni-list>
+    <uni-list v-else :border="true">
+      <uni-list-chat
+        v-for="(point, index) in userStore.starPoint"
+        :key="point.id"
+        :clickable="true"
+        :title="point.title"
+        link
+        @click="handleTapList(point.id, index)"
+        :avatar="point.detail.cover"
+        :note="point.detail.content"
+        badge-positon="left"
+      >
+        <view class="chat-custom-right">
+          <text class="chat-custom-text">已收藏</text>
+          <uni-icons type="star-filled" color="#999" size="18" />
+        </view>
+      </uni-list-chat>
     </uni-list>
   </view>
 </template>
@@ -27,11 +43,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
-import { useGuideStore } from "@/stores";
+import { useGuideStore, useUserStore } from "@/stores";
 import { useMapStore } from "@/stores/modules/useMapStore";
+
 const guideStore = useGuideStore();
+const userStore = useUserStore();
 const mapStore = useMapStore();
 const isGuid = ref(false);
+const isStar = ref(false);
 const handleTapList = (id: number, index: number) => {
   if (!isGuid.value)
     uni.navigateTo({
@@ -45,7 +64,10 @@ const handleTapList = (id: number, index: number) => {
   }
 };
 onLoad((options) => {
-  isGuid.value = (options as { mode: "guide" | undefined }).mode === "guide";
+  isGuid.value =
+    (options as { mode: "guide" | "star" | undefined }).mode === "guide";
+  isStar.value =
+    (options as { mode: "guide" | "star" | undefined }).mode === "star";
 });
 </script>
 

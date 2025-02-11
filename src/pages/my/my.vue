@@ -16,21 +16,42 @@
     </view>
     <view class="pl-2 pr-2 -mt-8">
       <uni-card margin="0" padding="0.5rem">
-        <view class="flex">
+        <view class="flex justify-between">
           <button
+            @tap="handleStar"
             class="flex flex-col clear-btn items-center justify-center p-2"
           >
-            <image :src="Star" :style="{ height: '2rem', width: '2rem' }" />
-            <text>收藏记录</text>
+            <image
+              src="/static/user/star.svg"
+              :style="{ height: '2rem', width: '2rem' }"
+            />
+            <text>收藏地点</text>
+          </button>
+          <button
+            open-type="feedback"
+            class="flex flex-col clear-btn items-center justify-between p-2 pt-[0.8rem]"
+          >
+            <image
+              src="/static/user/feedback.svg"
+              :style="{ height: '1.5rem', width: '1.5rem' }"
+            />
+            <text>问题反馈</text>
+          </button>
+          <button
+            @tap="userInfo"
+            class="flex flex-col clear-btn items-center justify-center p-2 pt-3"
+          >
+            <image
+              src="/static/user/userInfo.svg"
+              :style="{ height: '2rem', width: '2rem' }"
+            />
+            <text>个人信息</text>
           </button>
         </view>
       </uni-card>
     </view>
   </view>
   <view class="w-[calc(100%-2rem)] left-4 fixed bottom-4">
-    <view class="text-center mb-2 text-[--diy-color-primary]" @tap="feedback">
-      <text>遇到问题？点我反馈</text>
-    </view>
     <button
       class="w-full h-12 logout-btn flex justify-center items-center bg-none text-red-600"
       @tap="logout"
@@ -57,7 +78,6 @@
 <script setup lang="ts" name="my">
 import { computed, ref } from "vue";
 import { useUserStore } from "@/stores";
-import Star from "@/pages_sub/default/static/pointDetail/star.svg";
 
 const { safeAreaInsets } = uni.getSystemInfoSync();
 const userStore = useUserStore();
@@ -71,6 +91,14 @@ const username = computed(() => {
 });
 const feedback = () => {
   inputDialog.value.open("center");
+};
+const userInfo = () => {
+  uni.navigateTo({ url: "/pages_sub/default/userInfo/userInfo" });
+};
+const handleStar = () => {
+  uni.navigateTo({
+    url: "/pages_sub/default/pages/point/point?mode=star",
+  });
 };
 const dialogInputConfirm = () => {
   if (feedbackText.value === "") {

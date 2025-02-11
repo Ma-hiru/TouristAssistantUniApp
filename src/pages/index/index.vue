@@ -46,7 +46,7 @@ import IndexBar from "@/components/IndexBar/IndexBar.vue";
 import Weather from "@/components/Weather/Weather.vue";
 
 import { ref } from "vue";
-import { onLoad } from "@dcloudio/uni-app";
+import { onLoad, onShow } from "@dcloudio/uni-app";
 import {
   MapControl,
   MapOnCallouttap,
@@ -56,6 +56,7 @@ import {
 /** 底部栏 */
 import { rem } from "@/settings";
 import { useMapStore } from "@/stores/modules/useMapStore";
+
 const safeAreaInsetsTop = uni.getWindowInfo().safeAreaInsets?.top;
 const bottomBarPositions = {
   closed: -28 * rem,
@@ -84,6 +85,12 @@ const tapMarkerPop: MapOnCallouttap = (event) => {
 };
 onLoad(async () => {
   await mapStore.getLocation();
+});
+onShow(() => {
+  if (mapStore.currentMarker) {
+    const mapContext = uni.createMapContext("map");
+    mapContext.moveToLocation(mapStore.currentMarker);
+  }
 });
 </script>
 <style lang="scss" scoped>

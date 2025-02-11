@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { LoginInfo, UserProfile } from "@/types/api";
+import { PointList } from "@/types/map";
 
 export const useUserStore = defineStore(
   "userStore",
@@ -13,9 +14,11 @@ export const useUserStore = defineStore(
       nickname: "",
       avatar: "",
     });
+    const starPoint = ref<PointList>([]);
     return {
       loginInfo,
       userProfile,
+      starPoint,
     };
   },
   {

@@ -4,7 +4,7 @@
     :style="{ paddingBottom: `${safeAreaInsets.bottom}px` }"
   >
     <ant-steps :items="items" :current="currentSteps" />
-    <view class="w-full pl-8 pr-8">
+    <view class="w-full pl-8 pr-8 overflow-hidden">
       <upload-img
         v-show="currentSteps === 0"
         :style="{ transition: 'all 0.3s' }"
@@ -12,6 +12,7 @@
       <view class="pt-4" v-show="currentSteps === 1">
         <textarea
           placeholder="写下你的感受吧！"
+          v-model="shareStore.feelingText"
           class="bg-gray-100 w-full shadow-sm p-4"
           maxlength="500"
         />
@@ -43,8 +44,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import UploadImg from "@/components/UploadImg/UploadImg.vue";
-import ShareResult from "@/components/ShareResult/ShareResult.vue";
+import UploadImg from "@/pages_sub/default/components/UploadImg.vue";
+import ShareResult from "@/pages_sub/default/components/ShareResult.vue";
+import { useShareStore } from "@/stores";
+
+const shareStore = useShareStore();
 const currentSteps = ref(0);
 const items = ref([
   {
