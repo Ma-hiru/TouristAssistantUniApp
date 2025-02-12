@@ -117,13 +117,6 @@ const onKeyboardHeightChange: TextareaOnKeyboardheightchange = (e) => {
 };
 /** 发送数据 */
 const sendMessage = async () => {
-  if (chatStore.isTyping) {
-    await uni.showToast({
-      title: "正在输入中，请稍后...",
-      icon: "none",
-    });
-    return;
-  }
   if (inputText.value.trim() === "") {
     await uni.showToast({
       title: "内容不能为空~",
@@ -143,10 +136,6 @@ const sendMessage = async () => {
     inputText.value = "";
   } else {
     uni.hideLoading();
-    await uni.showToast({
-      title: "发送失败，请检查网络~",
-      icon: "error",
-    });
   }
 };
 /** 语音输入 */

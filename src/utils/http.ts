@@ -39,6 +39,12 @@ export const http = <T>(
           resolve(res.data as ResponseData<T>);
           //TODO 身份认证失败的处理
         } else if (res.statusCode === 401) {
+          uni
+            .showToast({
+              icon: "none",
+              title: (res.data as ResponseData<T>)?.msg ?? "身份认证失败",
+            })
+            .then();
           uni.navigateTo({ url: "/pages/login/login" }).then();
           reject(res);
         } else {

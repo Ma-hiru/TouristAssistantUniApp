@@ -1,60 +1,119 @@
 import { defineStore } from "pinia";
-import { Chat, ChatList } from "@/types/chat";
+import { Message } from "@/types/chat";
 import { ref } from "vue";
-import data from "./data.txt?raw";
+import { ws, wsURL } from "@/api";
+import pinia, { useUserStore } from "@/stores";
+import { GetTime } from "@/utils";
 
+const userStore = useUserStore(pinia);
 export const useChatStore = defineStore("chatStore", () => {
-  const chatList = ref<ChatList>([]);
+  const chatList = ref<Message[]>([]);
   const isTyping = ref(false);
-  const typingWhere = ref(0);
+  // const typingWhere = ref(0);
   const isStop = ref(false);
-  //TODO createWs
+  const wsInstance = ref<ws<Message>>();
+
   //TODO 持久化
-  (function init() {})();
+  function init() {
+    wsInstance.value = new ws<Message>(
+      {
+        url: `${wsURL}?token=${userStore.userProfile.token}`,
+        method: "GET",
+      },
+      "Chat",
+      (_) => {},
+      ({ data: message }) => {
+        if (!message.hasSlice) {
+          chatList.value.push(message);
+          isTyping.value = false;
+        } else {
+          isTyping.value = true;
+          if (message.id === chatList.value[chatList.value.length - 1].id) {
+            chatList.value[chatList.value.length - 1].content +=
+              message.content;
+          } else {
+            chatList.value.push(message);
+          }
+        }
+      },
+      () => {},
+      () => {
+        uni
+          .showToast({
+            title: "网络错误",
+            icon: "none",
+          })
+          .then();
+      }
+    );
+  }
+
+  init();
+
   function newChat() {
     isStop.value = true;
     setTimeout(() => {
       chatList.value = [];
       isTyping.value = false;
-      typingWhere.value = 0;
       isStop.value = false;
     }, 300);
-  }
-  function typeComplete() {
-    if (typingWhere.value === 0) return;
-    chatList.value[chatList.value.length - 1].isAdd = false;
-    chatList.value[chatList.value.length - 1].content = chatList.value[
-      chatList.value.length - 1
-    ].content.slice(0, typingWhere.value);
-    typingWhere.value = 0;
   }
 
   function getChatList() {}
 
-  function sendText(chat: Chat<false>, callback?: () => void) {
-    chatList.value.push(chat);
-    chatList.value.push({
-      id: Math.floor(100 * Math.random()),
-      userId: 1,
-      content: data,
-      type: "assistant",
-      time: "2023-05-05 12:00:00",
-      isAdd: true,
+  function stopChat() {
+    sendText({
+      id: 114,
+      content: "stop",
+      type: "system",
+      time: GetTime(),
+      polyline: {
+        isPolyline: false,
+        polyline: [],
+      },
+      hasSlice: false,
     });
-    callback && callback();
   }
-
-  function sendImage() {}
+  function sendText(chat: Message, success?: () => void, fail?: () => void) {
+    if (!wsInstance.value || !wsInstance.value.ready) {
+      uni
+        .showToast({
+          title: "网络错误，重连中",
+          icon: "none",
+        })
+        .then();
+      init();
+      fail && fail();
+    } else {
+      wsInstance.value.sendMessage({
+        data: JSON.stringify(chat),
+        success(_) {
+          chatList.value.push(chat);
+          isTyping.value = true;
+          success && success();
+        },
+        fail(_) {
+          uni
+            .showToast({
+              title: "网络错误",
+              icon: "none",
+            })
+            .then();
+          fail && fail();
+        },
+      });
+    }
+  }
 
   return {
     sendText,
-    sendImage,
     getChatList,
-    typingWhere,
+    // typingWhere,
     isTyping,
     chatList,
-    typeComplete,
+    // typeComplete,
     isStop,
+    stopChat,
     newChat,
   };
 });

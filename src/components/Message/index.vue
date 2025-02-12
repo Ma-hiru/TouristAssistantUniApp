@@ -24,10 +24,8 @@
       <view class="w-full pl-16 pr-16 flex justify-start items-end">
         <ChatText
           :text="props.text"
-          :is-type-text="props.isTypeText"
           corner-position="left"
           :scroll-to-bottom="props.scrollToBottom"
-          ref="textRef"
         />
       </view>
     </view>
@@ -50,7 +48,6 @@ const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string | undefined;
   text: string;
-  isTypeText: boolean | undefined;
   scrollToBottom: () => void;
 }>();
 </script>

@@ -39,8 +39,7 @@
         :time="msg.time"
         :text="msg.content"
         :key="index"
-        :id="'item-' + index"
-        :is-type-text="msg.isAdd"
+        :id="msg.id"
         :scroll-to-bottom="scrollToBottom"
       />
       <ChatWelcome v-if="chatStore.chatList.length === 0" :on-send="onSend" />
@@ -75,17 +74,27 @@ const title = ref("随身小D");
 function onSend(text: string): Promise<boolean> {
   sendLoading.value = true;
   return new Promise((resolve) => {
-    chatStore.sendText({
-      id: 114,
-      userId: 1,
-      content: text,
-      type: "user",
-      time: GetTime(),
-      isAdd: true,
-    });
-    scrollToBottom();
+    chatStore.sendText(
+      {
+        id: 114,
+        content: text,
+        type: "user",
+        time: GetTime(),
+        polyline: {
+          isPolyline: false,
+          polyline: [],
+        },
+        hasSlice: false,
+      },
+      () => {
+        scrollToBottom();
+        resolve(true);
+      },
+      () => {
+        resolve(false);
+      }
+    );
     setTimeout(() => (sendLoading.value = false), 1500);
-    resolve(true);
   });
 }
 
