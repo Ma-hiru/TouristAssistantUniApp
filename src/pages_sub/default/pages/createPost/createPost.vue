@@ -73,7 +73,7 @@
           />
           标记地点
         </button>
-        <text class="text-[#666666]">
+        <text class="text-[#666666]" @tap="selectPoint">
           {{ guideStore.createPostPoint?.name || "未选择" }}
         </text>
       </view>

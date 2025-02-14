@@ -21,12 +21,22 @@
         <ChatAvatar :type="props.type" />
         <ChatTime :time="props.time" />
       </view>
-      <view class="w-full pl-16 pr-16 flex justify-start items-end">
+      <view class="w-full pl-16 pr-16 flex justify-end items-start flex-col">
         <ChatText
           :text="props.text"
           corner-position="left"
           :scroll-to-bottom="props.scrollToBottom"
         />
+        <button
+          class="clear-btn flex justify-center items-center text-sm p-1 bg-blue-50"
+          @tap="choosePolyline"
+        >
+          <image
+            src="/static/chat/location.svg"
+            :style="{ height: '1.25rem', width: '1.25rem' }"
+          />
+          选择路线
+        </button>
       </view>
     </view>
   </view>
@@ -41,15 +51,27 @@
 import ChatAvatar from "@/components/Message/ChatAvatar.vue";
 import ChatTime from "@/components/Message/ChatTime.vue";
 import ChatText from "@/components/Message/ChatText.vue";
-import { ref } from "vue";
+import type { MapPolyline } from "@uni-helper/uni-app-types";
+import { useAudio } from "@/hooks/useAudio";
 //TODO 适配大屏的消息
 //TODO 路线采纳按钮
 const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string | undefined;
+  polyline: {
+    isPolyline: boolean;
+    polyline: MapPolyline[];
+  };
   text: string;
   scrollToBottom: () => void;
 }>();
+const choosePolyline = () => {
+  uni.switchTab({ url: "/pages/index/index" });
+};
+//TODO 音频播放
+// const ctx = useAudio("https://shiina-mahiru.cn/download/test.mp3");
+// console.log(ctx);
+// ctx.play();
 </script>
 
 <style scoped lang="scss"></style>

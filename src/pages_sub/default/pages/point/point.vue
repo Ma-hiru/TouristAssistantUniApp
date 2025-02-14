@@ -1,7 +1,6 @@
 <template>
   <view>
     <uni-list v-if="!isStar" :border="true">
-      <!-- 自定义右侧内容 -->
       <uni-list-chat
         v-for="(point, index) in mapStore.pointList"
         :key="point.id"
@@ -37,6 +36,12 @@
         </view>
       </uni-list-chat>
     </uni-list>
+    <view
+      v-show="userStore.starPoint.length === 0 && isStar"
+      class="w-screen h-screen flex justify-center items-center"
+    >
+      暂无收藏地点
+    </view>
   </view>
 </template>
 
@@ -57,7 +62,7 @@ const handleTapList = (id: number, index: number) => {
       url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${id}&index=${index}`,
     });
   else {
-    guideStore.createPostPoint = { id, name: `地点${id}` };
+    guideStore.createPostPoint = { id, name: mapStore.pointList[index].title };
     uni.navigateBack({
       animationType: "pop-out",
     });
@@ -74,9 +79,7 @@ onLoad((options) => {
 <style scoped lang="scss">
 .chat-custom-right {
   flex: 1;
-  /* #ifndef APP-NVUE */
   display: flex;
-  /* #endif */
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;

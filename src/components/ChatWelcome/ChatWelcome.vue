@@ -1,6 +1,9 @@
 <template>
   <view>
-    <view class="flex justify-center items-center h-56 w-64 m-auto">
+    <view
+      class="flex justify-center items-center h-56 w-64 m-auto"
+      @tap="divAppearance"
+    >
       形象待定......
     </view>
     <view class="p-4">
@@ -53,6 +56,10 @@ const baseList = ref<AntdMiniPromptsItem[]>([
   },
 ]);
 const promptsTitle = ref("你可以这样问我：");
+
+function divAppearance() {
+  uni.navigateTo({ url: "/pages_sub/default/pages/appearance/appearance" });
+}
 
 function onItemTap(e: AntdMiniPromptsCustomEventType) {
   const [item, index] = e.detail;

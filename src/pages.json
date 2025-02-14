@@ -114,6 +114,13 @@
             "navigationBarTitleText": "个人信息",
             "enablePullDownRefresh": false
           }
+        },
+        {
+          "path": "pages/appearance/appearance",
+          "style": {
+            "navigationBarTitleText": "形象定制",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     }

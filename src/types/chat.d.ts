@@ -15,6 +15,11 @@ export interface Message {
     isPolyline: boolean;
     polyline: MapPolyline[];
   };
+  /** 当前位置 */
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export type AntdMiniPromptsItem = {

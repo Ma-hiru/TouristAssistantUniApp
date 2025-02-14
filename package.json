@@ -95,7 +95,7 @@
     "@vue/runtime-core": "^3.4.21",
     "@vue/tsconfig": "^0.4.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.22.0",
+    "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.3.0",
     "globals": "^15.14.0",
     "lint-staged": "^13.0.3",

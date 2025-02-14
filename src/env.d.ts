@@ -2,6 +2,7 @@
 interface ImportMetaEnv {
   readonly VITE_URL: string;
   readonly VITE_WS: string;
+  readonly VITE_UPLOAD_AVATAR: string;
 }
 
 declare module "*.vue" {

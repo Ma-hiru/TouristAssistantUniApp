@@ -4,6 +4,7 @@ import { ref } from "vue";
 import { ws, wsURL } from "@/api";
 import pinia, { useUserStore } from "@/stores";
 import { GetTime } from "@/utils";
+import { useAudioStop } from "@/hooks/useAudio";
 
 const userStore = useUserStore(pinia);
 export const useChatStore = defineStore("chatStore", () => {
@@ -12,6 +13,7 @@ export const useChatStore = defineStore("chatStore", () => {
   // const typingWhere = ref(0);
   const isStop = ref(false);
   const wsInstance = ref<ws<Message>>();
+  const isMute = ref(false);
 
   //TODO 持久化
   function init() {
@@ -51,30 +53,42 @@ export const useChatStore = defineStore("chatStore", () => {
   init();
 
   function newChat() {
+    useAudioStop();
     isStop.value = true;
-    setTimeout(() => {
-      chatList.value = [];
-      isTyping.value = false;
-      isStop.value = false;
-    }, 300);
+    isTyping.value = false;
+    chatList.value = [];
   }
 
   function getChatList() {}
 
   function stopChat() {
-    sendText({
+    // sendText({
+    //   id: 114,
+    //   content: "stop",
+    //   type: "system",
+    //   time: GetTime(),
+    //   polyline: {
+    //     isPolyline: false,
+    //     polyline: [],
+    //   },
+    //   hasSlice: false,
+    // });
+  }
+
+  function sendText(chat: Message, success?: () => void, fail?: () => void) {
+    chatList.value.push(chat);
+    chatList.value.push({
+      type: "assistant",
+      content: "hello",
       id: 114,
-      content: "stop",
-      type: "system",
+      hasSlice: false,
       time: GetTime(),
       polyline: {
         isPolyline: false,
         polyline: [],
       },
-      hasSlice: false,
     });
-  }
-  function sendText(chat: Message, success?: () => void, fail?: () => void) {
+    success && success();
     if (!wsInstance.value || !wsInstance.value.ready) {
       uni
         .showToast({
@@ -107,6 +121,7 @@ export const useChatStore = defineStore("chatStore", () => {
 
   return {
     sendText,
+    isMute,
     getChatList,
     // typingWhere,
     isTyping,

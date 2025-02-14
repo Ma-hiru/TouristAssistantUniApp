@@ -51,7 +51,10 @@
       </uni-card>
     </view>
   </view>
-  <view class="w-[calc(100%-2rem)] left-4 fixed bottom-4">
+  <view
+    class="w-[calc(100%-2rem)] left-4 fixed bottom-4"
+    v-show="userStore.userProfile.nickname"
+  >
     <button
       class="w-full h-12 logout-btn flex justify-center items-center bg-none text-red-600"
       @tap="logout"
@@ -59,39 +62,20 @@
       退出登录
     </button>
   </view>
-  <uni-popup
-    ref="inputDialog"
-    type="dialog"
-    mask-background-color="rgba(0,0,0,0.4)"
-  >
-    <uni-popup-dialog
-      ref="inputClose"
-      mode="input"
-      title="反馈"
-      v-model="feedbackText"
-      placeholder="描述你遇到的问题"
-      @confirm="dialogInputConfirm"
-      @close="feedbackText = ''"
-    />
-  </uni-popup>
 </template>
 <script setup lang="ts" name="my">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useUserStore } from "@/stores";
 
 const { safeAreaInsets } = uni.getSystemInfoSync();
 const userStore = useUserStore();
-const inputDialog = ref();
-const feedbackText = ref("");
+
 const avatarSrc = computed(() => {
   return userStore.userProfile.avatar || "/static/user/avatar_default.jpg";
 });
 const username = computed(() => {
   return userStore.userProfile.nickname || "点击登录";
 });
-const feedback = () => {
-  inputDialog.value.open("center");
-};
 const userInfo = () => {
   uni.navigateTo({ url: "/pages_sub/default/userInfo/userInfo" });
 };
@@ -100,20 +84,7 @@ const handleStar = () => {
     url: "/pages_sub/default/pages/point/point?mode=star",
   });
 };
-const dialogInputConfirm = () => {
-  if (feedbackText.value === "") {
-    uni.showToast({
-      title: "请输入反馈内容",
-      icon: "none",
-    });
-  } else {
-    uni.showToast({
-      title: "反馈成功",
-      icon: "none",
-    });
-    feedbackText.value = "";
-  }
-};
+
 const isLogin = () => {
   if (username.value !== userStore.userProfile.nickname) {
     uni.navigateTo({ url: "/pages/login/login" });

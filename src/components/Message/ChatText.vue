@@ -25,6 +25,9 @@ const props = defineProps<{
   scrollToBottom: () => void;
 }>();
 const content = ref(null);
+content.value = useTowxml(props.text, "markdown", {
+  theme: "light",
+});
 const stop = watch(
   () => props.text,
   () => {
@@ -34,14 +37,15 @@ const stop = watch(
     props.scrollToBottom();
   }
 );
+//TODO 回收内存
 const unwatch = watch(
   () => chatStore.isStop,
   () => {
     if (chatStore.isStop) {
-      stop();
-      unwatch();
       chatStore.isStop = false;
       chatStore.stopChat();
+      unwatch();
+      stop();
     }
   }
 );

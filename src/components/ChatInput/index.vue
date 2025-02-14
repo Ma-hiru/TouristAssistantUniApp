@@ -72,7 +72,7 @@
         v-show="!isVoiceInput"
       >
         <button
-          class="w-10 h-10 flex justify-center items-center rounded-full bg-[var(--diy-color-primary)] relative"
+          class="w-10 h-10 flex justify-center items-center rounded-full bg-[#3688FF] relative"
           :hover-class="'btn-hover'"
           @tap="handleSendOrStop"
         >
@@ -143,15 +143,12 @@ const isVoiceInput = ref(false);
 const isTapping = ref(false);
 const voiceInput = () => {
   isVoiceInput.value = !isVoiceInput.value;
-  uni.authorize({
-    scope: "record",
-  });
 };
 const recorder = uni.getRecorderManager();
 const tapStart = () => {
   isTapping.value = true;
   recorder.start({
-    sampleRate: 16000,
+    sampleRate: 8000,
     format: "mp3",
   });
 };
@@ -160,6 +157,12 @@ const tapEnd = () => {
   recorder.stop();
 };
 recorder.onStop((res) => {
+  if (res.duration < 1000) {
+    uni.showToast({
+      title: "录音时间太短",
+      icon: "error",
+    });
+  }
   console.log(res);
 });
 recorder.onError(() => {

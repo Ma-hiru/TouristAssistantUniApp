@@ -23,15 +23,39 @@
       >
         <view class="mb-1">
           <uni-easyinput
+            v-model="searchText"
             confirm-type="search"
             prefixIcon="search"
-            placeholder="搜索地点"
+            placeholder="搜索地点和公共服务"
             :adjust-position="false"
             @focus="up"
           />
         </view>
-        <view class="flex justify-center items-center">
-          <text>暂无历史记录</text>
+        <view
+          class="flex flex-col items-center w-full overflow-hidden"
+          :style="{
+            justifyContent: !searchText ? 'center' : 'start',
+          }"
+        >
+          <text v-show="!searchText">搜索并浏览地点吧！</text>
+          <uni-list v-show="searchText" style="width: calc(100%)">
+            <uni-list-chat
+              v-for="(point, index) in pointList"
+              :key="point.id"
+              :clickable="true"
+              :title="point.title"
+              link
+              @click="handleTapList(point.id, index)"
+              :avatar="point.detail.cover"
+              :note="point.detail.content"
+              badge-positon="left"
+            >
+              <view class="chat-custom-right">
+                <text class="chat-custom-text">打卡点</text>
+                <uni-icons type="star-filled" color="#999" size="18" />
+              </view>
+            </uni-list-chat>
+          </uni-list>
         </view>
         <view class="h-24" />
       </view>
@@ -63,9 +87,22 @@
 </template>
 
 <script setup lang="ts" name="IndexBar">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { TouchEvent } from "@uni-helper/uni-app-types";
+import { useMapStore } from "@/stores";
 
+const searchText = ref("");
+const mapStore = useMapStore();
+const pointList = computed(() =>
+  mapStore.pointList.filter((item) => {
+    return searchText.value !== "" && item.title.includes(searchText.value);
+  })
+);
+const handleTapList = (id: number, index: number) => {
+  uni.navigateTo({
+    url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${id}&index=${index}`,
+  });
+};
 const goToRoute = async (path: "chat" | "point" | "share") => {
   if (path === "chat")
     await uni.switchTab({
@@ -138,5 +175,17 @@ defineExpose({ up, down });
 
 .clear-btn::after {
   border: none;
+}
+.chat-custom-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.chat-custom-text {
+  font-size: 12px;
+  color: #999;
 }
 </style>

@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "@/stores";
+import { reqLogin } from "@/api";
 
 const userStore = useUserStore();
 const login = () => {
@@ -36,10 +37,26 @@ const login = () => {
   });
   uni.login({
     provider: "weixin",
-    success: (res) => {
+    success: async (res) => {
       userStore.loginInfo.code = res.code;
       //TODO 判断是否需要昵称头像
-      uni.navigateTo({ url: "/pages_sub/default/pages/register/register" });
+      try {
+        const data = await reqLogin({ code: res.code });
+        if (data.result.isFirst) {
+          userStore.userProfile.nickname = data.result.nickname!;
+          userStore.userProfile.avatar = data.result.avatar!;
+          userStore.userProfile.token = data.result.token!;
+        } else
+          await uni.navigateTo({
+            url: "/pages_sub/default/pages/register/register",
+          });
+      } catch {
+        /*empty*/
+        //TODO 记得删
+        await uni.navigateTo({
+          url: "/pages_sub/default/pages/register/register",
+        });
+      }
     },
     fail: () => {
       uni.showToast({

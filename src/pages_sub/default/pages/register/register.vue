@@ -47,9 +47,14 @@
 import { ref } from "vue";
 import { onLoad } from "@dcloudio/uni-app";
 import type { ButtonOnChooseavatar } from "@uni-helper/uni-app-types";
-import type { RegisterInfo } from "@/types/api";
+import {
+  RegisterInfo,
+  ReqRegisterResponseData,
+  ResponseData,
+} from "@/types/api";
 import { useUserStore } from "@/stores";
 import { uploadAPI } from "@/api/modules/uploadAPI";
+import { uploadAvatarURL } from "@/api";
 
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const userStore = useUserStore();
@@ -75,44 +80,53 @@ onLoad(() => {
     },
   });
 });
-const handleSubmit = () => {
+const handleSubmit = async () => {
   if (registerForm.value.nickname === "") {
-    uni.showToast({
+    await uni.showToast({
       title: "昵称不能为空！",
       icon: "none",
     });
     return;
   } else if (registerForm.value.nickname!.length > 10) {
-    uni.showToast({
+    await uni.showToast({
       title: "昵称太长了，换个吧~",
       icon: "none",
     });
     return;
   } else if (registerForm.value.avatar === defaultAvatarUrl.value) {
-    uni.showToast({
+    await uni.showToast({
       title: "请设置头像！",
       icon: "none",
     });
     return;
   }
+  //TODO 记得删
   userStore.userProfile.avatar = registerForm.value.avatar!;
   userStore.userProfile.nickname = registerForm.value.nickname!;
   userStore.userProfile.token = registerForm.value.code!;
-  //TODO 压缩图像 大小限制
-  uploadAPI({
-    url: "/api/upload",
-    filePath: registerForm.value.avatar,
-    name: "avatar",
-    formData: {
-      nickname: registerForm.value.nickname,
-      code: registerForm.value.code,
-    },
-    success: (res) => {
-      console.log(res.data);
-    },
-  });
-  uni.showToast({ icon: "success", title: "登录成功" });
   setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 1000);
+  // try {
+  //   const data = await uploadAPI({
+  //     url: uploadAvatarURL,
+  //     filePath: registerForm.value.avatar,
+  //     name: "avatar",
+  //     formData: {
+  //       nickname: registerForm.value.nickname,
+  //       code: registerForm.value.code,
+  //     },
+  //   });
+  //   const res: ResponseData<ReqRegisterResponseData> = JSON.parse(data.data);
+  //   userStore.userProfile.avatar = res.result.avatar;
+  //   userStore.userProfile.nickname = res.result.nickname;
+  //   userStore.userProfile.token = res.result.token;
+  //   await uni.showToast({ icon: "success", title: "注册成功" });
+  //   setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 1000);
+  // } catch {
+  //   await uni.showToast({
+  //     title: "请检查网络",
+  //     icon: "error",
+  //   });
+  // }
 };
 </script>
 
