@@ -3,6 +3,7 @@ interface ImportMetaEnv {
   readonly VITE_URL: string;
   readonly VITE_WS: string;
   readonly VITE_UPLOAD_AVATAR: string;
+  readonly VITE_CARD_GENERATE: string;
 }
 
 declare module "*.vue" {

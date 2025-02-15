@@ -3,25 +3,25 @@
     class="w-screen h-screen grid grid-rows-[auto_1fr_auto] grid-cols-1"
     :style="{ paddingBottom: `${safeAreaInsets.bottom}px` }"
   >
-    <ant-steps :items="items" :current="currentSteps" />
+    <ant-steps :items="shareStore.items" :current="currentSteps" />
     <view class="w-full pl-8 pr-8 overflow-hidden">
-      <view class="w-full" id="containerRef">
-        <upload-img
-          v-show="currentSteps === 0"
-          :style="{ transition: 'all 0.3s' }"
+      <upload-img
+        v-show="currentSteps === 0"
+        :style="{ transition: 'all 0.3s' }"
+      />
+      <view class="pt-4" v-show="currentSteps === 1">
+        <textarea
+          placeholder="写下你的感受吧！"
+          v-model="shareStore.feelingText"
+          class="bg-gray-100 w-full shadow-sm p-4"
+          maxlength="500"
         />
-        <view class="pt-4" v-show="currentSteps === 1">
-          <textarea
-            placeholder="写下你的感受吧！"
-            v-model="shareStore.feelingText"
-            class="bg-gray-100 w-full shadow-sm p-4"
-            maxlength="500"
-          />
-        </view>
+      </view>
+      <view class="w-full" id="containerRef">
         <share-result
-          v-show="currentSteps === 2"
           :width="containerRefWidth"
           ref="resultRef"
+          v-if="currentSteps === 2"
         />
       </view>
     </view>
@@ -40,7 +40,7 @@
         @tap="nextStep"
       >
         <text class="font-medium text-base">
-          {{ currentSteps === items.length - 1 ? "生成" : "下一步" }}
+          {{ btnTitle }}
         </text>
       </button>
     </view>
@@ -48,13 +48,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance } from "vue";
+import { ref, getCurrentInstance, computed } from "vue";
 import UploadImg from "@/pages_sub/default/components/UploadImg.vue";
 import ShareResult from "@/pages_sub/default/components/ShareResult.vue";
-import { useShareStore } from "@/stores";
+import { useShareStore, useUserStore } from "@/stores";
 import NodeInfo = UniNamespace.NodeInfo;
 import { onReady } from "@dcloudio/uni-app";
+import { reqGetCard } from "@/api/modules/cardAPI";
+import {
+  convertBufferResultToArrayBuffer,
+  GetTime,
+  saveTempImage,
+} from "@/utils";
 
+const btnTitle = computed(() => {
+  if (currentSteps.value === shareStore.items.length - 1) return "保存大图";
+  else if (currentSteps.value === shareStore.items.length - 2) return "生成";
+  else return "下一步";
+});
+const userStore = useUserStore();
 const containerRefWidth = ref(0);
 const instance = getCurrentInstance();
 const resultRef = ref<InstanceType<typeof ShareResult>>();
@@ -66,45 +78,60 @@ onReady(() => {
     query
       .select("#containerRef")
       .boundingClientRect((rect) => {
-        if ((rect as NodeInfo).width) {
-          console.log("获取到容器宽度:", (rect as NodeInfo).width);
+        if ((rect as NodeInfo).width)
           containerRefWidth.value = (rect as NodeInfo).width!;
-        } else {
-          handleManualCalculation();
-        }
+        else handleManualCalculation();
       })
       .exec();
-  }, 1500);
+  }, 500);
   const handleManualCalculation = () => {
-    console.log("手动计算宽度前:", containerRefWidth.value);
     const margin = 32 * 2;
     containerRefWidth.value = screenWidth - margin;
-    console.log("手动计算宽度后:", containerRefWidth.value);
   };
 });
 const shareStore = useShareStore();
 const currentSteps = ref(0);
-const items = ref([
-  {
-    title: "步骤一",
-    description: "上传图片",
-  },
-  {
-    title: "步骤二",
-    description: "写下感受",
-  },
-  {
-    title: "步骤三",
-    description: "生成游记",
-  },
-]);
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
-const nextStep = () => {
-  if (currentSteps.value === items.value.length - 1) {
-    console.log("生成游记");
-    resultRef.value!.generateCard();
+const nextStep = async () => {
+  if (currentSteps.value === shareStore.items.length - 1) {
+    resultRef.value!.saveImg();
+  } else if (currentSteps.value === shareStore.items.length - 2) {
+    if (shareStore.feelingText === "") {
+      await uni.showToast({
+        title: "请输入文字！",
+        icon: "none",
+      });
+      return;
+    }
+    currentSteps.value++;
+    const res = await reqGetCard({
+      temp: "tempB",
+      color: "dark-color-2",
+      icon: "https://img0.baidu.com/it/u=2752111444,4073693972&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1719507600&t=884a9a2b95e90dc7f959911fe3dc7613",
+      title: "hi你好",
+      date: "GetTime()",
+      content: shareStore.feelingText,
+      author: "八奈见杏菜",
+      textcount: "字数",
+      qrcodetitle: "随身小D",
+      qrcodetext: "扫描二维码",
+      qrcode: "https://shiina-mahiru.cn/",
+      watermark: "随身小D",
+      switchConfig: {
+        showIcon: "true",
+        showForeword: "false",
+      },
+    });
+    const filePath = await saveTempImage(
+      convertBufferResultToArrayBuffer(res.result)
+    );
+    const { width, height } = await uni.getImageInfo({
+      src: filePath,
+    });
+    resultRef.value!.setDisplaySize(width, height);
+    await resultRef.value!.generateCard(filePath, false);
   }
-  if (items.value.length - 1 !== currentSteps.value) currentSteps.value++;
+  if (shareStore.items.length - 1 !== currentSteps.value) currentSteps.value++;
 };
 const lastStep = () => {
   currentSteps.value--;

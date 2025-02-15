@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { Message } from "@/types/chat";
 import { ref } from "vue";
-import { ws, wsURL } from "@/api";
+import { wsURL } from "@/api";
+import { ws } from "@/utils";
 import pinia, { useUserStore } from "@/stores";
 import { GetTime } from "@/utils";
 import { useAudioStop } from "@/hooks/useAudio";

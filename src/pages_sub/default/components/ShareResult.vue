@@ -1,12 +1,16 @@
 <template>
-  <view class="w-full">
-    <button @tap="generateCard">生成卡片</button>
+  <view class="w-full overflow-hidden">
+    <view class="flex justify-center w-full" v-show="isLoading">
+      <ant-loading type="mini" />
+    </view>
     <canvas
-      class="m-auto"
+      @tap="checkImg"
       canvas-id="myCanvas"
       :style="{
         width: displayWidth + 'px',
         height: displayHeight + 'px',
+        transform: 'scale(' + canvasSize + ')',
+        transformOrigin: 'left top',
       }"
     />
   </view>
@@ -23,6 +27,9 @@ export default {
       displayHeight: 966,
       scaleRatio: 1,
       generateImg: "",
+      isLoading: true,
+      isSmall: true,
+      canvasSize: 1,
     };
   },
   props: {
@@ -32,8 +39,10 @@ export default {
     },
   },
   methods: {
-    generateCard() {
-      this.createCanvas();
+    async generateCard(path, isSmall) {
+      this.isLoading = true;
+      await this.createCanvas(path, isSmall);
+      this.isLoading = false;
       uni.canvasToTempFilePath(
         {
           canvasId: "myCanvas",
@@ -44,18 +53,23 @@ export default {
         this
       );
     },
-    async createCanvas() {
+    async createCanvas(path, isSmall) {
       if (!shareStore.coverSrc[0]) {
-        uni.showToast({
+        await uni.showToast({
           title: "请先上传封面",
           icon: "none",
         });
         return;
       }
       const ctx = uni.createCanvasContext("myCanvas", this);
-      this.scaleRatio = this.width / this.displayWidth;
-      this.displayWidth = this.displayWidth * this.scaleRatio;
-      this.displayHeight = this.displayHeight * this.scaleRatio;
+      if (isSmall) {
+        this.scaleRatio = this.width / this.displayWidth;
+        this.canvasSize = 1;
+      } else {
+        this.scaleRatio = this.width / this.displayWidth;
+        this.canvasSize = this.scaleRatio;
+      }
+
       const loadImageInfo = (src) => {
         return new Promise((resolve, reject) => {
           uni.getImageInfo({
@@ -68,6 +82,10 @@ export default {
       const { width: imgWidth, height: imgHeight } = await loadImageInfo(
         shareStore.coverSrc[0]
       );
+      if (isSmall) {
+        this.displayWidth = this.displayWidth * this.scaleRatio;
+        this.displayHeight = this.displayHeight * this.scaleRatio;
+      }
       const widthRatio = this.displayWidth / imgWidth;
       const heightRatio = this.displayHeight / imgHeight;
       const scale = Math.max(widthRatio, heightRatio);
@@ -77,27 +95,57 @@ export default {
       const offsetY = (this.displayHeight - drawHeight) / 2;
       ctx.drawImage(
         shareStore.coverSrc[0],
-        0,
-        0,
-        drawWidth,
-        drawHeight,
         offsetX,
-        offsetY
+        offsetY,
+        drawWidth,
+        drawHeight
       );
       ctx.setGlobalAlpha(0.75);
-      ctx.drawImage(
-        "/static/img.png",
-        0,
-        0,
-        this.displayWidth,
-        this.displayHeight
-      );
+      ctx.drawImage(path, 0, 0, this.displayWidth, this.displayHeight);
       ctx.setGlobalAlpha(1);
-      ctx.scale(this.scaleRatio);
+      if (isSmall) ctx.scale(this.scaleRatio);
       ctx.draw();
     },
+    checkImg() {
+      if (!this.isLoading) {
+        uni.previewImage({
+          urls: [this.generateImg],
+          current: 0,
+        });
+      }
+    },
+    setDisplaySize(displayWidth, displayHeight) {
+      this.displayHeight = displayHeight;
+      this.displayWidth = displayWidth;
+    },
+    saveImg() {
+      if (!this.generateImg) {
+        uni.showToast({
+          title: "加载中",
+          icon: "none",
+        });
+        return;
+      }
+      uni.saveImageToPhotosAlbum({
+        filePath: this.generateImg,
+        success: () => {
+          uni.showToast({
+            title: "保存成功",
+            icon: "success",
+            duration: 2000,
+          });
+        },
+        fail: () => {
+          uni.showToast({
+            title: "保存失败",
+            icon: "none",
+            duration: 2000,
+          });
+        },
+      });
+    },
   },
-  expose: ["generateCard"],
+  expose: ["generateCard", "setDisplaySize", "saveImg"],
 };
 </script>
 <style></style>

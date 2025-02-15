@@ -1,15 +1,14 @@
 <template>
-  <view
-    class="w-full h-full grid grid-cols-2 grid-rows-3 items-center justify-items-center"
-  >
+  <view class="w-full h-full flex justify-center items-center">
     <view
       v-for="(src, index) in shareStore.coverSrc"
       class="relative bg-gray-100 flex justify-center items-center overflow-visible rounded-lg"
       :key="index"
     >
+      <!--      :style="{ width: '35vw', height: '18vh' }"-->
       <image
         :src="src"
-        :style="{ width: '35vw', height: '18vh' }"
+        :style="{ width: '75vw', height: '50vh' }"
         mode="aspectFill"
       >
         <view
@@ -21,7 +20,7 @@
       </image>
     </view>
     <button
-      v-show="shareStore.coverSrc.length <= 5"
+      v-show="shareStore.coverSrc.length < 1"
       @tap="uploadImg"
       :style="{ width: '35vw', height: '18vh' }"
       class="clear-btn bg-gray-100 flex justify-center items-center relative overflow-visible rounded-lg"
