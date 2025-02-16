@@ -11,15 +11,15 @@
         height: displayHeight + 'px',
       }"
     />
-  </view>
-  <view style="position: fixed; top: 999999px; overflow: hidden">
-    <canvas
-      canvas-id="drawTemp"
-      :style="{
-        width: drawWidth + 'px',
-        height: drawHeight + 'px',
-      }"
-    />
+    <view style="position: fixed; top: 999999px; overflow: hidden">
+      <canvas
+        canvas-id="drawTemp"
+        :style="{
+          width: drawWidth + 'px',
+          height: drawHeight + 'px',
+        }"
+      />
+    </view>
   </view>
 </template>
 
@@ -47,7 +47,7 @@ export default {
     },
   },
   methods: {
-    async generateCard(path, isSmall) {
+    async generateCard(path) {
       if (!shareStore.coverSrc[0]) {
         await uni.showToast({
           title: "请先上传封面",
@@ -56,25 +56,52 @@ export default {
         return;
       }
       this.isLoading = true;
-      await this.createCanvas(path, isSmall);
+      await this.createCanvas(path, false, "myCanvas");
       this.isLoading = false;
-      await this.drawCanvas(path);
+      this.createCanvas(path, true, "drawTemp").then(() =>
+        uni.canvasToTempFilePath(
+          {
+            canvasId: "drawTemp",
+            success: (res) => (this.generateImg = res.tempFilePath),
+          },
+          this
+        )
+      );
     },
-    async createCanvas(path) {
-      const ctx = uni.createCanvasContext("myCanvas", this);
-      this.scaleRatio = this.width / this.displayWidth;
-      this.displayWidth = this.displayWidth * this.scaleRatio;
-      this.displayHeight = this.displayHeight * this.scaleRatio;
+    async createCanvas(path, isDraw, canvasId) {
+      const ctx = uni.createCanvasContext(canvasId, this);
+      if (!isDraw) {
+        this.scaleRatio = this.width / this.displayWidth;
+        this.displayWidth = this.displayWidth * this.scaleRatio;
+        this.displayHeight = this.displayHeight * this.scaleRatio;
+      }
       const { width: imgWidth, height: imgHeight } = await this.loadImageInfo(
         shareStore.coverSrc[0]
       );
-      const widthRatio = this.displayWidth / imgWidth;
-      const heightRatio = this.displayHeight / imgHeight;
-      const scale = Math.max(widthRatio, heightRatio);
-      const drawWidth = imgWidth * scale;
-      const drawHeight = imgHeight * scale;
-      const offsetX = (this.displayWidth - drawWidth) / 2;
-      const offsetY = (this.displayHeight - drawHeight) / 2;
+      let widthRatio;
+      let heightRatio;
+      let scale;
+      let drawWidth;
+      let drawHeight;
+      let offsetX;
+      let offsetY;
+      if (!isDraw) {
+        widthRatio = this.displayWidth / imgWidth;
+        heightRatio = this.displayHeight / imgHeight;
+        scale = Math.max(widthRatio, heightRatio);
+        drawWidth = imgWidth * scale;
+        drawHeight = imgHeight * scale;
+        offsetX = (this.displayWidth - drawWidth) / 2;
+        offsetY = (this.displayHeight - drawHeight) / 2;
+      } else {
+        widthRatio = this.drawWidth / imgWidth;
+        heightRatio = this.drawHeight / imgHeight;
+        scale = Math.max(widthRatio, heightRatio);
+        drawWidth = imgWidth * scale;
+        drawHeight = imgHeight * scale;
+        offsetX = (this.drawWidth - drawWidth) / 2;
+        offsetY = (this.drawHeight - drawHeight) / 2;
+      }
       ctx.drawImage(
         shareStore.coverSrc[0],
         offsetX,
@@ -83,7 +110,9 @@ export default {
         drawHeight
       );
       ctx.setGlobalAlpha(0.75);
-      ctx.drawImage(path, 0, 0, this.displayWidth, this.displayHeight);
+      if (!isDraw)
+        ctx.drawImage(path, 0, 0, this.displayWidth, this.displayHeight);
+      else ctx.drawImage(path, 0, 0, this.drawWidth, this.drawHeight);
       ctx.setGlobalAlpha(1);
       ctx.draw();
     },
@@ -96,29 +125,11 @@ export default {
         });
       });
     },
-    async drawCanvas(path) {
-      const ctx = uni.createCanvasContext("drawTemp", this);
-      const { width: imgWidth, height: imgHeight } = await this.loadImageInfo(
-        shareStore.coverSrc[0]
-      );
-      const widthRatio = this.drawWidth / imgWidth;
-      const heightRatio = this.drawHeight / imgHeight;
-      const scale = Math.max(widthRatio, heightRatio);
-      const drawWidth = imgWidth * scale;
-      const drawHeight = imgHeight * scale;
-      const offsetX = (this.drawWidth - drawWidth) / 2;
-      const offsetY = (this.displayHeight - drawHeight) / 2;
-      ctx.drawImage(
-        shareStore.coverSrc[0],
-        offsetX,
-        offsetY,
-        drawWidth,
-        drawHeight
-      );
-      ctx.setGlobalAlpha(0.75);
-      ctx.drawImage(path, 0, 0, this.drawWidth, this.drawHeight);
-      ctx.setGlobalAlpha(1);
-      ctx.draw();
+    setDisplaySize(displayWidth, displayHeight) {
+      this.displayHeight = displayHeight;
+      this.displayWidth = displayWidth;
+      this.drawHeight = displayHeight;
+      this.drawWidth = displayWidth;
     },
     checkImg() {
       if (this.generateImg)
@@ -148,12 +159,6 @@ export default {
           this
         );
       }
-    },
-    setDisplaySize(displayWidth, displayHeight) {
-      this.displayHeight = displayHeight;
-      this.displayWidth = displayWidth;
-      this.drawHeight = displayHeight;
-      this.drawWidth = displayWidth;
     },
     saveImg() {
       if (this.generateImg)

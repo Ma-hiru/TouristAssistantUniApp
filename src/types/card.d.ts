@@ -95,7 +95,7 @@ export type CardParams = {
   /** 颜色 */
   color?: color;
   /** unknown */
-  textcount: string;
+  textcount?: string;
   /** 图标 */
   icon?: string;
   /** 卡片  title */

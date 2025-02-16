@@ -110,12 +110,10 @@ const nextStep = async () => {
     const res = await reqGetCard({
       temp: "tempB",
       color: "dark-color-2",
-      icon: "https://img0.baidu.com/it/u=2752111444,4073693972&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1719507600&t=884a9a2b95e90dc7f959911fe3dc7613",
       title: "你好",
       date: GetTime(),
       content: shareStore.feelingText,
-      author: "八奈见杏菜",
-      textcount: "字数",
+      author: "@八奈见杏菜",
       qrcodetitle: "随身小D",
       qrcodetext: "扫描二维码",
       qrcode: "https://shiina-mahiru.cn/",
@@ -132,7 +130,7 @@ const nextStep = async () => {
       src: filePath,
     });
     resultRef.value!.setDisplaySize(width, height);
-    await resultRef.value!.generateCard(filePath, true);
+    await resultRef.value!.generateCard(filePath);
   }
   if (shareStore.items.length - 1 !== currentSteps.value) currentSteps.value++;
 };
