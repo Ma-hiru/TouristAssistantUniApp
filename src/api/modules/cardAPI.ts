@@ -5,5 +5,6 @@ export const reqGetCard = (data: CardParams) =>
   http<CardResponseData>({
     url: cardURL,
     method: "POST",
+    sslVerify: false,
     data,
   });

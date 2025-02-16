@@ -34,6 +34,12 @@ export const http = <T>(
   new Promise((resolve, reject) => {
     uni.request({
       ...options,
+      sslVerify: false,
+      timeout: 30000,
+      header: {
+        "content-type": "application/json; charset=utf-8",
+        "source-client": "miniapp",
+      },
       success(res) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data as ResponseData<T>);
