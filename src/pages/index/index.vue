@@ -28,6 +28,12 @@
     <view class="z-20 mb-44 mr-4">
       <button
         class="w-12 h-12 bg-white flex justify-center items-center rounded-sm mb-4"
+        @tap="mapStore.reset"
+      >
+        <image src="/static/map/reset.svg" style="height: 2rem; width: 2rem" />
+      </button>
+      <button
+        class="w-12 h-12 bg-white flex justify-center items-center rounded-sm mb-4"
         @tap="mapStore.getLocation"
       >
         <image

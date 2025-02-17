@@ -1,10 +1,10 @@
 <template>
   <view>
     <view
-      class="flex justify-center items-center h-56 w-64 m-auto"
+      class="flex justify-center items-center w-full min-h-64"
       @tap="divAppearance"
     >
-      形象待定......
+      <ChatAppearance />
     </view>
     <view class="p-4">
       <ant-welcome
@@ -28,7 +28,7 @@ import {
   AntdMiniPromptsCustomEventType,
   AntdMiniPromptsItem,
 } from "@/types/chat";
-
+import ChatAppearance from "@/components/ChatAppearance/ChatAppearance.vue";
 const props = defineProps<{
   onSend: (text: string) => void;
 }>();

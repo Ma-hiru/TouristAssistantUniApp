@@ -6,6 +6,7 @@ import { ws } from "@/utils";
 import pinia, { useUserStore } from "@/stores";
 import { GetTime } from "@/utils";
 import { useAudioStop } from "@/hooks/useAudio";
+import { appearanceList as List, defaultAppearance } from "@/settings";
 
 const userStore = useUserStore(pinia);
 export const useChatStore = defineStore("chatStore", () => {
@@ -15,6 +16,8 @@ export const useChatStore = defineStore("chatStore", () => {
   const isStop = ref(false);
   const wsInstance = ref<ws<Message>>();
   const isMute = ref(false);
+  const appearanceList = ref(List);
+  const appearanceIndex = ref(defaultAppearance);
 
   //TODO 持久化
   function init() {
@@ -120,16 +123,23 @@ export const useChatStore = defineStore("chatStore", () => {
     }
   }
 
+  function changeAppearance() {
+    appearanceIndex.value =
+      ++appearanceIndex.value % appearanceList.value.length;
+  }
   return {
     sendText,
     isMute,
     getChatList,
     // typingWhere,
     isTyping,
+    appearanceIndex,
     chatList,
     // typeComplete,
     isStop,
+    appearanceList,
     stopChat,
     newChat,
+    changeAppearance,
   };
 });

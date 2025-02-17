@@ -8,9 +8,10 @@
         hover-class="btn-hover"
         @tap="login"
       >
+        <uni-icons type="weixin" size="2rem" color="#fff" class="mr-1" />
         <text class="font-medium text-base">微信一键登录</text>
       </button>
-      <wd-divider> 其他登录方式</wd-divider>
+      <ant-divider text="其他登录方式" lineColor="#333" />
       <view class="w-full flex flex-col justify-center items-center">
         <button
           class="border border-solid border-black w-10 h-10 rounded-full flex items-center justify-center"

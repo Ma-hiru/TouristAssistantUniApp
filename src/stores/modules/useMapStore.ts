@@ -60,6 +60,7 @@ export const useMapStore = defineStore("mapStore", () => {
     },
   ]);
   const currentMarker = ref<Position>();
+
   async function getLocation() {
     try {
       const res = await uni.getLocation({
@@ -112,11 +113,37 @@ export const useMapStore = defineStore("mapStore", () => {
 
   function getPoint() {}
 
+  function reset() {
+    if (polyline.value.length === 0) {
+      uni
+        .showToast({
+          title: "暂无路线数据",
+          icon: "none",
+        })
+        .then();
+    } else {
+      uni.showModal({
+        title: "是否重置路线？",
+        success: (res) => {
+          res.confirm &&
+            (polyline.value = []) &&
+            uni
+              .showToast({
+                title: "重置路线成功",
+                icon: "none",
+              })
+              .then();
+        },
+      });
+    }
+  }
+
   return {
     scale,
     markers,
     polyline,
     position,
+    reset,
     getLocation,
     getMarkers,
     pointList,
