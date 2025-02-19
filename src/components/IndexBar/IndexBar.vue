@@ -38,24 +38,26 @@
           }"
         >
           <text v-show="!searchText">搜索并浏览地点吧！</text>
-          <uni-list v-show="searchText" style="width: calc(100%)">
-            <uni-list-chat
-              v-for="(point, index) in pointList"
-              :key="point.id"
-              :clickable="true"
-              :title="point.title"
-              link
-              @click="handleTapList(point.id, index)"
-              :avatar="point.detail.cover"
-              :note="point.detail.content"
-              badge-positon="left"
-            >
-              <view class="chat-custom-right">
-                <text class="chat-custom-text">打卡点</text>
-                <uni-icons type="star-filled" color="#999" size="18" />
-              </view>
-            </uni-list-chat>
-          </uni-list>
+          <view class="w-full overflow-y-scroll">
+            <uni-list v-show="searchText" style="width: calc(100%)">
+              <uni-list-chat
+                v-for="(point, index) in pointList"
+                :key="point.id"
+                :clickable="true"
+                :title="point.title"
+                link
+                @click="handleTapList(point.id, index)"
+                :avatar="point.detail.cover"
+                :note="point.detail.content"
+                badge-positon="left"
+              >
+                <view class="chat-custom-right">
+                  <text class="chat-custom-text">打卡点</text>
+                  <uni-icons type="star-filled" color="#999" size="18" />
+                </view>
+              </uni-list-chat>
+            </uni-list>
+          </view>
         </view>
         <view class="h-24" />
       </view>
@@ -66,22 +68,19 @@
       <button class="clear-btn">
         <image
           src="/static/map/positions.svg"
-          style="height: 2rem; width: 2rem"
+          style="height: 1.8rem; width: 1.8rem"
         />
       </button>
-      <text class="mt-2">地点总览</text>
+      <text class="mt-2 text-sm">地点总览</text>
     </view>
     <view class="flex items-center flex-col" @tap="goToRoute('chat')">
       <button class="clear-btn">
-        <image src="/static/map/flag.svg" style="height: 2rem; width: 2rem" />
+        <image
+          src="/static/map/flag.svg"
+          style="height: 1.8rem; width: 1.8rem"
+        />
       </button>
-      <text class="mt-2">AI规划路线</text>
-    </view>
-    <view class="flex items-center flex-col" @tap="goToRoute('share')">
-      <button class="clear-btn">
-        <image src="/static/map/share.svg" style="height: 2rem; width: 2rem" />
-      </button>
-      <text class="mt-2">路线分享</text>
+      <text class="mt-2 text-sm">AI规划路线</text>
     </view>
   </view>
 </template>

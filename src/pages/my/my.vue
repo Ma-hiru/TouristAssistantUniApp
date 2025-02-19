@@ -77,7 +77,7 @@ const username = computed(() => {
   return userStore.userProfile.nickname || "点击登录";
 });
 const userInfo = () => {
-  uni.navigateTo({ url: "/pages_sub/default/userInfo/userInfo" });
+  uni.navigateTo({ url: "/pages_sub/default/pages/userInfo/userInfo" });
 };
 const handleStar = () => {
   uni.navigateTo({

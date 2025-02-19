@@ -22,6 +22,7 @@ import { useWeatherData } from "@/hooks";
 import { onMounted } from "vue";
 import { ref } from "vue";
 import { CityType, WeatherType } from "@/types/weather";
+import { useCheckStore } from "@/stores";
 
 const city = ref<CityType>();
 const weather = ref<WeatherType>();
@@ -29,6 +30,7 @@ const cityName = ref<string>("");
 const weatherData = ref<string>("");
 const temp = ref<string>("");
 const icon = ref<string>("");
+const checkStore = useCheckStore();
 onMounted(async () => {
   const res = await useWeatherData();
   city.value = res.city;
@@ -36,6 +38,11 @@ onMounted(async () => {
   cityName.value = res.cityName;
   weatherData.value = res.weatherData;
   temp.value = res.temp;
+  try {
+    checkStore.temp = Number(res.temp);
+  } catch {
+    checkStore.temp = 0;
+  }
   icon.value = res.icon;
   console.log(res);
 });

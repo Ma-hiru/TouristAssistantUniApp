@@ -1,6 +1,6 @@
 <template>
-  <view class="w-full overflow-hidden">
-    <view class="flex justify-center w-full" v-show="isLoading">
+  <view class="overflow-hidden flex justify-center items-center h-full w-full">
+    <view v-show="isLoading" class="inline-block">
       <ant-loading type="mini" />
     </view>
     <canvas
@@ -24,9 +24,10 @@
 </template>
 
 <script>
-import { useShareStore } from "@/stores";
+import { useCheckStore } from "@/stores";
+import { GetTime } from "@/utils";
 
-const shareStore = useShareStore();
+const checkStore = useCheckStore();
 export default {
   data() {
     return {
@@ -48,13 +49,6 @@ export default {
   },
   methods: {
     async generateCard(path) {
-      if (!shareStore.coverSrc[0]) {
-        await uni.showToast({
-          title: "请先上传封面",
-          icon: "none",
-        });
-        return;
-      }
       this.isLoading = true;
       await this.createCanvas(path, false, "myCanvas");
       this.isLoading = false;
@@ -62,7 +56,13 @@ export default {
         uni.canvasToTempFilePath(
           {
             canvasId: "drawTemp",
-            success: (res) => (this.generateImg = res.tempFilePath),
+            success: (res) => {
+              this.generateImg = res.tempFilePath;
+              checkStore.history.push({
+                path: this.generateImg,
+                time: GetTime(),
+              });
+            },
           },
           this
         )
@@ -76,7 +76,7 @@ export default {
         this.displayHeight = this.displayHeight * this.scaleRatio;
       }
       const { width: imgWidth, height: imgHeight } = await this.loadImageInfo(
-        shareStore.coverSrc[0]
+        checkStore.coverSrc[0]
       );
       let widthRatio;
       let heightRatio;
@@ -103,7 +103,7 @@ export default {
         offsetY = (this.drawHeight - drawHeight) / 2;
       }
       ctx.drawImage(
-        shareStore.coverSrc[0],
+        checkStore.coverSrc[0],
         offsetX,
         offsetY,
         drawWidth,
@@ -149,6 +149,10 @@ export default {
             success: (res) => {
               if (!this.isLoading) {
                 this.generateImg = res.tempFilePath;
+                checkStore.history.push({
+                  path: this.generateImg,
+                  time: GetTime(),
+                });
                 uni.previewImage({
                   urls: [res.tempFilePath],
                   current: 0,
@@ -190,6 +194,10 @@ export default {
             canvasId: "drawTemp",
             success: (res) => {
               this.generateImg = res.tempFilePath;
+              checkStore.history.push({
+                path: this.generateImg,
+                time: GetTime(),
+              });
               uni.saveImageToPhotosAlbum({
                 filePath: res.tempFilePath,
                 success: () => {

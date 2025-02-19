@@ -55,7 +55,8 @@
       "style": {
         "navigationBarTitleText": "打卡",
         "enablePullDownRefresh": false,
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     }
   ],
@@ -74,13 +75,6 @@
           "path": "pages/route/route",
           "style": {
             "navigationBarTitleText": "路线规划",
-            "enablePullDownRefresh": false
-          }
-        },
-        {
-          "path": "pages/share/share",
-          "style": {
-            "navigationBarTitleText": "路线分享",
             "enablePullDownRefresh": false
           }
         },
@@ -117,7 +111,7 @@
           }
         },
         {
-          "path": "userInfo/userInfo",
+          "path": "pages/userInfo/userInfo",
           "style": {
             "navigationBarTitleText": "个人信息",
             "enablePullDownRefresh": false
@@ -127,6 +121,13 @@
           "path": "pages/appearance/appearance",
           "style": {
             "navigationBarTitleText": "形象定制",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/checkHistory/checkHistory",
+          "style": {
+            "navigationBarTitleText": "打卡历史",
             "enablePullDownRefresh": false
           }
         }

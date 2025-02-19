@@ -58,6 +58,204 @@ export const useMapStore = defineStore("mapStore", () => {
         price: "164元/天",
       },
     },
+    {
+      id: 2,
+      title: "武当山1",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 3,
+      title: "武当山2",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 4,
+      title: "武当山3",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 5,
+      title: "武当山4",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 6,
+      title: "武当山5",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 7,
+      title: "武当山6",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 8,
+      title: "武当山7",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 9,
+      title: "武当山8",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 10,
+      title: "武当山9",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 11,
+      title: "武当山10",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
+    {
+      id: 12,
+      title: "武当山11",
+      position: {
+        latitude: 116.4,
+        longitude: 39.9,
+      },
+      iconPath: "",
+      detail: {
+        content:
+          "中国道教圣地，又名太和山、谢罗山、参上山、仙室山，古有“太岳”、“玄岳”、“大岳”之称。2010至2013年，武当山分别被评为国家AAAAA级旅游风景区、国家森林公园、中国十大避暑名山、海峡两岸交流基地，入选最美 “国家地质公园”。",
+        position: "湖北省十堰市丹江口市武当山特区永乐路14号‌",
+        cover: "https://shiina-mahiru.cn/download/wudangshan.jpg",
+        tel: "123456789",
+        time: "08：00—17：00",
+        price: "164元/天",
+      },
+    },
   ]);
   const currentMarker = ref<Position>();
 
