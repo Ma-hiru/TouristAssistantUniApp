@@ -130,6 +130,13 @@
             "navigationBarTitleText": "打卡历史",
             "enablePullDownRefresh": false
           }
+        },
+        {
+          "path": "pages/yiyan/yiyan",
+          "style": {
+            "navigationBarTitleText": "一言",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     }

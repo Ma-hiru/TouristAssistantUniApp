@@ -77,7 +77,7 @@ async function loginSuccess() {
 
 <style scoped lang="scss">
 .wallpaper {
-  background-image: url("https://shiina-mahiru.cn/download/login_bg.png");
+  background-image: $login-bg-url;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

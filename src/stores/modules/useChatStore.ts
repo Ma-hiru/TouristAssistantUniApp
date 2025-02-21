@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { Message } from "@/types/chat";
 import { ref } from "vue";
-import { wsURL } from "@/api";
+import { wsURL } from "@/settings";
 import { ws } from "@/utils";
 import pinia, { useUserStore } from "@/stores";
 import { GetTime } from "@/utils";
@@ -12,7 +12,6 @@ const userStore = useUserStore(pinia);
 export const useChatStore = defineStore("chatStore", () => {
   const chatList = ref<Message[]>([]);
   const isTyping = ref(false);
-  // const typingWhere = ref(0);
   const isStop = ref(false);
   const wsInstance = ref<ws<Message>>();
   const isMute = ref(false);
@@ -63,8 +62,13 @@ export const useChatStore = defineStore("chatStore", () => {
     chatList.value = [];
   }
 
-  function getChatList() {}
+  function wsClose() {
+    wsInstance.value?.close({
+      reason: "User Logout.",
+    });
+  }
 
+  //TODO StopChat
   function stopChat() {
     // sendText({
     //   id: 114,
@@ -127,18 +131,17 @@ export const useChatStore = defineStore("chatStore", () => {
     appearanceIndex.value =
       ++appearanceIndex.value % appearanceList.value.length;
   }
+
   return {
     sendText,
     isMute,
-    getChatList,
-    // typingWhere,
     isTyping,
     appearanceIndex,
     chatList,
-    // typeComplete,
     isStop,
     appearanceList,
     stopChat,
+    wsClose,
     newChat,
     changeAppearance,
   };

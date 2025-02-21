@@ -1,11 +1,8 @@
 import { http } from "@/utils";
 import { PostCategoryList, PostList } from "@/types/guide";
+import { API } from "@/settings";
 
-enum API {
-  CATEGORY = "/wechat/category",
-  POST_LIST = "/wechat/postList",
-}
 export const reqPostCategoryList = () =>
-  http<PostCategoryList>({ url: API.CATEGORY, method: "GET" });
+  http<PostCategoryList>({ url: API.GUIDE_CATEGORY, method: "GET" });
 export const reqPostList = () =>
-  http<PostList>({ url: API.POST_LIST, method: "GET" });
+  http<PostList>({ url: API.GUIDE_POST_LIST, method: "GET" });

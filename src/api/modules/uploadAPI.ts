@@ -1,7 +1,10 @@
-import UploadFileOption = UniNamespace.UploadFileOption;
-import { reqURL } from "@/api";
+import { UploadAvatarInfo } from "@/types/upload";
+import { ReqRegisterResponseData, type ResponseData } from "@/types/api";
+import { upload } from "@/utils";
+import { API } from "@/settings";
 
-export const uploadAPI = (options: UploadFileOption) => {
-  options.url = reqURL + options.url;
-  return uni.uploadFile(options);
-};
+export const reqUploadAvatar = async (options: UploadAvatarInfo) =>
+  upload<ReqRegisterResponseData>({
+    url: API.UPLOAD_AVATAR,
+    ...options,
+  });

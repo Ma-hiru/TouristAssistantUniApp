@@ -20,6 +20,11 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/variable.scss";`,
+        },
+      },
       postcss: {
         plugins: [tailwindcss(), autoprefixer()],
       },

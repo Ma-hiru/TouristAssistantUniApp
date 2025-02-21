@@ -66,10 +66,11 @@
 <script setup lang="ts" name="my">
 import { computed } from "vue";
 import { useUserStore } from "@/stores";
+import { useChatStore } from "@/stores/modules/useChatStore";
 
 const { safeAreaInsets } = uni.getSystemInfoSync();
 const userStore = useUserStore();
-
+const chatStore = useChatStore();
 const avatarSrc = computed(() => {
   return userStore.userProfile.avatar || "/static/user/avatar_default.jpg";
 });
@@ -96,6 +97,7 @@ const logout = () => {
     avatar: "",
     token: "",
   };
+  chatStore.wsClose();
   uni.navigateTo({ url: "/pages/login/login" });
 };
 </script>
@@ -109,6 +111,6 @@ const logout = () => {
 }
 
 .user-card {
-  background-image: url("https://shiina-mahiru.cn/download/user_bg.png");
+  background-image: $my-bg-url;
 }
 </style>

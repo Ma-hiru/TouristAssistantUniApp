@@ -1,23 +1,19 @@
 import { useUserStore } from "@/stores";
-import { reqURL } from "@/api";
+import { reqURL } from "@/settings";
 import type { ResponseData } from "@/types/api";
 
 const userStore = useUserStore();
-const httpInterceptor = {
+const httpInterceptor: UniApp.InterceptorOptions = {
   //拦截前触发
   invoke(options: UniApp.RequestOptions) {
-    if (!options.url.startsWith("http")) {
-      options.url = reqURL + options.url;
-    }
-    options.timeout = 10000;
+    !options.url.startsWith("http") && (options.url = reqURL + options.url);
+    options.timeout = 15000;
     options.header = {
       "source-client": "miniapp",
       ...options.header,
     };
     const token = userStore.userProfile.token;
-    if (token) {
-      options.header["Authorization"] = token;
-    }
+    token && (options.header["Authorization"] = token);
   },
 };
 uni.addInterceptor("request", httpInterceptor);
@@ -35,11 +31,6 @@ export const http = <T>(
     uni.request({
       ...options,
       sslVerify: false,
-      timeout: 30000,
-      header: {
-        "content-type": "application/json; charset=utf-8",
-        "source-client": "miniapp",
-      },
       success(res) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data as ResponseData<T>);
@@ -57,13 +48,39 @@ export const http = <T>(
           uni
             .showToast({
               icon: "none",
-              title: (res.data as ResponseData<T>)?.msg ?? "请求错误",
+              title: (res.data as ResponseData<T>)?.msg || "请求错误",
             })
             .then();
           reject(res);
         }
       },
       fail(err) {
+        uni.showToast({ icon: "none", title: "网络错误，换个网络试试" }).then();
+        reject(err);
+      },
+    });
+  });
+export const upload = <T>(
+  options: UniApp.UploadFileOption
+): Promise<ResponseData<T>> =>
+  new Promise((resolve, reject) => {
+    uni.uploadFile({
+      ...options,
+      success: (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(JSON.parse(res.data) as ResponseData<T>);
+        } else {
+          uni
+            .showToast({
+              icon: "none",
+              title:
+                (JSON.parse(res.data) as ResponseData<T>)?.msg || "请求错误",
+            })
+            .then();
+          reject(res);
+        }
+      },
+      fail: (err) => {
         uni.showToast({ icon: "none", title: "网络错误，换个网络试试" }).then();
         reject(err);
       },

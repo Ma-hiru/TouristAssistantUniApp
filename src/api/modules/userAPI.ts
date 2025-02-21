@@ -1,4 +1,3 @@
-import pinia, { useUserStore } from "../../stores";
 import { http } from "@/utils";
 import {
   LoginInfo,
@@ -6,21 +5,16 @@ import {
   ReqLoginResponseData,
   ReqRegisterResponseData,
 } from "@/types/api";
+import { API } from "@/settings";
 
-const userStore = useUserStore(pinia);
-
-enum API {
-  LOGIN = "/wechat/login",
-  REGISTER = "/wechat/register",
-}
 export const reqLogin = (data: LoginInfo) =>
   http<ReqLoginResponseData>({
-    url: `${API.LOGIN}?code=${data.code}`,
+    url: `${API.USER_LOGIN}?code=${data.code}`,
     method: "GET",
   });
 export const reqRegister = (data: RegisterInfo) =>
   http<ReqRegisterResponseData>({
-    url: API.REGISTER,
+    url: API.USER_REGISTER,
     method: "POST",
     data,
   });

@@ -53,8 +53,7 @@ import {
   ResponseData,
 } from "@/types/api";
 import { useUserStore } from "@/stores";
-import { uploadAPI } from "@/api/modules/uploadAPI";
-import { uploadAvatarURL } from "@/api";
+import { reqUploadAvatar } from "@/api/modules/uploadAPI";
 
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const userStore = useUserStore();
@@ -106,7 +105,7 @@ const handleSubmit = async () => {
   userStore.userProfile.token = registerForm.value.code!;
   setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 1000);
   // try {
-  //   const data = await uploadAPI({
+  //   const data = await reqUploadAvatar({
   //     url: uploadAvatarURL,
   //     filePath: registerForm.value.avatar,
   //     name: "avatar",

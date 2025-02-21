@@ -1,11 +1,5 @@
 import { CityType, WeatherType } from "@/types/weather";
-
-enum API {
-  LOCAL_WEATHER = "https://devapi.qweather.com/v7/weather/now",
-  LOCAL_CITY = "https://geoapi.qweather.com/v2/city/lookup",
-}
-
-const key: string = "5e185d3411dc4d5bb0e0a276a704ea63";
+import { API, WeatherApiKey } from "@/settings";
 
 export const getLocalWeatherData = (city: string): Promise<WeatherType> =>
   new Promise((resolve, reject) => {
@@ -13,7 +7,7 @@ export const getLocalWeatherData = (city: string): Promise<WeatherType> =>
       url: `${API.LOCAL_WEATHER}?location=${city}&lang=zh&unit=m`,
       method: "GET",
       header: {
-        "X-QW-Api-Key": key,
+        "X-QW-Api-Key": WeatherApiKey,
       },
       success: (res) => {
         if (res.statusCode >= 200 && res.statusCode < 300)
@@ -36,7 +30,7 @@ export const getCityLocation = (city: string = "北京"): Promise<CityType> =>
       method: "GET",
       url: `${API.LOCAL_CITY}?location=${city}`,
       header: {
-        "X-QW-Api-Key": key,
+        "X-QW-Api-Key": WeatherApiKey,
       },
       success: (res) => {
         if (res.statusCode >= 200 && res.statusCode < 300)

@@ -19,7 +19,7 @@
             <uni-tag :inverted="true" :text="tag.title" :type="tag.type" />
           </view>
         </view>
-        <view class="m-8 mt-4">
+        <view class="m-8 mt-4 flex flex-col items-center">
           <textarea
             placeholder="写下你的感受吧！"
             v-model="checkStore.feelingText"
@@ -28,6 +28,17 @@
             :show-confirm-bar="false"
             confirm-type="done"
           />
+          <button
+            class="p-1 m-auto mt-2 clear-btn flex justify-center items-center"
+            @tap="insertYIYAN"
+          >
+            <image
+              src="/static/check/yiyan.svg"
+              class="mr-1"
+              style="height: 1.3rem; width: 1.3rem"
+            />
+            插入一言
+          </button>
         </view>
       </view>
       <view
@@ -118,8 +129,15 @@ import {
 import { watch } from "vue";
 import { useMapStore } from "@/stores";
 import { Point } from "@/types/map";
-import { ScenicName } from "@/settings";
+import { ModelCard, ScenicName } from "@/settings";
+import { CardParams } from "@/types/card";
 
+const props = defineProps<{
+  yiyan: string;
+}>();
+const insertYIYAN = () => {
+  checkStore.feelingText += props.yiyan;
+};
 const pointList = computed(() =>
   mapStore.pointList.filter((item) => {
     return item.title.includes(searchText.value);
@@ -192,20 +210,12 @@ const nextStep = async () => {
       });
     isLastStep.value = true;
     const res = await reqGetCard({
-      temp: "tempB",
-      color: "dark-color-2",
       title: ScenicName + "·" + checkPoint.value.title,
       date: GetTime(),
       content: checkStore.feelingText,
       author: "@八奈见杏菜",
       qrcodetitle: "随身小D · " + tagText + "卡片",
-      qrcodetext: "扫描二维码",
-      qrcode: "https://shiina-mahiru.cn/",
-      watermark: "随身小D",
-      switchConfig: {
-        showIcon: "false",
-        showForeword: "false",
-      },
+      ...(ModelCard as CardParams),
     });
     const filePath = await saveTempImage(
       convertBufferResultToArrayBuffer(res.result)

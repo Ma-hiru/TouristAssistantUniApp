@@ -143,3 +143,89 @@ export interface BufferResult {
   data: number[];
   type: "Buffer";
 }
+
+export enum TypeYIYAN {
+  /** 动画 */
+  a = "a",
+  /** 漫画 */
+  b = "b",
+  /** 游戏 */
+  c = "c",
+  /** 文学 */
+  d = "d",
+  /** 原创 */
+  e = "e",
+  /** 来自网络 */
+  f = "f",
+  /** 其他 */
+  g = "g",
+  /** 影视 */
+  h = "h",
+  /** 诗词 */
+  i = "i",
+  /** 网易云 */
+  j = "j",
+  /** 哲学 */
+  k = "k",
+  /** 抖机灵 */
+  l = "l",
+}
+
+export enum EncodeYIYAN {
+  /** 返回纯洁文本*/
+  text = "text",
+  /** 返回格式化后的 JSON 文本*/
+  json = "json",
+  /** 返回指定选择器的同步调用函数。默认选择器为：.hitokoto*/
+  js = "js",
+}
+
+export enum CharsetYIYAN {
+  /** 返回 utf-8 编码的内容 */
+  utf8 = "utf-8",
+  /** 返回 gbk 编码的内容。不支持与异步函数同用 */
+  gbk = "gbk",
+}
+
+export type GetYIYANInfo = {
+  /**类型参数*/
+  c: TypeYIYAN;
+  /** 返回编码 */
+  encode: EncodeYIYAN;
+  /** 字符集 */
+  charset: CharsetYIYAN;
+  /** 调用的异步函数 如：moe */
+  callback?: string;
+  /** 选择器。配合 encode=js 使用 默认：.hitokoto*/
+  select?: string;
+  /** 返回句子的最小长度（包含） 默认：0*/
+  min_length: number;
+  /** 返回句子的最大长度（包含） 默认：30*/
+  max_length: number;
+};
+export type YIYANResponseData = {
+  /** 一言标识 */
+  id: number;
+  /** 一言正文。编码方式 unicode。使用 utf-8。 */
+  hitokoto: string;
+  /** 类型。 */
+  type: TypeYIYAN;
+  /** 一言的出处 */
+  from: string;
+  /** 一言的作者 */
+  from_who: string;
+  /** 添加者 */
+  creator: string;
+  /** 添加者用户标识 */
+  creator_uid: number;
+  /** 审核员标识 */
+  reviewer: number;
+  /** 一言唯一标识；可以链接到 https://hitokoto.cn?uuid=[uuid] */
+  uuid: string;
+  /** 提交方式 */
+  commit_from: string;
+  /** 添加时间 */
+  created_at: string;
+  /** 句子长度 */
+  length: number;
+};

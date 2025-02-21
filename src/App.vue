@@ -12,21 +12,21 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-//@import "../src/wxcomponents/vant/common/index.wxss";
-@import "../src/assets/tailwind.css";
+@import "@/assets/tailwind.css";
 
 html {
   font-size: 16px;
+  box-sizing: border-box;
   --diy-color-primary: #0066d5;
   --div-color-primary-dark: #8fcdeb;
   --div-color-white: #f5f1e8;
   --div-color-gray: #656565;
-  box-sizing: border-box;
 }
 
 .btn-hover {
   background: var(--div-color-primary-dark);
 }
+
 .clear-btn {
   &::after {
     border: none;
