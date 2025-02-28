@@ -27,7 +27,10 @@
       :show-scrollbar="false"
     >
       <GuideSkeleton v-show="isLoading" />
-      <view class="w-screen grid grid-cols-[1fr_1fr]" v-show="!isLoading">
+      <view
+        class="w-screen grid grid-cols-[1fr_1fr] columns-2"
+        v-show="!isLoading"
+      >
         <GuideCard
           v-for="(post, index) in guideStore.postList"
           v-show="

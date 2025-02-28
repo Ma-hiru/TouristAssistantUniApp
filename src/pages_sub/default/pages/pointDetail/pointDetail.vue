@@ -117,7 +117,11 @@ onLoad((options) => {
     id: Number((options as { id: string }).id),
     index: Number((options as { index: string }).index),
   };
-  if (typedOptions.index) pointIndex.value = typedOptions.index;
+  if (
+    typedOptions.index &&
+    mapStore.pointList[typedOptions.index].id === typedOptions.id
+  )
+    pointIndex.value = typedOptions.index;
   else
     mapStore.pointList.find(
       (item, index) => item.id === typedOptions.id && (pointIndex.value = index)
