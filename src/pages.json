@@ -137,6 +137,20 @@
             "navigationBarTitleText": "一言",
             "enablePullDownRefresh": false
           }
+        },
+        {
+          "path": "pages/plan/plan",
+          "style": {
+            "navigationBarTitleText": "AI路线规划",
+            "enablePullDownRefresh": false
+          }
+        },
+        {
+          "path": "pages/activity/activity",
+          "style": {
+            "navigationBarTitleText": "热门活动",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     }

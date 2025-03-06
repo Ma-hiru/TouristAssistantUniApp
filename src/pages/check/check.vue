@@ -63,10 +63,9 @@ const CheckYIYAN = () => {
 };
 onMounted(async () => {
   await GetYIYAN();
-  //TODO 打开天气
-  // useWeatherData().then((res) => {
-  //   temp.value = Number(res.temp);
-  // });
+  useWeatherData().then((res) => {
+    temp.value = Number(res.temp);
+  });
 });
 </script>
 

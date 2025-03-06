@@ -6,7 +6,7 @@
       class="absolute z-20 left-4"
       :style="{ top: safeAreaInsetsTop + 'px' }"
     >
-      <!--      <Weather />-->
+      <Weather />
     </view>
     <map
       id="map"

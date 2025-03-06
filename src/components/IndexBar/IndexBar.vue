@@ -2,7 +2,6 @@
   <view
     class="absolute bottom-0 w-full"
     :style="{
-      // bottom: `${currentY}px`,
       transform: `translateY(${-currentY}px)`,
       transition: 'transform 0.2s ease',
     }"
@@ -73,7 +72,7 @@
       </button>
       <text class="mt-2 text-sm">地点总览</text>
     </view>
-    <view class="flex items-center flex-col" @tap="goToRoute('chat')">
+    <view class="flex items-center flex-col" @tap="goToRoute('plan')">
       <button class="clear-btn">
         <image
           src="/static/map/flag.svg"
@@ -102,15 +101,10 @@ const handleTapList = (id: number, index: number) => {
     url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${id}&index=${index}`,
   });
 };
-const goToRoute = async (path: "chat" | "point" | "share") => {
-  if (path === "chat")
-    await uni.switchTab({
-      url: `/pages/${path}/${path}`,
-    });
-  else
-    await uni.navigateTo({
-      url: `/pages_sub/default/pages/${path}/${path}`,
-    });
+const goToRoute = async (path: "plan" | "point") => {
+  await uni.navigateTo({
+    url: `/pages_sub/default/pages/${path}/${path}`,
+  });
 };
 /** 动画部分 */
 const props = defineProps<{
@@ -175,6 +169,7 @@ defineExpose({ up, down });
 .clear-btn::after {
   border: none;
 }
+
 .chat-custom-right {
   flex: 1;
   display: flex;

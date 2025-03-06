@@ -97,6 +97,13 @@
             :width="containerRefWidth"
           />
         </view>
+        <!--        <view class="w-full flex justify-center items-center h-full">-->
+        <!--          <image-->
+        <!--            src="/static/card-template.png"-->
+        <!--            style="width: 100%"-->
+        <!--            mode="widthFix"-->
+        <!--          />-->
+        <!--        </view>-->
       </view>
     </view>
     <view class="pl-8 pr-8 pb-6">
@@ -131,6 +138,8 @@ import { useMapStore } from "@/stores";
 import { Point } from "@/types/map";
 import { ModelCard, ScenicName } from "@/settings";
 import { CardParams } from "@/types/card";
+import { reqGetNearByPoints, reqGetPointDetail } from "@/api/modules/mapAPI";
+import { useLocation } from "@/hooks";
 
 const props = defineProps<{
   yiyan: string;
@@ -143,15 +152,29 @@ const pointList = computed(() =>
     return item.title.includes(searchText.value);
   })
 );
-const findPoint = () => {
-  uni.showToast({
-    title: "识别地点中...",
-    icon: "loading",
-    duration: 2000,
-  });
-  setTimeout(() => {
-    searchText.value = "武当山2";
-  }, 2000);
+const findPoint = async () => {
+  try {
+    const res = await useLocation();
+    uni
+      .showToast({
+        title: "识别地点中...",
+        icon: "loading",
+        duration: 2000,
+      })
+      .then();
+    const pointsList = await reqGetNearByPoints(res);
+    const data = await reqGetPointDetail(pointsList.result[0]);
+    searchText.value = data.result.title;
+  } catch {
+    //TODO to delete
+    setTimeout(() => {
+      searchText.value = "武当山2";
+    }, 2000);
+    // await uni.showToast({
+    //   title: "识别失败",
+    //   icon: "none",
+    // });
+  }
 };
 const mapStore = useMapStore();
 const checkPoint = ref<Point>();

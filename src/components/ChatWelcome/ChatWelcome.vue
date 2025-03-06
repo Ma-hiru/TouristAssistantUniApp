@@ -36,7 +36,7 @@ const baseList = ref<AntdMiniPromptsItem[]>([
   {
     showArrow: true,
     label: "热门提问：",
-    description: "介绍一下xxx吧！",
+    description: "武功山有什么当地特色？",
     icon: "LikeOutline",
     key: "1",
   },

@@ -10,7 +10,7 @@
           :text="props.text"
           :is-type-text="false"
           corner-position="right"
-          :scroll-to-bottom="props.scrollToBottom"
+          :scroll-to-bottom="props.scrollToBottom!"
         />
       </view>
     </view>
@@ -25,9 +25,10 @@
         <ChatText
           :text="props.text"
           corner-position="left"
-          :scroll-to-bottom="props.scrollToBottom"
+          :scroll-to-bottom="props.scrollToBottom!"
         />
         <button
+          v-show="props.polyline?.isPolyline"
           class="clear-btn flex justify-center items-center text-sm p-1 bg-blue-50"
           @tap="choosePolyline"
         >
@@ -52,18 +53,18 @@ import ChatAvatar from "@/components/Message/ChatAvatar.vue";
 import ChatTime from "@/components/Message/ChatTime.vue";
 import ChatText from "@/components/Message/ChatText.vue";
 import type { MapPolyline } from "@uni-helper/uni-app-types";
-import { useAudio } from "@/hooks/useAudio";
+// import { useAudio } from "@/hooks/useAudio";
 //TODO 适配大屏的消息
 //TODO 路线采纳按钮
 const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string | undefined;
-  polyline: {
+  polyline?: {
     isPolyline: boolean;
     polyline: MapPolyline[];
   };
   text: string;
-  scrollToBottom: () => void;
+  scrollToBottom?: () => void;
 }>();
 const choosePolyline = () => {
   uni.switchTab({ url: "/pages/index/index" });

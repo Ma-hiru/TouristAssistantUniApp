@@ -7,7 +7,7 @@ const httpInterceptor: UniApp.InterceptorOptions = {
   //拦截前触发
   invoke(options: UniApp.RequestOptions) {
     !options.url.startsWith("http") && (options.url = reqURL + options.url);
-    options.timeout = 15000;
+    options.timeout = 30000;
     options.header = {
       "source-client": "miniapp",
       ...options.header,
