@@ -25,6 +25,7 @@ html {
 
 .btn-hover {
   background: var(--div-color-primary-dark);
+  color: #333333;
 }
 
 .clear-btn {

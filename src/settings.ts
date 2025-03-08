@@ -57,3 +57,87 @@ export const ModelCard = {
     showForeword: "false",
   },
 };
+
+export const PlanTime = [{ val: 30 }, { val: 45 }, { val: 60 }, { val: 90 }];
+export const defaultTime = PlanTime[0];
+export const goOutType = [
+  {
+    name: "骑行",
+    icon: () => import("@/pages_sub/default/static/plan/bike.svg"),
+    select: () => import("@/pages_sub/default/static/plan/bike_select.svg"),
+  },
+  {
+    name: "公交",
+    icon: () => import("@/pages_sub/default/static/plan/bus.svg"),
+    select: () => import("@/pages_sub/default/static/plan/bus_select.svg"),
+  },
+  {
+    name: "汽车",
+    icon: () => import("@/pages_sub/default/static/plan/car.svg"),
+    select: () => import("@/pages_sub/default/static/plan/car_select.svg"),
+  },
+  {
+    name: "地铁",
+    icon: () => import("@/pages_sub/default/static/plan/subway.svg"),
+    select: () => import("@/pages_sub/default/static/plan/subway_select.svg"),
+  },
+  {
+    name: "步行",
+    icon: () => import("@/pages_sub/default/static/plan/walk.svg"),
+    select: () => import("@/pages_sub/default/static/plan/walk_select.svg"),
+  },
+];
+export const defaultGoOutType = goOutType[0];
+export const sightseeingType = [
+  {
+    name: "观光型",
+    desc: "打卡地标景点。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/see.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/see_select.svg"),
+  },
+  {
+    name: "体验型",
+    desc: "融入当地文化。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/culture.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/culture_select.svg"),
+  },
+  {
+    name: "休闲型",
+    desc: "放松身心。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/holiday.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/holiday_select.svg"),
+  },
+  {
+    name: "探险型",
+    desc: "挑战极限。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/zoomIn.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/zoomIn_select.svg"),
+  },
+  {
+    name: "美食型",
+    desc: "探店当地特色餐厅和小吃。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/food.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/food_select.svg"),
+  },
+  {
+    name: "摄影型",
+    desc: "以拍摄风景、人文为主题的专业旅行。",
+    icon: () =>
+      import("@/pages_sub/default/static/plan/sightsee/photography.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/photography_select.svg"),
+  },
+  {
+    name: "学习型",
+    desc: "语言课程、学术交流、技能培训。",
+    icon: () => import("@/pages_sub/default/static/plan/sightsee/study.svg"),
+    select: () =>
+      import("@/pages_sub/default/static/plan/sightsee/study_select.svg"),
+  },
+];
+export const defaultSightseeingype = sightseeingType[0];
