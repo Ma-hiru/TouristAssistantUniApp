@@ -99,7 +99,7 @@
                 :style="selectedPoint?.id === item.id && styles.selectedBorder"
               >
                 <image
-                  :src="item.detail.cover"
+                  :src="item.cover"
                   style="width: 2rem; height: 2rem"
                   mode="aspectFill"
                 />
@@ -125,9 +125,9 @@
       您当前的位置是：
       <text
         class="underline text-[--diy-color-primary]"
-        @tap="searchKeywords = pointList[0]?.title"
+        @tap="currentPoint?.title && (searchKeywords = currentPoint.title)"
       >
-        {{ pointList[0]?.title }}
+        {{ currentPoint?.title ?? "暂无数据" }}
       </text>
     </view>
   </view>
@@ -162,6 +162,8 @@ import PlanCard from "@/pages_sub/default/components/PlanCard.vue";
 import { computed, onMounted, ref } from "vue";
 import { useMapStore } from "@/stores";
 import { Point } from "@/types/map";
+import { useLocation } from "@/hooks";
+import { reqGetNearByPoints, reqGetPointDetail } from "@/api/modules/mapAPI";
 
 const mapStore = useMapStore();
 const { safeAreaInsets } = uni.getWindowInfo();
@@ -210,6 +212,20 @@ onMounted(() => {
 const goToChat = () => {
   uni.switchTab({ url: "/pages/chat/chat" });
 };
+const currentPoint = ref<Point>();
+const findPoint = async () => {
+  try {
+    const res = await useLocation();
+    const pointsIdList = await reqGetNearByPoints(res);
+    const data = await reqGetPointDetail(pointsIdList.result[0]);
+    currentPoint.value = data.result;
+  } catch {
+    /*empty*/
+  }
+};
+onMounted(() => {
+  findPoint();
+});
 </script>
 
 <style scoped lang="scss">

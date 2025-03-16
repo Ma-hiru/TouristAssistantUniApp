@@ -9,8 +9,9 @@ import { API } from "@/settings";
 
 export const reqLogin = (data: LoginInfo) =>
   http<ReqLoginResponseData>({
-    url: `${API.USER_LOGIN}?code=${data.code}`,
-    method: "GET",
+    url: API.USER_LOGIN,
+    method: "POST",
+    data,
   });
 export const reqRegister = (data: RegisterInfo) =>
   http<ReqRegisterResponseData>({

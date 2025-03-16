@@ -70,7 +70,7 @@ const choosePolyline = () => {
   uni.switchTab({ url: "/pages/index/index" });
 };
 //TODO 音频播放
-// const ctx = useAudio("https://shiina-mahiru.cn/project/download/test.mp3");
+// const ctx = useAudio("https://shiina-mahiru.cn/sub/touristassistant/download/test.mp3");
 // console.log(ctx);
 // ctx.play();
 </script>

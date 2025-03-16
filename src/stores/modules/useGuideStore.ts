@@ -28,9 +28,9 @@ export const useGuideStore = defineStore("guideStore", () => {
         "巴太树：巴太和文秀坐过的树，安静地赢立在离小实部往里几十米的地方，充满了故事～\n" +
         "五彩滩：上帝作画时遗离在人间的调色盘，一定要天气好的时候日落时分去看看，像极了一幅油画！",
       time: "2025-02-13",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/wdalt.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/wdalt.png",
       likes: 1200,
       position: {
         id: 1,
@@ -80,9 +80,9 @@ export const useGuideStore = defineStore("guideStore", () => {
         "💗Tips： 这里有保留最好的明清建筑群，随便路过一处都是百年古宅古树。🌳\n" +
         "•",
       time: "2025-02-13",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/wind.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/wind.png",
       likes: 1200,
       position: {
         id: 1,
@@ -105,9 +105,9 @@ export const useGuideStore = defineStore("guideStore", () => {
       title: "东京旅游地图攻略",
       content: "依据旅游地图，打卡歌舞伎町、银座等景点，尽享东京繁华与精彩。",
       time: "2025-02-12",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/dj.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/dj.png",
       likes: 1200,
       position: {
         id: 1,
@@ -127,9 +127,9 @@ export const useGuideStore = defineStore("guideStore", () => {
       content:
         "踏上阿勒泰精华路线，赏禾木、喀纳斯等美景，领略大自然的鬼斧神工。",
       time: "2025-02-13",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/alt.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/alt.png",
       likes: 1200,
       position: {
         id: 1,
@@ -149,9 +149,9 @@ export const useGuideStore = defineStore("guideStore", () => {
       content:
         "跟随City Walk路线，打卡小印度、苏丹回教堂等，赏特色建筑，品别样文化。",
       time: "2025-02-09",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/xjp.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/xjp.png",
       likes: 1200,
       position: {
         id: 1,
@@ -179,9 +179,9 @@ export const useGuideStore = defineStore("guideStore", () => {
       title: "成都City Walk攻略",
       content: "沿着懒人路线，游熊猫基地、宽窄巷子等地，体验成都的惬意与古韵。",
       time: "2025-02-11",
-      avatar: "https://shiina-mahiru.cn/project/download/avatar.jpg",
+      avatar: "https://shiina-mahiru.cn/sub/touristassistant/download/avatar.jpg",
       nickname: "随身小D",
-      cover: "https://shiina-mahiru.cn/project/download/cd.png",
+      cover: "https://shiina-mahiru.cn/sub/touristassistant/download/cd.png",
       likes: 1200,
       position: {
         id: 1,

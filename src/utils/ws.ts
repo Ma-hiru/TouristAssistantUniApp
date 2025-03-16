@@ -84,6 +84,7 @@ export class ws<T> {
 
   close(options: CloseSocketOptions) {
     this.instance.close(options);
+    this.ready = false;
   }
 
   sendMessage(options: SendSocketMessageOptions) {

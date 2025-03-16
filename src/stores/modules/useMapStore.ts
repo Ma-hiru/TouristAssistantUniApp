@@ -43,38 +43,32 @@ export const useMapStore = defineStore("mapStore", () => {
     {
       id: 1,
       title: "武功山",
-      position: {
-        latitude: 116.4,
-        longitude: 39.9,
-      },
+      latitude: 116.4,
+      longitude: 39.9,
       iconPath: "",
-      detail: {
-        content:
-          "又名罗霄山、泸潇山，位于江西省中西部，居罗霄山脉北支，山体呈东北—西南走向，地跨江西省萍乡市芦溪县、吉安市安福县、宜春市袁州区，主脉绵延120余千米，总面积约970平方千米。",
-        position: "江西西部",
-        cover: "https://shiina-mahiru.cn/project/download/wugongshan.jpg",
-        tel: "无",
-        time: "无",
-        price: "无",
-      },
+      content:
+        "又名罗霄山、泸潇山，位于江西省中西部，居罗霄山脉北支，山体呈东北—西南走向，地跨江西省萍乡市芦溪县、吉安市安福县、宜春市袁州区，主脉绵延120余千米，总面积约970平方千米。",
+      position: "江西西部",
+      cover:
+        "https://shiina-mahiru.cn/sub/touristassistant/download/wugongshan.jpg",
+      tel: "无",
+      time: "无",
+      price: "无",
     },
     {
       id: 2,
       title: "武功山风景名胜区",
-      position: {
-        latitude: 116.4,
-        longitude: 39.9,
-      },
+      latitude: 116.4,
+      longitude: 39.9,
       iconPath: "",
-      detail: {
-        content:
-          "国家AAAAA级旅游景区，位于江西省中西部，萍乡、宜春、吉安三市交界处，地处湘赣边界的罗霄山脉北段，介于东经114°04’14”—114°22’52”和北纬27°22’36”—27°41’00”之间。",
-        position: "江西省中西部，萍乡、宜春、吉安三市交界处",
-        cover: "https://shiina-mahiru.cn/project/download/wugongshanjq.png",
-        tel: "12345678910",
-        time: "4月1日-10月31日 08:10-16:40" + "11月1日-次年3月31日 08:20-16:00",
-        price: "xxx元/天",
-      },
+      content:
+        "国家AAAAA级旅游景区，位于江西省中西部，萍乡、宜春、吉安三市交界处，地处湘赣边界的罗霄山脉北段，介于东经114°04’14”—114°22’52”和北纬27°22’36”—27°41’00”之间。",
+      position: "江西省中西部，萍乡、宜春、吉安三市交界处",
+      cover:
+        "https://shiina-mahiru.cn/sub/touristassistant/download/wugongshanjq.png",
+      tel: "12345678910",
+      time: "4月1日-10月31日 08:10-16:40" + "11月1日-次年3月31日 08:20-16:00",
+      price: "xxx元/天",
     },
   ]);
   const currentMarker = ref<Position>();
@@ -107,14 +101,14 @@ export const useMapStore = defineStore("mapStore", () => {
     pointList.value.forEach((point) => {
       markers.value.push({
         id: point.id,
-        latitude: point.position.latitude,
-        longitude: point.position.longitude,
+        latitude: point.latitude,
+        longitude: point.longitude,
         iconPath: point?.iconPath ?? "",
         width: 20,
         height: 20,
         title: point.title,
         callout: {
-          content: point.detail.content,
+          content: point.content,
           color: "#fff",
           fontSize: 12,
           borderRadius: 4,

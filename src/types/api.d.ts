@@ -4,6 +4,7 @@ export interface ResponseData<T> {
   msg: string;
   result: T;
 }
+
 export type UserProfile = {
   token: string;
   nickname: string;
@@ -12,12 +13,12 @@ export type UserProfile = {
 export type LoginInfo = {
   code: string;
 };
-export type ReqLoginResponseData<T = { isFirst: boolean }> =
-  T["isFirst"] extends true ? T & UserProfile : T & Partial<UserProfile>;
+export type ReqLoginResponseData = {
+  isFirst: boolean;
+} & UserProfile;
 export type RegisterInfo = ExcludeInObject<UserProfile, "token"> & LoginInfo;
 export type ReqRegisterResponseData = UserProfile;
 /** TypeTools */
-
 /** Exclude in object.
  *  @template T Object type
  *  @template U Exclude key

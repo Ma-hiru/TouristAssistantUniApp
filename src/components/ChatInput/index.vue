@@ -94,6 +94,7 @@
 import { ref } from "vue";
 import { TextareaOnKeyboardheightchange } from "@uni-helper/uni-app-types";
 import { useChatStore } from "@/stores/modules/useChatStore";
+import { reqUploadRecorder } from "@/api/modules/recorderAPI";
 
 const chatStore = useChatStore();
 const props = defineProps<{
@@ -163,7 +164,27 @@ recorder.onStop((res) => {
       icon: "error",
     });
   }
-  console.log(res);
+  uni.showToast({
+    title: "识别中",
+    icon: "loading",
+  });
+  reqUploadRecorder(res.tempFilePath)
+    .then((res) => {
+      if (res.ok) {
+        inputText.value += res.result;
+      } else {
+        uni.showToast({
+          title: "识别失败",
+          icon: "error",
+        });
+      }
+    })
+    .catch(() => {
+      uni.showToast({
+        title: "识别失败,请检查网络",
+        icon: "error",
+      });
+    });
 });
 recorder.onError(() => {
   uni.showToast({

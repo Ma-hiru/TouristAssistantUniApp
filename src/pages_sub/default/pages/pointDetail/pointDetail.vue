@@ -3,7 +3,7 @@
     <image
       style="width: 100%"
       mode="widthFix"
-      :src="currentPoint?.detail.cover"
+      :src="currentPoint?.cover"
       @tap="previewImage"
     />
     <view
@@ -14,7 +14,7 @@
       </text>
       <view>
         <text class="select-auto text-[#333]"
-          >{{ currentPoint?.detail.content }}
+          >{{ currentPoint?.content }}
         </text>
       </view>
       <ant-divider />
@@ -23,19 +23,19 @@
       >
         <view class="grid grid-cols-[auto_1fr]">
           <view class="h-full">地理位置：</view>
-          <view>{{ currentPoint?.detail.position }}</view>
+          <view>{{ currentPoint?.position }}</view>
         </view>
         <view class="grid grid-cols-[auto_1fr]">
           <view class="h-full">开放时间：</view>
-          <view>{{ currentPoint?.detail.time }}</view>
+          <view>{{ currentPoint?.time }}</view>
         </view>
         <view class="grid grid-cols-[auto_1fr]">
           <view class="h-full">门票价格：</view>
-          <view>{{ currentPoint?.detail.price }}</view>
+          <view>{{ currentPoint?.price }}</view>
         </view>
         <view class="grid grid-cols-[auto_1fr]">
           <view class="h-full">官方电话：</view>
-          <view>{{ currentPoint?.detail.tel }}</view>
+          <view>{{ currentPoint?.tel }}</view>
         </view>
       </view>
     </view>
@@ -143,7 +143,7 @@ const goto = () => {
 };
 const previewImage = () => {
   uni.previewImage({
-    urls: [currentPoint.value!.detail.cover],
+    urls: [currentPoint.value!.cover],
   });
 };
 </script>

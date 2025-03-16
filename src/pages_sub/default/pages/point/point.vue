@@ -8,8 +8,8 @@
         :title="point.title"
         link
         @click="handleTapList(point.id, index)"
-        :avatar="point.detail.cover"
-        :note="point.detail.content"
+        :avatar="point.cover"
+        :note="point.content"
         badge-positon="left"
       >
         <view class="chat-custom-right">
@@ -26,8 +26,8 @@
         :title="point.title"
         link
         @click="handleTapList(point.id, index)"
-        :avatar="point.detail.cover"
-        :note="point.detail.content"
+        :avatar="point.cover"
+        :note="point.content"
         badge-positon="left"
       >
         <view class="chat-custom-right">

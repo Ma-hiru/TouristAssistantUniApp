@@ -35,17 +35,18 @@
 import { computed, onMounted, ref } from "vue";
 import CheckShare from "@/components/CheckShare/CheckShare.vue";
 import { reqGetYIYAN } from "@/api";
-import { CharsetYIYAN, EncodeYIYAN, TypeYIYAN } from "@/types/card.d";
 import { DetailYIYANURL, ModelYIYAN } from "@/settings";
 import { useWeatherData } from "@/hooks";
-
-const date = ref(new Date().getDate());
-const temp = ref(0);
+/* SafeAreaTop */
 const menuButtonTop = computed(() => {
   const top = uni.getMenuButtonBoundingClientRect().top;
   if (top === 0) return 20;
   return top;
 });
+/* Date & Temp */
+const date = ref(new Date().getDate());
+const temp = ref(0);
+/* 一言 */
 const YIYAN = ref("");
 const DetailYIYAN = ref(DetailYIYANURL);
 const UuidYIYAN = ref("");
@@ -56,13 +57,12 @@ const GetYIYAN = async () => {
   UuidYIYAN.value = res.result.uuid;
 };
 const CheckYIYAN = () => {
-  console.log("1");
   uni.navigateTo({
     url: `/pages_sub/default/pages/yiyan/yiyan?uuid=${UuidYIYAN.value}`,
   });
 };
-onMounted(async () => {
-  await GetYIYAN();
+onMounted(() => {
+  GetYIYAN();
   useWeatherData().then((res) => {
     temp.value = Number(res.temp);
   });

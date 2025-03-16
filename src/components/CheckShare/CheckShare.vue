@@ -72,8 +72,8 @@
               :title="point.title"
               link
               @click="handleTapList(point.id, index)"
-              :avatar="point.detail.cover"
-              :note="point.detail.content"
+              :avatar="point.cover"
+              :note="point.content"
               badge-positon="left"
             >
               <view class="chat-custom-right">
@@ -141,12 +141,17 @@ import { CardParams } from "@/types/card";
 import { reqGetNearByPoints, reqGetPointDetail } from "@/api/modules/mapAPI";
 import { useLocation } from "@/hooks";
 
+const instance = getCurrentInstance();
+const mapStore = useMapStore();
+const checkStore = useCheckStore();
+/* Insert YIYAN */
 const props = defineProps<{
   yiyan: string;
 }>();
 const insertYIYAN = () => {
   checkStore.feelingText += props.yiyan;
 };
+/* Point */
 const pointList = computed(() =>
   mapStore.pointList.filter((item) => {
     return item.title.includes(searchText.value);
@@ -162,21 +167,23 @@ const findPoint = async () => {
         duration: 2000,
       })
       .then();
-    const pointsList = await reqGetNearByPoints(res);
-    const data = await reqGetPointDetail(pointsList.result[0]);
-    searchText.value = data.result.title;
+    const pointsIdList = await reqGetNearByPoints(res);
+    const data = await reqGetPointDetail(pointsIdList.result[0]);
+    if (data.ok) searchText.value = data.result.title;
+    else
+      uni
+        .showToast({
+          title: "识别失败",
+          icon: "fail",
+        })
+        .then();
   } catch {
-    //TODO to delete
-    setTimeout(() => {
-      searchText.value = "武当山2";
-    }, 2000);
-    // await uni.showToast({
-    //   title: "识别失败",
-    //   icon: "none",
-    // });
+    await uni.showToast({
+      title: "识别失败",
+      icon: "fail",
+    });
   }
 };
-const mapStore = useMapStore();
 const checkPoint = ref<Point>();
 const searchText = ref("");
 const handleTapList = (id: number, index: number) => {
@@ -188,7 +195,7 @@ const handleTapList = (id: number, index: number) => {
     else checkPoint.value = mapStore.pointList.find((item) => item.id === id);
   }
 };
-const checkStore = useCheckStore();
+/* Tags */
 const selectTags = (index: number) => {
   checkStore.tags = checkStore.tags.map((tag) => ({
     ...tag,
@@ -196,6 +203,7 @@ const selectTags = (index: number) => {
   }));
   checkStore.tags[index].type = "primary";
 };
+/* Steps */
 const currentSteps = ref(0);
 const resultRef = ref<InstanceType<typeof ShareResult>>();
 const isLastStep = ref(false);
@@ -206,8 +214,9 @@ const btnText = computed(() => {
 });
 const nextStep = async () => {
   if (isLastStep.value) {
-    resultRef.value!.saveImg();
+    resultRef.value?.saveImg();
   } else if (currentSteps.value === checkStore.items.length - 1) {
+    /* Check if it has invalidated value. */
     const tag = checkStore.tags.find((tag) => tag.type === "primary");
     if (!tag)
       return await uni.showToast({
@@ -256,11 +265,10 @@ const lastStep = () => {
     isLastStep.value = false;
   } else currentSteps.value--;
 };
-const instance = getCurrentInstance();
+/* CardPages width */
 const containerRefWidth = ref(0);
-watch(isLastStep, () => {
-  const systemInfo = uni.getWindowInfo();
-  const screenWidth = systemInfo.screenWidth;
+const unwatch = watch(isLastStep, () => {
+  const { screenWidth } = uni.getWindowInfo();
   const query = uni.createSelectorQuery().in(instance!.proxy);
   query
     .select("#containerRef")
@@ -268,7 +276,7 @@ watch(isLastStep, () => {
       if ((rect as NodeInfo).width)
         containerRefWidth.value = (rect as NodeInfo).width!;
       else handleManualCalculation();
-      console.log(containerRefWidth.value);
+      unwatch();
     })
     .exec();
   const handleManualCalculation = () => {
