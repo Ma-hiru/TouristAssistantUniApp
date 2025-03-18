@@ -4,7 +4,7 @@
   >
     <view
       class="absolute z-20 left-4"
-      :style="{ top: safeAreaInsetsTop + 'px' }"
+      :style="{ top: safeAreaInsetsTop + 20 + 'px' }"
     >
       <Weather />
     </view>
@@ -62,6 +62,7 @@ import {
 /** 底部栏 */
 import { rem } from "@/settings";
 import { useMapStore } from "@/stores/modules/useMapStore";
+import { reqGetAllPoints } from "@/api/modules/mapAPI";
 
 const safeAreaInsetsTop = uni.getWindowInfo().safeAreaInsets?.top;
 const bottomBarPositions = {
@@ -89,8 +90,20 @@ const tapMarkerPop: MapOnCallouttap = (event) => {
     url: `/pages_sub/default/pages/pointDetail/pointDetail?id=${event.detail.markerId}`,
   });
 };
+const getPoint = async () => {
+  try {
+    const res = await reqGetAllPoints();
+    mapStore.pointList = res.result;
+  } catch {
+    await uni.showToast({
+      title: "获取地点失败",
+      icon: "none",
+    });
+  }
+};
 onLoad(async () => {
   await mapStore.getLocation();
+  await getPoint();
 });
 onShow(() => {
   if (mapStore.currentMarker) {

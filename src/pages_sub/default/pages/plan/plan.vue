@@ -143,6 +143,7 @@
     <button
       class="w-full p-3 bg-[--diy-color-primary] clear-btn rounded-lg text-white"
       hover-class="btn-hover"
+      @tap="submit"
     >
       一键生成
     </button>
@@ -164,8 +165,11 @@ import { useMapStore } from "@/stores";
 import { Point } from "@/types/map";
 import { useLocation } from "@/hooks";
 import { reqGetNearByPoints, reqGetPointDetail } from "@/api/modules/mapAPI";
+import { useChatStore } from "@/stores/modules/useChatStore";
+import { UserPlan } from "@/types/chat";
 
 const mapStore = useMapStore();
+const chatStore = useChatStore();
 const { safeAreaInsets } = uni.getWindowInfo();
 const searchKeywords = ref("");
 const pointList = computed(() =>
@@ -222,6 +226,21 @@ const findPoint = async () => {
   } catch {
     /*empty*/
   }
+};
+const submit = () => {
+  if (!selectedPoint.value) {
+    return uni.showToast({
+      title: "请选择地点！",
+      icon: "none",
+    });
+  }
+  chatStore.submitUserPlan = {
+    selectedTime: selectedTime.value,
+    selectType: selectType.value,
+    selectedPoint: selectedPoint.value,
+    selectedSightseeingType: selectedSightseeingType.value,
+  } as UserPlan;
+  uni.switchTab({ url: "/pages/chat/chat" });
 };
 onMounted(() => {
   findPoint();

@@ -137,7 +137,6 @@ const handleTapTile = () => {
     lastTap.value = currentTapTime;
   }
 };
-
 const mute = () => {
   chatStore.isMute = !chatStore.isMute;
   if (chatStore.isMute) useVolume(0);

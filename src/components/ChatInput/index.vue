@@ -95,6 +95,8 @@ import { ref } from "vue";
 import { TextareaOnKeyboardheightchange } from "@uni-helper/uni-app-types";
 import { useChatStore } from "@/stores/modules/useChatStore";
 import { reqUploadRecorder } from "@/api/modules/recorderAPI";
+import { onLaunch, onShow } from "@dcloudio/uni-app";
+import { PlanToText } from "@/settings";
 
 const chatStore = useChatStore();
 const props = defineProps<{
@@ -171,7 +173,8 @@ recorder.onStop((res) => {
   reqUploadRecorder(res.tempFilePath)
     .then((res) => {
       if (res.ok) {
-        inputText.value += res.result;
+        inputText.value = res.result;
+        sendMessage();
       } else {
         uni.showToast({
           title: "识别失败",
@@ -191,6 +194,14 @@ recorder.onError(() => {
     title: "录音失败，请检查录音权限~",
     icon: "error",
   });
+});
+/** 用户计划 */
+onShow(() => {
+  if (chatStore.submitUserPlan) {
+    inputText.value = PlanToText(chatStore.submitUserPlan);
+    sendMessage();
+    chatStore.submitUserPlan = undefined;
+  }
 });
 </script>
 

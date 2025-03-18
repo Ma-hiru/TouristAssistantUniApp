@@ -82,12 +82,12 @@ export const useMapStore = defineStore("mapStore", () => {
       position.value.latitude = res.latitude;
       position.value.longitude = res.longitude;
       uni.createMapContext("map").moveToLocation(position.value);
-      polyline.value[0].points[0].latitude = res.latitude;
-      polyline.value[0].points[0].longitude = res.longitude;
-      polyline.value[0].points[1].latitude = res.latitude + 0.001;
-      polyline.value[0].points[1].longitude = res.longitude + 0.001;
-      markers.value[0].latitude = res.latitude + 0.001;
-      markers.value[0].longitude = res.longitude + 0.001;
+      // polyline.value[0].points[0].latitude = res.latitude;
+      // polyline.value[0].points[0].longitude = res.longitude;
+      // polyline.value[0].points[1].latitude = res.latitude + 0.001;
+      // polyline.value[0].points[1].longitude = res.longitude + 0.001;
+      // markers.value[0].latitude = res.latitude + 0.001;
+      // markers.value[0].longitude = res.longitude + 0.001;
     } catch (e) {
       await uni.showToast({
         title: "获取位置失败，请检查定位权限",
@@ -123,8 +123,6 @@ export const useMapStore = defineStore("mapStore", () => {
     });
   }
 
-  function getPoint() {}
-
   function reset() {
     if (polyline.value.length === 0) {
       uni
@@ -159,7 +157,6 @@ export const useMapStore = defineStore("mapStore", () => {
     getLocation,
     getMarkers,
     pointList,
-    getPoint,
     currentMarker,
   };
 });

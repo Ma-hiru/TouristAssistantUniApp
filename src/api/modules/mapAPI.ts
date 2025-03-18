@@ -13,3 +13,8 @@ export const reqGetPointDetail = (id: number) =>
     url: `${API.MAP_GET_POINT_DETAIL}/${id}`,
     method: "GET",
   });
+export const reqGetAllPoints = () =>
+  http<Point[]>({
+    url: API.MAP_GET_ALL_POINT,
+    method: "GET",
+  });

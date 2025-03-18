@@ -52,21 +52,29 @@
 import ChatAvatar from "@/components/Message/ChatAvatar.vue";
 import ChatTime from "@/components/Message/ChatTime.vue";
 import ChatText from "@/components/Message/ChatText.vue";
-import type { MapPolyline } from "@uni-helper/uni-app-types";
+
+import { Position } from "@/types/map";
+import { useMapStore } from "@/stores";
 // import { useAudio } from "@/hooks/useAudio";
 //TODO 适配大屏的消息
 //TODO 路线采纳按钮
+const mapStore = useMapStore();
 const props = defineProps<{
   type: "user" | "system" | "assistant";
   time: string | undefined;
-  polyline?: {
+  polyline: {
     isPolyline: boolean;
-    polyline: MapPolyline[];
+    polyline: Position[];
   };
   text: string;
   scrollToBottom?: () => void;
 }>();
 const choosePolyline = () => {
+  mapStore.polyline.push({
+    points: props.polyline.polyline,
+    width: 15,
+    color: "#0066d5",
+  });
   uni.switchTab({ url: "/pages/index/index" });
 };
 //TODO 音频播放

@@ -29,32 +29,11 @@ import {
   AntdMiniPromptsItem,
 } from "@/types/chat";
 import ChatAppearance from "@/components/ChatAppearance/ChatAppearance.vue";
+import { defaultChatWelcomeText } from "@/settings";
 const props = defineProps<{
   onSend: (text: string) => void;
 }>();
-const baseList = ref<AntdMiniPromptsItem[]>([
-  {
-    showArrow: true,
-    label: "热门提问：",
-    description: "武功山有什么当地特色？",
-    icon: "LikeOutline",
-    key: "1",
-  },
-  {
-    showArrow: true,
-    label: "路线规划：",
-    icon: "StarOutline",
-    description: "一小时的速览路线~",
-    key: "2",
-  },
-  {
-    showArrow: true,
-    label: "讲解一下：",
-    icon: "PlayOutline",
-    description: "我在什么景点处？",
-    key: "3",
-  },
-]);
+const baseList = ref<AntdMiniPromptsItem[]>(defaultChatWelcomeText);
 const promptsTitle = ref("你可以这样问我：");
 
 function divAppearance() {

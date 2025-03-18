@@ -1,4 +1,4 @@
-import { MapPolyline } from "@uni-helper/uni-app-types";
+import { Point, Position } from "@/types/map";
 
 export interface Message {
   /** 唯一id user这里前端生成（只要一个用户下唯一就好） */
@@ -13,7 +13,7 @@ export interface Message {
   /** 路线 */
   polyline: {
     isPolyline: boolean;
-    polyline: MapPolyline[];
+    polyline: Position[];
   };
   /** 当前位置 */
   location?: {
@@ -32,7 +32,10 @@ export type AntdMiniPromptsItem = {
 export type AntdMiniPromptsCustomEventType = {
   detail: [item: AntdMiniPromptsItem, index: number];
 };
-/** 类型体操偷懒 */
-// type customEventType = {
-//   detail: [item: (typeof baseList.value)[number], index: number];
-// };
+
+export type UserPlan = {
+  selectedTime: number;
+  selectType: string;
+  selectedPoint: Point;
+  selectedSightseeingType: string;
+};

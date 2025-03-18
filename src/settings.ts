@@ -3,6 +3,7 @@ import avatar1 from "@/static/chat/assistant_avatar1.png";
 import avatar2 from "@/static/chat/assistant_avatar2.jpg";
 import avatar3 from "@/static/chat/assistant_avatar3.jpg";
 import avatar4 from "@/static/chat/assistant_avatar4.jpg";
+import { AntdMiniPromptsItem, UserPlan } from "@/types/chat";
 
 export enum API {
   CHECK_CARD = "https://shiina-mahiru.cn/sub/touristassistant/api/card",
@@ -16,6 +17,7 @@ export enum API {
   LOCAL_CITY = "https://geoapi.qweather.com/v2/city/lookup",
   MAP_NEAR_POINTS = "/points/nearby-ids",
   MAP_GET_POINT_DETAIL = "/points",
+  MAP_GET_ALL_POINT = "/all",
   CHAT_URL = "/chatTest",
   RECORD_URL = "/transcript",
 }
@@ -139,3 +141,34 @@ export const sightseeingType = [
   },
 ];
 export const defaultSightseeingype = sightseeingType[0];
+export const PlanToText = (plan: UserPlan): string => {
+  return `我计划是：
+--浏览时长：${plan.selectedTime ?? "-- "}min，
+--游览方式：${plan.selectType ?? "无"}，
+--游览偏好：${plan.selectedSightseeingType ?? "无"}，
+--所在地点：${plan.selectedPoint.title ?? "无"}，
+小D，帮我规划一下吧！`;
+};
+export const defaultChatWelcomeText: AntdMiniPromptsItem[] = [
+  {
+    showArrow: true,
+    label: "热门提问：",
+    description: "当地有什么特色？",
+    icon: "LikeOutline",
+    key: "1",
+  },
+  {
+    showArrow: true,
+    label: "路线规划：",
+    icon: "StarOutline",
+    description: "一小时的速览路线~",
+    key: "2",
+  },
+  {
+    showArrow: true,
+    label: "讲解一下：",
+    icon: "PlayOutline",
+    description: "我在什么景点处？",
+    key: "3",
+  },
+];
