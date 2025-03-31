@@ -5,7 +5,12 @@
       class="relative flex justify-center items-center overflow-visible rounded-lg h-full"
       :key="index"
     >
-      <image :src="src" :style="{ height: '80%' }" mode="heightFix">
+      <image
+        :src="src"
+        :style="{ height: '80%' }"
+        mode="heightFix"
+        @tap.stop="uploadImg"
+      >
         <view
           @tap.stop="cancelUploadImage(index)"
           class="absolute top-5 -right-3 w-6 h-6 bg-[#999999] flex justify-center items-center rounded-full z-50"

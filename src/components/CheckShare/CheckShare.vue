@@ -97,13 +97,6 @@
             :width="containerRefWidth"
           />
         </view>
-        <!--        <view class="w-full flex justify-center items-center h-full">-->
-        <!--          <image-->
-        <!--            src="/static/card-template.png"-->
-        <!--            style="width: 100%"-->
-        <!--            mode="widthFix"-->
-        <!--          />-->
-        <!--        </view>-->
       </view>
     </view>
     <view class="pl-8 pr-8 pb-6">
@@ -174,13 +167,13 @@ const findPoint = async () => {
       uni
         .showToast({
           title: "识别失败",
-          icon: "fail",
+          icon: "none",
         })
         .then();
   } catch {
     await uni.showToast({
       title: "识别失败",
-      icon: "fail",
+      icon: "none",
     });
   }
 };

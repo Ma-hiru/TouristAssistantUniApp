@@ -21,3 +21,4 @@ dist
 *.sw?
 /wxcomponent/
 /src/wxcomponents/
+/.yarn/

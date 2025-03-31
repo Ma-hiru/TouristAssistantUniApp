@@ -108,6 +108,7 @@ const props = defineProps<{
 const handleSendOrStop = () => {
   if (chatStore.isTyping) {
     chatStore.isStop = true;
+    console.log("isStop=>", chatStore.isStop);
   } else {
     sendMessage();
   }
@@ -173,7 +174,16 @@ recorder.onStop((res) => {
   reqUploadRecorder(res.tempFilePath)
     .then((res) => {
       if (res.ok) {
-        inputText.value = res.result;
+        if (typeof res.result === "string") {
+          if (res.result.includes(`"text":`)) {
+            const { text } = JSON.parse(res.result);
+            inputText.value = text;
+          } else {
+            inputText.value = res.result;
+          }
+        } else {
+          inputText.value = res.result.text;
+        }
         sendMessage();
       } else {
         uni.showToast({

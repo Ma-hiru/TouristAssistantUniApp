@@ -16,10 +16,10 @@ export interface Message {
     polyline: Position[];
   };
   /** 当前位置 */
-  location?: {
-    latitude: number;
-    longitude: number;
-  };
+  // location: {
+  //   latitude: number | null;
+  //   longitude: number | null;
+  // };
 }
 
 export type AntdMiniPromptsItem = {

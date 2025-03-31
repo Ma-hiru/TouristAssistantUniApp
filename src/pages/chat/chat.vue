@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { GetTime } from "@/utils";
 import { throttle } from "lodash";
 import Message from "@/components/Message/index.vue";
@@ -97,7 +97,7 @@ async function onSend(text: string): Promise<boolean> {
   return new Promise((resolve) => {
     chatStore.sendText(
       {
-        id: 114,
+        id: new Date().getTime(),
         content: text,
         type: "user",
         time: GetTime(),
@@ -105,7 +105,10 @@ async function onSend(text: string): Promise<boolean> {
           isPolyline: false,
           polyline: [],
         },
-        location,
+        // location: {
+        //   latitude: location?.latitude,
+        //   longitude: location?.longitude,
+        // },
         hasSlice: false,
       },
       () => {
@@ -142,6 +145,9 @@ const mute = () => {
   if (chatStore.isMute) useVolume(0);
   else useVolume(defaultVolume);
 };
+onMounted(() => {
+  chatStore.init();
+});
 </script>
 
 <style scoped lang="scss">

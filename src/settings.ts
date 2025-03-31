@@ -10,7 +10,7 @@ export enum API {
   CHECK_YIYAN = "https://shiina-mahiru.cn/sub/touristassistant/api/yiyan",
   GUIDE_CATEGORY = "/wechat/category",
   GUIDE_POST_LIST = "/wechat/postList",
-  UPLOAD_AVATAR = "/wechat/avatar",
+  UPLOAD_AVATAR = "/wechat/register",
   USER_LOGIN = "/wechat/login",
   USER_REGISTER = "/wechat/register",
   LOCAL_WEATHER = "https://devapi.qweather.com/v7/weather/now",
@@ -18,8 +18,7 @@ export enum API {
   MAP_NEAR_POINTS = "/points/nearby-ids",
   MAP_GET_POINT_DETAIL = "/points",
   MAP_GET_ALL_POINT = "/all",
-  CHAT_URL = "/chatTest",
-  RECORD_URL = "/transcript",
+  RECORD_URL = "/api/ai/transcript",
 }
 
 export const rem = 16;
@@ -153,7 +152,7 @@ export const defaultChatWelcomeText: AntdMiniPromptsItem[] = [
   {
     showArrow: true,
     label: "热门提问：",
-    description: "当地有什么特色？",
+    description: "武功山有什么特色？",
     icon: "LikeOutline",
     key: "1",
   },
@@ -161,14 +160,14 @@ export const defaultChatWelcomeText: AntdMiniPromptsItem[] = [
     showArrow: true,
     label: "路线规划：",
     icon: "StarOutline",
-    description: "一小时的速览路线~",
+    description: "武功山一小时的速览路线~",
     key: "2",
   },
   {
     showArrow: true,
     label: "讲解一下：",
     icon: "PlayOutline",
-    description: "我在什么景点处？",
+    description: "武功山风景如何",
     key: "3",
   },
 ];

@@ -1,5 +1,5 @@
 import { UploadAvatarInfo } from "@/types/upload";
-import { ReqRegisterResponseData, type ResponseData } from "@/types/api";
+import { ReqRegisterResponseData } from "@/types/api";
 import { upload } from "@/utils";
 import { API } from "@/settings";
 

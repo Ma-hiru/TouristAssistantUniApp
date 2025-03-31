@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores";
 import { reqLogin } from "@/api";
+import { reqURL } from "@/settings";
 
 const userStore = useUserStore();
 const login = () => {
@@ -40,23 +41,25 @@ const login = () => {
     provider: "weixin",
     success: async (res) => {
       userStore.loginInfo.code = res.code;
-      //TODO 判断是否需要昵称头像
       try {
         const data = await reqLogin({ code: res.code });
-        if (data.result.isFirst) {
+        if (!data.result.isFirst) {
           userStore.userProfile.nickname = data.result.nickname!;
-          userStore.userProfile.avatar = data.result.avatar!;
           userStore.userProfile.token = data.result.token!;
+          userStore.userProfile.avatar = reqURL + data.result.avatar!;
+          uni.getUserInfo({
+            provider: "weixin",
+            success: function (infoRes) {
+              userStore.userProfile.avatar = infoRes.userInfo.avatarUrl;
+            },
+          });
+          loginSuccess().then();
         } else
           await uni.navigateTo({
             url: "/pages_sub/default/pages/register/register",
           });
       } catch {
         /*empty*/
-        //TODO 记得删
-        await uni.navigateTo({
-          url: "/pages_sub/default/pages/register/register",
-        });
       }
     },
     fail: () => {
@@ -67,12 +70,10 @@ const login = () => {
     },
   });
 };
-
-async function loginSuccess() {
+const loginSuccess = async () => {
   await uni.showToast({ icon: "success", title: "登录成功" });
-  //TODO save userInfo
-  // setTimeout(() => uni.switchTab({ url: "/pages/index/index" }), 800);
-}
+  setTimeout(() => uni.switchTab({ url: "/pages/chat/chat" }), 800);
+};
 </script>
 
 <style scoped lang="scss">
