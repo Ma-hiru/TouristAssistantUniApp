@@ -2,7 +2,7 @@
   <view class="flex justify-center items-center">
     <view class="-mr-6 icon-bg rounded-full inline-block p-2 z-30">
       <image
-        :src="`https://shiina-mahiru.cn:3003/assets/weather/${icon ?? 100}.svg`"
+        :src="`https://shiina-mahiru.cn/weatherIcon/black/${icon ?? 100}.svg`"
         style="width: 1.5rem; height: 1.5rem"
       />
     </view>
