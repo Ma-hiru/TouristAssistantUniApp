@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts" name="ChatText">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, watchEffect } from "vue";
 import { useTowxml } from "@/wxcomponents/towxml";
 import { useChatStore } from "@/stores/modules/useChatStore";
 
@@ -36,7 +36,6 @@ const stop = watch(
     props.scrollToBottom();
   }
 );
-//TODO 回收内存
 const unwatch = watch(
   () => chatStore.isStop,
   () => {

@@ -72,7 +72,7 @@ export class ws<T> {
 
   onMessage(callback: (result: OnSocketMessageCallbackResult<T>) => void) {
     this.instance.onMessage((res) => {
-      console.log(`WebSocket<${this.name}> 接收消息：`, res.data);
+      // console.log(`WebSocket<${this.name}> 接收消息：`, res.data);
       try {
         res.data = JSON.parse(res.data);
       } catch {
@@ -83,11 +83,15 @@ export class ws<T> {
   }
 
   close(options: CloseSocketOptions) {
-    this.instance.close(options);
-    this.ready = false;
+    if (this.ready) {
+      this.instance.close(options);
+      this.ready = false;
+    }
   }
 
   sendMessage(options: SendSocketMessageOptions) {
-    this.instance.send(options);
+    if (this.ready) {
+      this.instance.send(options);
+    }
   }
 }

@@ -23,12 +23,13 @@
   </view>
 </template>
 
-<script>
+<script lang="ts">
 import { useCheckStore } from "@/stores";
 import { GetTime } from "@/utils";
+import { defineComponent } from "vue";
 
 const checkStore = useCheckStore();
-export default {
+export default defineComponent({
   data() {
     return {
       displayWidth: 0,
@@ -113,7 +114,7 @@ export default {
       if (!isDraw)
         ctx.drawImage(path, 0, 0, this.displayWidth, this.displayHeight);
       else ctx.drawImage(path, 0, 0, this.drawWidth, this.drawHeight);
-      ctx.setGlobalAlpha(1);
+      ctx.setGlobalAlpha(0.75);
       ctx.draw();
     },
     async loadImageInfo(src) {
@@ -223,6 +224,6 @@ export default {
     },
   },
   expose: ["generateCard", "setDisplaySize", "saveImg"],
-};
+});
 </script>
 <style></style>

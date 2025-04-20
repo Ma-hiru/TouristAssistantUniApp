@@ -243,7 +243,8 @@ const submit = () => {
   uni.switchTab({ url: "/pages/chat/chat" });
 };
 onMounted(() => {
-  findPoint();
+  //TODO 暂时关闭地点列表请求
+  // findPoint();
 });
 </script>
 

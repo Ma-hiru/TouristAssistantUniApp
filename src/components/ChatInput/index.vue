@@ -108,7 +108,11 @@ const props = defineProps<{
 const handleSendOrStop = () => {
   if (chatStore.isTyping) {
     chatStore.isStop = true;
-    console.log("isStop=>", chatStore.isStop);
+    console.log(
+      "isStop=>",
+      chatStore.isStop,
+      "That will be watched and to use the function:StopChat"
+    );
   } else {
     sendMessage();
   }

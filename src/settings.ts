@@ -4,6 +4,7 @@ import avatar2 from "@/static/chat/assistant_avatar2.jpg";
 import avatar3 from "@/static/chat/assistant_avatar3.jpg";
 import avatar4 from "@/static/chat/assistant_avatar4.jpg";
 import { AntdMiniPromptsItem, UserPlan } from "@/types/chat";
+import { MapCallout } from "@uni-helper/uni-app-types";
 
 export enum API {
   CHECK_CARD = "https://shiina-mahiru.cn/sub/touristassistant/api/card",
@@ -19,6 +20,7 @@ export enum API {
   MAP_GET_POINT_DETAIL = "/points",
   MAP_GET_ALL_POINT = "/all",
   RECORD_URL = "/api/ai/transcript",
+  TEXT_TO_VOICE = "/api/ai/synthesis",
 }
 
 export const rem = 16;
@@ -171,3 +173,37 @@ export const defaultChatWelcomeText: AntdMiniPromptsItem[] = [
     key: "3",
   },
 ];
+const weatherUrl = "https://shiina-mahiru.cn/weatherIcon";
+export const GetWeatherIconUrl = (
+  iconIndex: string | null | undefined,
+  style: "fill" | "line",
+  color: "white" | "black",
+  defaultIcon: number
+) => {
+  const prefix = weatherUrl + `/${color}/`;
+  const suffix = `${style === "fill" ? "-fill" : ""}.svg`;
+  const defaultUrl = prefix + defaultIcon + suffix;
+  if (iconIndex === null || iconIndex === undefined) {
+    return defaultUrl;
+  }
+  const id = Number(iconIndex);
+  if (Number.isNaN(id) || id === 0) {
+    return defaultUrl;
+  }
+  return prefix + id + suffix;
+};
+export const CHAT_TIME_OUT = 99999999;
+export const CHAT_STOP_MSG = "stop";
+export const CHAT_LEAVE_MSG = "leave";
+export const VOICE_BUFFER_LEN = 20;
+export const MarkerCallout = {
+  color: "#0066d5",
+  bgColor: "#fff",
+  padding: 12,
+  borderRadius: 4,
+  display: "ALWAYS",
+  fontSize: 16,
+  borderWidth: 0,
+  borderColor: "#fff",
+  textAlign: "center",
+} satisfies Omit<MapCallout, "content">;

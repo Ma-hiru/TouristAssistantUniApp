@@ -91,24 +91,31 @@ const tapMarkerPop: MapOnCallouttap = (event) => {
   });
 };
 const getPoint = async () => {
+  //TODO 关闭错误提示
   try {
-    const res = await reqGetAllPoints();
-    mapStore.pointList = res.result;
+    // const res = await reqGetAllPoints();
+    // mapStore.pointList = res.result;
   } catch {
-    await uni.showToast({
-      title: "获取地点失败",
-      icon: "none",
-    });
+    // await uni.showToast({
+    //   title: "获取地点失败",
+    //   icon: "none",
+    // });
   }
 };
 onLoad(async () => {
+  console.log("Map onLoad");
+  mapStore.getMarkers();
   await mapStore.getLocation();
   await getPoint();
 });
 onShow(() => {
+  console.log("Map onShow");
   if (mapStore.currentMarker) {
+    console.log("移动到当前地点");
+    console.log(mapStore.currentMarker);
     const mapContext = uni.createMapContext("map");
     mapContext.moveToLocation(mapStore.currentMarker);
+    mapStore.currentMarker = undefined;
   }
 });
 </script>

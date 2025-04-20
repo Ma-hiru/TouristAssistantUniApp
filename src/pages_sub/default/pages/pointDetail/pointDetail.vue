@@ -94,6 +94,7 @@ import planeSvg from "@/pages_sub/default/static/pointDetail/plane.svg";
 import starSvg from "@/pages_sub/default/static/pointDetail/star.svg";
 import starNoneSvg from "@/pages_sub/default/static/pointDetail/star_none.svg";
 import { useUserStore } from "@/stores";
+import { MarkerCallout } from "@/settings";
 
 const userStore = useUserStore();
 const currentPoint = ref<Point>();
@@ -136,9 +137,19 @@ onLoad((options) => {
 });
 const goto = () => {
   mapStore.currentMarker = {
-    latitude: mapStore.markers[0].latitude,
-    longitude: mapStore.markers[0].longitude,
+    id: currentPoint.value!.id,
+    latitude: currentPoint.value!.latitude,
+    longitude: currentPoint.value!.longitude,
+    title: currentPoint.value!.title,
+    iconPath: currentPoint.value!.iconPath,
+    height: 20,
+    width: 20,
+    callout: {
+      content: currentPoint.value!.title,
+      ...MarkerCallout,
+    },
   };
+  mapStore.markers.push(mapStore.currentMarker);
   uni.switchTab({ url: `/pages/index/index` });
 };
 const previewImage = () => {

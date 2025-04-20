@@ -6,17 +6,7 @@ import { mapScale } from "@/settings";
 
 export const useMapStore = defineStore("mapStore", () => {
   const scale = ref<number>(mapScale);
-  const markers = ref<MapMarker[]>([
-    {
-      id: 1,
-      latitude: 28.336447,
-      longitude: 113.00219,
-      iconPath: "",
-      width: 20,
-      height: 20,
-      title: "地点一",
-    },
-  ]);
+  const markers = ref<MapMarker[]>([]);
   const polyline = ref<MapPolyline[]>([
     {
       points: [
@@ -71,7 +61,7 @@ export const useMapStore = defineStore("mapStore", () => {
       price: "xxx元/天",
     },
   ]);
-  const currentMarker = ref<Position>();
+  const currentMarker = ref<MapMarker>();
 
   async function getLocation() {
     try {
@@ -108,7 +98,7 @@ export const useMapStore = defineStore("mapStore", () => {
         height: 20,
         title: point.title,
         callout: {
-          content: point.content,
+          content: "",
           color: "#fff",
           fontSize: 12,
           borderRadius: 4,

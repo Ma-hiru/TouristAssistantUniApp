@@ -82,7 +82,6 @@ import ChatInput from "@/components/ChatInput/index.vue";
 import ChatWelcome from "@/components/ChatWelcome/ChatWelcome.vue";
 import { useChatStore } from "@/stores/modules/useChatStore";
 import { useLocation } from "@/hooks";
-import { defaultVolume, useVolume } from "@/hooks/useAudio";
 
 const safeAreaInsets = uni.getWindowInfo().safeAreaInsets;
 const { top: menuButtonTop } = uni.getMenuButtonBoundingClientRect();
@@ -142,8 +141,11 @@ const handleTapTile = () => {
 };
 const mute = () => {
   chatStore.isMute = !chatStore.isMute;
-  if (chatStore.isMute) useVolume(0);
-  else useVolume(defaultVolume);
+  if (chatStore.isMute)
+    chatStore.audioInstance && chatStore.audioInstance.SetVolume(0);
+  else
+    chatStore.audioInstance &&
+      chatStore.audioInstance.SetVolume(chatStore.audioInstance.DefaultVolume);
 };
 onMounted(() => {
   chatStore.init();

@@ -96,6 +96,7 @@
           />
           <button
             class="p-2 flex justify-start items-center clear-btn rounded-full"
+            @tap="goTo('check')"
           >
             <image
               src="/static/user/arrow.svg"
@@ -145,7 +146,7 @@
   </view>
 </template>
 <script setup lang="ts" name="my">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useCheckStore, useUserStore } from "@/stores";
 import { useChatStore } from "@/stores/modules/useChatStore";
 
@@ -221,6 +222,12 @@ const logout = () => {
   chatStore.wsClose();
   uni.navigateTo({ url: "/pages/login/login" });
 };
+onMounted(async () => {
+  // const res = await reqTextToVoice("你好！随身小D！");
+  // const ctx = useAudio(res);
+  // ctx.play();
+  // console.log(res);
+});
 </script>
 <style lang="scss" scoped>
 .logout-btn {

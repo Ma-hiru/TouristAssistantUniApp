@@ -2,7 +2,7 @@
   <view class="flex justify-center items-center">
     <view class="-mr-6 icon-bg rounded-full inline-block p-2 z-30">
       <image
-        :src="`https://shiina-mahiru.cn/weatherIcon/black/${icon ?? 100}.svg`"
+        :src="GetWeatherIconUrl(icon, 'line', 'black', 100)"
         style="width: 1.5rem; height: 1.5rem"
       />
     </view>
@@ -23,6 +23,7 @@ import { onMounted } from "vue";
 import { ref } from "vue";
 import { CityType, WeatherType } from "@/types/weather";
 import { useCheckStore } from "@/stores";
+import { GetWeatherIconUrl } from "@/settings";
 
 const city = ref<CityType>();
 const weather = ref<WeatherType>();

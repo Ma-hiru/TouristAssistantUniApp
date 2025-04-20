@@ -22,6 +22,7 @@ uni.addInterceptor("uploadFile", httpInterceptor);
 /**
  * 封装的uni.request请求
  * @param options 原始 uni.request 参数
+ * @param success
  * @return Promise<Data<T>> 返回响应数据（类型T）的包装体
  */
 export const http = <T>(
