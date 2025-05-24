@@ -1,42 +1,45 @@
 <template>
-  <view
-    class="m-1 flex rounded-lg bg-white flex-col justify-center items-center p-1"
-    :style="{
-      marginLeft: `${props.noLeftMargin ? 0 : 0.25}rem`,
-    }"
-    @tap="selectPost"
-  >
-    <view class="w-full">
-      <image
-        :src="props.cover"
-        mode="widthFix"
-        class="rounded-lg"
-        :style="{ width: 'calc(100%)' }"
-      />
-    </view>
-    <view class="pt-2 pb-2 text-left w-full">
-      {{ props.content }}
-    </view>
+  <view @tap="selectPost" style="padding: 0 10rpx 15rpx">
     <view
-      class="grid grid-rows-1 grid-cols-[minmax(0,1fr)_auto] max:w-full w-full"
+      class="flex bg-white flex-col justify-end items-center"
+      style="border-radius: 20rpx; padding: 10rpx 10rpx"
     >
       <view
-        class="flex justify-start items-center text-ellipsis whitespace-nowrap overflow-hidden"
-      >
-        <ant-avatar :src="props.avatar" size="x-small" />
-        <text class="ml-1 text-[#666] text-ellipsis whitespace-nowrap text-sm">
-          {{ props.username }}
-        </text>
+        :style="{
+          width: `100%`,
+          background: `url(${props.cover}) no-repeat center center`,
+          height: `400rpx`,
+          backgroundSize: `cover`,
+          borderRadius: `20rpx`,
+        }"
+      />
+      <view class="pt-2 pb-2 text-left w-full">
+        {{ props.content }}
       </view>
-      <view class="flex justify-center items-center">
-        <ant-icon type="HeartOutline" />
-        <text class="text-sm">
-          {{
-            props.like > 1000
-              ? `${(props.like / 1000).toFixed(1)}k`
-              : props.like
-          }}
-        </text>
+      <view
+        class="grid grid-rows-1 grid-cols-[minmax(0,1fr)_auto] max:w-full w-full"
+        style="height: 50rpx"
+      >
+        <view
+          class="flex justify-start items-center text-ellipsis whitespace-nowrap overflow-hidden"
+        >
+          <ant-avatar :src="props.avatar" size="x-small" />
+          <text
+            class="ml-1 text-[#666] text-ellipsis whitespace-nowrap text-sm"
+          >
+            {{ props.username }}
+          </text>
+        </view>
+        <view class="flex justify-center items-center h-full">
+          <ant-icon type="HeartOutline" />
+          <text class="text-sm ml-1">
+            {{
+              props.like > 1000
+                ? `${(props.like / 1000).toFixed(1)}k`
+                : props.like
+            }}
+          </text>
+        </view>
       </view>
     </view>
   </view>

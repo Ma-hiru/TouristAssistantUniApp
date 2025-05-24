@@ -1,35 +1,23 @@
 <template>
   <view class="w-screen h-screen relative bg-gray-200">
-    <view class="bg-white w-screen top-0 left-0 z-[60] fixed">
-      <view :style="{ height: `${menuButtonTop}px`, marginBottom: '2.5rem' }" />
-    </view>
-    <view
-      class="fixed w-screen top-0 left-0 z-[70]"
-      :style="{ paddingTop: `${menuButtonTop}px` }"
-    >
-      <view
-        class="text-center relative text-base font-bold flex justify-center items-center"
-      >
-        攻略
-      </view>
-      <view class="relative top-[0.5rem-1px] h-10">
-        <ant-tabs
-          :style="{ width: '100%' }"
-          :items="guideStore.postCategoryList"
-          @change="tapsChange"
-        />
-      </view>
-    </view>
-    <view :style="{ height: `${menuButtonTop}px` }" class="mt-[4.5rem]" />
+    <Header title="攻略">
+      <ant-tabs
+        class="relative"
+        :style="{ width: '100%' }"
+        :items="guideStore.postCategoryList"
+        @change="tapsChange"
+      />
+    </Header>
+    <GuideSkeleton v-show="isLoading" />
     <scroll-view
       :scroll-y="true"
       :scroll-with-animation="true"
       :show-scrollbar="false"
+      class="h-screen"
     >
-      <GuideSkeleton v-show="isLoading" />
       <view
-        class="w-screen grid grid-cols-[1fr_1fr] columns-2"
-        v-show="!isLoading"
+        class="w-full grid grid-cols-2"
+        :style="{ paddingTop: `${AppConf.HeaderHeight + 70}rpx` }"
       >
         <GuideCard
           v-for="(post, index) in guideStore.postList"
@@ -48,17 +36,15 @@
           :avatar="post.avatar"
         />
       </view>
+      <BottomTips tips="划到底了，休息一下吧~" />
     </scroll-view>
-  </view>
-  <view
-    class="bg-white fixed bottom-8 left-1/2 -translate-x-1/2 shadow-lg rounded-full"
-  >
-    <button class="p-2 btn-clear rounded-full" @tap="createPost">
-      <image
-        src="/static/guide/plus.svg"
-        :style="{ height: '2.5rem', width: '2.5rem' }"
-      />
-    </button>
+    <view
+      class="bg-white fixed bottom-[64rpx] left-1/2 -translate-x-1/2 shadow-lg rounded-full"
+    >
+      <button class="p-2 btn-clear rounded-full" @tap="createPost">
+        <image src="/static/guide/plus.svg" class="h-[80rpx] w-[80rpx]" />
+      </button>
+    </view>
   </view>
 </template>
 
@@ -68,6 +54,7 @@ import GuideSkeleton from "@/components/GuideSkeleton/GuideSkeleton.vue";
 import { onMounted, ref } from "vue";
 import { AntdMiniTapsCustomEventType } from "@/types/guide";
 import { useGuideStore } from "@/stores";
+import AppConf from "@/settings/index";
 
 const guideStore = useGuideStore();
 const { top: menuButtonTop } = uni.getMenuButtonBoundingClientRect();
